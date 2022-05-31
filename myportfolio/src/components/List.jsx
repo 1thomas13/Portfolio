@@ -1,17 +1,23 @@
 import React from 'react'
-import { Project } from './Project'
+import { items } from '../data'
+import { Card } from './Card'
 
 export const List = () => {
 
 
   return (
-    <div className='grid m-auto  md:grid-cols-2 xl:grid-cols-3 '>
-        <Project title={'proyecto1'} img={'./person-icon.png'} description={'description'}/>
-        <Project title={'proyecto2'} img={'./person-icon.png'} description={'description2'}/>
-        <Project title={'proyecto1'} img={'./person-icon.png'} description={'description'}/>
-        <Project title={'proyecto2'} img={'./person-icon.png'} description={'description2'}/>
-        <Project title={'proyecto1'} img={'./person-icon.png'} description={'description'}/>
-        <Project title={'proyecto2'} img={'./person-icon.png'} description={'description2'}/>
+    <div >
+      <h2 className='block '>Projects</h2>
+      <br className='bg-white text-white'></br>
+    <div className='px-96 card-list flex content-start flex-wrap '>
+      
+      {
+        items.map(card =>{
+          return <Card key={card.id} {...card}/>
+        })
+      }
+        
+    </div>
     </div>
   )
 }

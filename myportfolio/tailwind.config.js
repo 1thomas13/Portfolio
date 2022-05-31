@@ -4,6 +4,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      padding: {
+        'cardContent': '460px 35px 35px 35px',
+      }
       
     },
   },
