@@ -14,21 +14,38 @@ import { FaReact, FaNodeJs, FaJsSquare, FaCss3, FaHtml5 } from 'react-icons/fa';
 import { SiNextDotJs, SiMongodb, SiMysql } from 'react-icons/si';
 
 export const Main = () => {
+
   const variants = {
     offscreen: {
-      y: 300,
-      display: 'none',
+      x: -1300,
     },
     onscreen: {
-      y: 0,
-      display: 'block',
+      x: 0,
       transition: {
         type: 'spring',
-        bounce: 0.4,
-        duration: 1,
+        bounce: 0.2,
+        delay:0.4,
+        duration: 1.3,
       },
     },
   };
+
+  const variantss = {
+    offscreen: {
+      y: -1300,
+    },
+    onscreen: {
+      y: 0,
+      transition: {
+        type: 'spring',
+        bounce: 0.2,
+        delay:0.4,
+        duration: 1.3,
+      },
+    },
+  };
+
+ 
 
   return (
     <VStack
@@ -45,7 +62,8 @@ export const Main = () => {
       h='100vh'
     >
       <Heading 
-        as='h1'
+        as={motion.h1}
+        variants={variantss}
         fontSize={{base:'4xl', sm:'5xl', md:'6xl'}}
         fontWeight='extrabold'
       >
@@ -63,11 +81,13 @@ export const Main = () => {
         <br></br>
       </motion.div>
 
-      <Button my={8}  href="../../Thomas Currículum.pdf" download as='a' variant="outline">
+      <Button  as={motion.a}
+        variants={variantss} my={8}  href="../../Thomas Currículum.pdf" download  variant="outline">
           View Resume
       </Button>
         
-      <HStack justifyContent="center" alignItems="center">
+      <HStack as={motion.div}
+        variants={variantss} justifyContent="center" alignItems="center">
         <Tooltip label="HTML">
           <Box p={{base: 0, md:1}}>
             <Icon w={{base:8, md:10}} h={{base:8, md:10}} as={FaHtml5} />

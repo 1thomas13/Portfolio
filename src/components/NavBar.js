@@ -12,14 +12,10 @@ import {
 
 export const NavBar = () => {
 
-
   return (
     <Flex 
-      initial={{y:-500,}} 
-      animate={{y:0, }}
-      transition={{duration: 3}}
       p={2} 
-      position='fixed' 
+      position={{base:'block', md:'fixed'}} 
       zIndex={1000}
       width='100%' 
     >

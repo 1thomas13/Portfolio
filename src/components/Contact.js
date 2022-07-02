@@ -16,35 +16,31 @@ import { BsArrowUp } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 
 export const Contact = () => {
+  
   const variants = {
     offscreen: {
-      y: 300,
-      display: 'block',
+      opacity: 0,
     },
     onscreen: {
-      y: 0,
-      display: 'block',
+      opacity: 1,
       transition: {
-        type: 'spring',
-        bounce: 0.4,
-        duration: 1,
+        delay:0.4,
+        duration: 1.3,
       },
     },
   };
 
-  const variantss = {
+  const variantsFooter = {
     offscreen: {
-      x: -1000,
-      display: 'block',
+      x: -1300,
     },
     onscreen: {
       x: 0,
-      display: 'block',
       transition: {
         type: 'spring',
         bounce: 0.4,
-        duration: 2,
-        
+        delay:0.1,
+        duration: 1.8,
       },
     },
   };
@@ -65,45 +61,56 @@ export const Contact = () => {
           Contact
         </Heading>
 
-        <motion.div variants={variants}>
+        
           <Stack
+            as={motion.div}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true }}
             width={{base:64, md:96}}
             spacing={6}
             display='flex'
             alignItems='center'
             justifyContent='center'
           >
-            <Input p="2" ho type="string" variant="flushed" placeholder="Name" />
+            <Input as={motion.input} variants={variants} p="2" ho type="string" variant="flushed" placeholder="Name" />
             <Input
+              as={motion.input} variants={variants}
               p="2"
               type="email"
               variant="flushed"
               placeholder="Enter Email"
             />
-            <Textarea p="2" placeholder="Your Message" variant="flushed" />
+            <Textarea as={motion.textarea} variants={variants} p="2" placeholder="Your Message" variant="flushed" />
 
-            <Button margin='50px' type="submit" width="200px" maxW="50%" variant="outline">
+            <Button as={motion.button} variants={variants} margin='50px' type="submit" width="200px" maxW="50%" variant="outline">
               Submit
             </Button>
           </Stack>
-        </motion.div>
+        
 
-        <HStack spacing={8}>
-          <motion.div
+        <HStack 
+          as={motion.div}
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true }}
+          spacing={8}
+         >
+          <motion.div variants={variants}
             onClick={() => window.open('https://www.linkedin.com/in/thomas-barreto-50ab71204/')}
             whileHover={{ scale: 0.9 }}
             whileTap={{ scale: 1.3 }}
           >
             <Icon cursor="pointer" h={10} w={10} as={FaLinkedin} />
           </motion.div>
-          <motion.div
+          <motion.div variants={variants}
             onClick={() => window.open('https://twitter.com/thomasbarreto9')}
             whileHover={{ scale: 0.9 }}
             whileTap={{ scale: 1.3 }}
           >
             <Icon cursor="pointer" h={10} w={10} as={FaTwitterSquare} />
           </motion.div>
-          <motion.div
+          <motion.div variants={variants}
             onClick={() => window.open('https://github.com/1thomas13')}
             whileHover={{ scale: 0.9 }}
             whileTap={{ scale: 1.3 }}
@@ -122,7 +129,7 @@ export const Contact = () => {
         justify="center"
         align="center"
       >
-        <motion.div variants={variantss} textAlign="center">
+        <motion.div variants={variantsFooter} textAlign="center">
           <Text fontWeight={500} as='em' fontSize={{base:'xs', md:'md'}}> Made in Chakra and Framer Motion by Thomas Barreto</Text>
         </motion.div> 
       </Stack>

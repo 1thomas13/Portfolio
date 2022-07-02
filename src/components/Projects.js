@@ -10,16 +10,41 @@ export const Projects = () => {
   
   console.log(projects)
 
+  const variants = {
+    offscreen: {
+      opacity: 0,
+    },
+    onscreen: {
+      opacity: 1,
+      transition: {
+        delay:0.4,
+        duration: 1.3,
+      },
+    },
+  };
+
   return (
-    <Stack as='section' alignItems='center'>
-      <VStack>
-        <Heading mb='16' as="h3">Projects</Heading>
+    <Stack   alignItems='center'>
+      <VStack as={motion.div}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true }} 
+            borderRadius='3xl' >
+        <Heading as={motion.div} variants={variants} mb='16' >
+          Projects
+        </Heading>
         <Grid maxW={'700px'} gap={6} templateColumns={{base: 'repeat(1, 1fr)', md:'repeat(2, 1fr)'}} spacing={10}>
         {
           projects.map(project => (
             
-            <GridItem borderRadius='3xl' >
-              <VStack spacing='4' px='4' py='6'>
+            <GridItem 
+            as={motion.div}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true }} 
+            borderRadius='3xl' 
+            >
+              <VStack  as={motion.div} variants={variants} spacing='4' px='4' py='6'>
                 <VStack spacing='4'>
                   <Text fontWeight='lighter' fontSize='2xl'>
                     {project.title}
@@ -35,7 +60,7 @@ export const Projects = () => {
                   </HStack>
                 </VStack>
               
-                <HStack >
+                <HStack  as={motion.div} variants={variants}>
                   <motion.div
                     whileHover={{ scale: 0.9 }}
                     whileTap={{ scale: 1.3 }}
@@ -63,10 +88,16 @@ export const Projects = () => {
         }
         </Grid>
       </VStack>
-      
-        <Button as='a' href='https://github.com/1thomas13?tab=repositories' target='__blank' variant="outline">
+      <Stack initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true }}
+        as={motion.div} 
+        variants={variants}
+      >
+        <Button as={motion.button} href='https://github.com/1thomas13?tab=repositories' target='__blank' variant="outline">
           View More
         </Button>
+      </Stack>
     </Stack>
   );
 };
