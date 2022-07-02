@@ -67,8 +67,7 @@ export const Contact = () => {
 
         <motion.div variants={variants}>
           <Stack
-
-            w="96"
+            width={{base:64, md:96}}
             spacing={6}
             display='flex'
             alignItems='center'
@@ -124,10 +123,8 @@ export const Contact = () => {
         align="center"
       >
         <motion.div variants={variantss} textAlign="center">
-          <Text fontWeight={500} as='em' fontSize='md'>Made in Chakra and Framer Motion by Thomas Barreto</Text>
+          <Text fontWeight={500} as='em' fontSize={{base:'xs', md:'md'}}> Made in Chakra and Framer Motion by Thomas Barreto</Text>
         </motion.div> 
-
-        
       </Stack>
     </>
   );

@@ -46,12 +46,12 @@ export const Main = () => {
     >
       <Heading 
         as='h1'
-        fontSize='6xl'
+        fontSize={{base:'4xl', sm:'5xl', md:'6xl'}}
         fontWeight='extrabold'
       >
         Thomas Barreto
         <br></br>
-        <Text fontSize='5xl' textAlign='center'>Web Developer</Text>
+        <Text fontSize={{base:'2xl', sm:'4xl', md:'5xl'}} textAlign='center'>Web Developer</Text>
          
       </Heading>
 
@@ -69,49 +69,49 @@ export const Main = () => {
         
       <HStack justifyContent="center" alignItems="center">
         <Tooltip label="HTML">
-          <Box p="1">
-            <Icon w={10} h={10} as={FaHtml5} />
+          <Box p={{base: 0, md:1}}>
+            <Icon w={{base:8, md:10}} h={{base:8, md:10}} as={FaHtml5} />
           </Box>
         </Tooltip>
 
         <Tooltip label="CSS">
-          <Box p="1">
-            <Icon w={10} h={10} as={FaCss3} />
+          <Box p={{base: 0, md:1}}>
+            <Icon w={{base:8, md:10}} h={{base:8, md:10}} as={FaCss3} />
           </Box>
         </Tooltip>
 
         <Tooltip label="JavaScript">
-          <Box p="1">
-            <Icon w={10} h={10} as={FaJsSquare} />
+          <Box p={{base: 0, md:1}}>
+            <Icon w={{base:8, md:10}} h={{base:8, md:10}} as={FaJsSquare} />
           </Box>
         </Tooltip>
 
         <Tooltip label="React">
-          <Box p="1">
-            <Icon w={10} h={10} as={FaReact} />
+          <Box p={{base: 0, md:1}}>
+            <Icon w={{base:8, md:10}} h={{base:8, md:10}} as={FaReact} />
           </Box>
         </Tooltip>
 
         <Tooltip label="Next">
-          <Box p="1">
-            <Icon w={10} h={10} as={SiNextDotJs} />
+          <Box p={{base: 0, md:1}}>
+            <Icon w={{base:8, md:10}} h={{base:8, md:10}} as={SiNextDotJs} />
           </Box>
         </Tooltip>
 
         <Tooltip label="Node">
-          <Box p="1">
-            <Icon w={10} h={10} as={FaNodeJs} />
+          <Box p={{base: 0, md:1}} >
+            <Icon w={{base:8, md:10}} h={{base:8, md:10}} as={FaNodeJs} />
           </Box>
         </Tooltip>
 
         <Tooltip label="MongoDB">
-          <Box p="1">
+          <Box p={{base: 0, md:1}}>
             <Icon w={10} h={10} as={SiMongodb} />
           </Box>
         </Tooltip>
 
         <Tooltip label="Mysql">
-          <Box p="1">
+          <Box p={{base: 0, md:1}}>
             <Icon w={10} h={10} as={SiMysql} />
           </Box>
         </Tooltip>
