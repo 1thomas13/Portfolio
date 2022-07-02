@@ -1,5 +1,4 @@
 import React from 'react';
-import { About } from './components/About';
 import { Projects } from './components/Projects';
 import { Main } from './components/Main';
 import { NavBar } from './components/NavBar';
@@ -9,8 +8,8 @@ function App() {
   return (
     <>
       <NavBar/>
+      
       <Main/>
-      <About/>
       <Projects/>
       <Contact/>
     </>

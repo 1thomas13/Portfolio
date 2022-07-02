@@ -12,42 +12,17 @@ import {
 
 export const NavBar = () => {
 
-  const bg = useColorModeValue('white', '#1A202C')
 
   return (
     <Flex 
-    initial={{y:-500,}} 
-    animate={{y:0, }}
-    transition={{duration: 3}}
-    
-      as={motion.ul} 
+      initial={{y:-500,}} 
+      animate={{y:0, }}
+      transition={{duration: 3}}
       p={2} 
       position='fixed' 
+      zIndex={1000}
       width='100%' 
-      bgColor={bg} 
-      direction='row' 
-      gap={4}
     >
-      <a href='/'>
-        <Button as={'li'} variant='ghost' leftIcon={<FaHome/>}>
-          Home 
-        </Button> 
-      </a>
-      <a href='/'>
-        <Button as={'li'} variant='ghost' leftIcon={<FaUserAlt/>}>
-          About Me 
-        </Button>
-      </a>
-      <a href='/'>
-        <Button as={'li'} variant='ghost' leftIcon={<FaFolderOpen/>}>
-          Projects
-        </Button>
-      </a>
-      <a href='/'>
-        <Button as={'li'} variant='ghost' leftIcon={<FaComment/>}>
-          Contact
-        </Button>
-      </a>
         <Spacer />
         <ColorModeSwitcher/>
     </Flex>

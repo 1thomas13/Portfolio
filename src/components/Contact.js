@@ -9,8 +9,10 @@ import {
   Button,
   Icon,
   Text,
+  Flex
 } from '@chakra-ui/react';
 import { FaLinkedin, FaTwitterSquare, FaGithubSquare } from 'react-icons/fa';
+import { BsArrowUp } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 
 export const Contact = () => {
@@ -48,7 +50,7 @@ export const Contact = () => {
   };
 
   return (
-    <>
+    < >
       <VStack
         as={motion.div}
         initial="offscreen"
@@ -111,7 +113,7 @@ export const Contact = () => {
           </motion.div>
         </HStack>
       </VStack>
-
+      
       <Stack
         as={motion.footer}
         initial="offscreen"
@@ -124,6 +126,8 @@ export const Contact = () => {
         <motion.div variants={variantss} textAlign="center">
           <Text fontWeight={500} as='em' fontSize='md'>Made in Chakra and Framer Motion by Thomas Barreto</Text>
         </motion.div> 
+
+        
       </Stack>
     </>
   );
