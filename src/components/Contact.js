@@ -51,6 +51,7 @@ export const Contact = () => {
         duration: 9000,
         isClosable: true,
       })
+      return
     } 
     
     emailjs.sendForm( process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, e.target, process.env.REACT_APP_PUBLIC_KEY)
