@@ -1,19 +1,8 @@
-import React from 'react';
-import {
-  VStack,
-  HStack,
-  Heading,
-  Stack,
-  Input,
-  Textarea,
-  Button,
-  Icon,
-  Text,
-  Flex
-} from '@chakra-ui/react';
+import React, { useRef, useState } from 'react';
+import {VStack, HStack, Heading, Stack, Input, Textarea, Button, Icon,Text, useToast } from '@chakra-ui/react';
 import { FaLinkedin, FaTwitterSquare, FaGithubSquare } from 'react-icons/fa';
-import { BsArrowUp } from 'react-icons/bs';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 export const Contact = () => {
   
@@ -44,9 +33,50 @@ export const Contact = () => {
       },
     },
   };
+  
+  const form = useRef()
+  const toast = useToast()
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [msg, setMsg] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    if(name === '' || email === '' || msg === ''){
+      toast({
+        title: 'Please fill in all fields',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+    } 
+    
+    emailjs.sendForm( process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, e.target, process.env.REACT_APP_PUBLIC_KEY)
+    .then((result) => {
+      toast({
+        title: 'Message Sent Successfully.',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+    }, (error) => {
+      toast({
+        title: 'An error occurred please try again later',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+    });
+
+    setName('')
+    setEmail('')
+    setMsg('')
+  }
 
   return (
-    < >
+    <>
       <VStack
         as={motion.div}
         initial="offscreen"
@@ -63,7 +93,8 @@ export const Contact = () => {
 
         
           <Stack
-            as={motion.div}
+            as={motion.form}
+            ref={form}
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true }}
@@ -72,20 +103,52 @@ export const Contact = () => {
             display='flex'
             alignItems='center'
             justifyContent='center'
+            onSubmit={handleSubmit}
           >
-            <Input as={motion.input} variants={variants} p="2" ho type="string" variant="flushed" placeholder="Name" />
             <Input
-              as={motion.input} variants={variants}
+             variants={variants} 
+              p="2" 
+              name="user_name"
+              type="string" 
+              variant="flushed" 
+              placeholder="Name" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              variants={variants}
+              _focus={{ outline:'10px solid blue'}}
               p="2"
               type="email"
+              name="user_email"
               variant="flushed"
               placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <Textarea as={motion.textarea} variants={variants} p="2" placeholder="Your Message" variant="flushed" />
+            <Textarea 
+              name="message" 
+              resize='none' 
+              as={motion.textarea} 
+              variants={variants} 
+              p="2" 
+              placeholder="Your Message"
+              variant="flushed" 
+              value={msg}
+              onChange={(e) => setMsg(e.target.value)}
+            />
 
-            <Button as={motion.button} variants={variants} margin='50px' type="submit" width="200px" maxW="50%" variant="outline">
-              Submit
-            </Button>
+            <Button 
+              value='Submit' 
+              variants={variants}
+              margin='50px'
+              type="submit"
+              width="200px" 
+              maxW="50%" 
+              variant="outline" 
+            />
+              
+            
           </Stack>
         
 
@@ -129,8 +192,8 @@ export const Contact = () => {
         justify="center"
         align="center"
       >
-        <motion.div variants={variantsFooter} textAlign="center">
-          <Text fontWeight={500} as='em' fontSize={{base:'xs', md:'md'}}> Made in Chakra and Framer Motion by Thomas Barreto</Text>
+        <motion.div variants={variantsFooter} >
+          <Text textAlign='justify' fontWeight={500} as='em' fontSize={{base:'xs', md:'md'}}> Made in Chakra and Framer Motion by Thomas Barreto</Text>
         </motion.div> 
       </Stack>
     </>
