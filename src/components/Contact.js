@@ -117,7 +117,6 @@ export const Contact = () => {
             />
             <Input
               variants={variants}
-              _focus={{ outline:'10px solid blue'}}
               p="2"
               type="email"
               name="user_email"
@@ -139,14 +138,15 @@ export const Contact = () => {
             />
 
             <Button 
-              value='Submit' 
+              type="submit"
               variants={variants}
               margin='50px'
-              type="submit"
               width="200px" 
               maxW="50%" 
               variant="outline" 
-            />
+            >
+              Submit
+            </Button>
               
             
           </Stack>
