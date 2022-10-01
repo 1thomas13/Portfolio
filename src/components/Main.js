@@ -146,16 +146,6 @@ export const Main = () => {
             </Box>
           </Tooltip>
 
-          <Tooltip label="Next">
-            <Box p={{ base: 0, md: 1 }}>
-              <Icon
-                w={{ base: 8, md: 10 }}
-                h={{ base: 8, md: 10 }}
-                as={SiNextDotJs}
-              />
-            </Box>
-          </Tooltip>
-
           <Tooltip label="Node">
             <Box p={{ base: 0, md: 1 }}>
               <Icon

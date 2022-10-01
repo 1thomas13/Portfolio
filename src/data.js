@@ -1,19 +1,19 @@
 export const projects  = [
     {
         id: 1,
+        "title": "Tasky",
+        "description": "Application to manage team tasks, and improve their performance. App created in the acceleration of alkemy",
+        "tecnologies": ["React", "Node"],
+        "link": "https://tasky-alkemy.herokuapp.com/",
+        "github": "https://github.com/emilianovaccaro/Tasky",
+    },
+    {
+        id: 2,
         "title": "Alkemy-Node",
         "description": "Api to explore the world of disney. Project proposed by Alkemy for devs backend in node",
         "tecnologies": ["Node"],
         "link": "https://www.example.com/",
         "github": "https://github.com/1thomas13/myPortfolio",
-    },
-    {
-        id: 2,
-        "title": "Expense-Control",
-        "description": "App to control your expenses and categorize them to manage your money in a better way",
-        "tecnologies": ["React"],
-        "link": "https://www.example.com/",
-        "github": "https://github.com/1thomas13/Curso-React/tree/main/ControlGastos",
     },
     {
         id: 3,
