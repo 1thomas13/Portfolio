@@ -9,11 +9,11 @@ export const projects  = [
     },
     {
         id: 2,
-        "title": "Alkemy-Node",
-        "description": "Api to explore the world of disney. Project proposed by Alkemy for devs backend in node",
-        "tecnologies": ["Node"],
-        "link": "https://www.example.com/",
-        "github": "https://github.com/1thomas13/myPortfolio",
+        "title": "Finance-manager",
+        "description": "App to manage your personal finances, and separate your expenses and income by categories",
+        "tecnologies": ["Node", "React"],
+        "link": "https://user-images.githubusercontent.com/81497241/197018390-be71cef5-9f07-41fc-ab83-b767cc40a695.png",
+        "github": "https://github.com/1thomas13/personal-finance-APP",
     },
     {
         id: 3,
