@@ -15,7 +15,7 @@
   },
   "about": {
     "title": "About me",
-    "description": "Full-Stack Developer with 4 years of experience, specialized mainly in Front-end. I quickly adapt to new technologies and enjoy getting involved in business logic to propose solutions that generate impact. I work collaboratively in multidisciplinary teams and have experience leading projects."
+    "description": "Full-Stack Developer with 4 years of experience. I quickly adapt to new technologies and enjoy getting involved in business logic to propose solutions that generate impact. I work collaboratively in multidisciplinary teams and have experience leading projects."
   },
   "techStack": {
     "title": "Tech Stack"
@@ -118,13 +118,30 @@
         "Optimization of planning and inventory control",
         "Developed both Front-End and Back-End ensuring smooth integration and a coherent user experience"
       ]
+    },
+    {
+      "company": "DAIRA IT Groups",
+      "position": "Front-end Developer",
+      "period": "Nov 2022 - Apr 2023",
+      "description": "Front-end development for a financial company, automating customer interaction and significantly improving user experience.",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Svelte"
+      ],
+      "responsibilities": [
+        "Tackled a project for a financial company where customer interaction automation was needed, significantly improving user experience",
+        "Quick adaptation to new technological environments and development methodologies, ensuring smooth and efficient transitions in projects",
+        "Implementation of interactive and responsive user interfaces using HTML, CSS, JavaScript and Svelte"
+      ]
     }
   ],
   "projects": {
     "title": "Projects",
-    "description": "Some of my personal or clients' projects that showcase my skills and experience.",
+    "description": "Some of my personal or clients' projects",
     "viewMore": "View More",
-    "viewMoreUrl": "#",
+    "viewMoreUrl": "https://github.com/1thomas13",
     "view": "View",
     "github": "GitHub",
     "liveDemo": "Live Demo"
@@ -142,7 +159,7 @@
       ],
       "image": "",
       "github": "#",
-      "demo": "#"
+      "demo": "https://mba-tutor.com/"
     },
     {
       "id": "project-2",
@@ -156,12 +173,12 @@
       ],
       "image": "",
       "github": "#",
-      "demo": "#"
+      "demo": "https://therockinchair-landing.vercel.app/"
     }
   ],
   "contact": {
     "title": "Let's Connect",
-    "description": "I'm open to conversations about full-time employment, contract roles, or collaboration in the React ecosystem. Drop me a line!",
+    "description": "I’m currently open to new opportunities or projects.",
     "email": "Email",
     "linkedin": "LinkedIn",
     "github": "GitHub",

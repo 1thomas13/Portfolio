@@ -27,9 +27,14 @@ const ExperienceV2 = ({ className }: ExperienceV2Props) => {
           <h1 className="text-5xl font-semibold tracking-tighter lg:text-6xl text-black" >
             {t.experience.title}
           </h1>
-          <button className="flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-sm font-semibold transition-all duration-200">
+          <a
+            href="/Thomas Barreto CV - Español.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-sm font-semibold transition-all duration-200"
+          >
             {t.hero.viewCV} <Download className="size-4" />
-          </button>
+          </a>
         </div>
 
         <ul>

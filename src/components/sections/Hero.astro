@@ -23,10 +23,13 @@ const i18n = getI18N({ currentLocale })
     </h2>
   </GradientText>
   <Magnet client:load padding={1500} disabled={false} magnetStrength={100}>
-    <button
+    <a
+      href="/Thomas Barreto CV - Español.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
       class="relative bg-white hover:bg-gray-50 text-black font-medium px-6 py-3 rounded-full flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer group transform mt-8">
       {i18n.hero.viewCV}
-    </button>
+    </a>
   </Magnet>
   <ArrowDown
     className="w-8 h-8 absolute bottom-4 left-1/2 -translate-x-1/2 text-white mt-12 animate-bounce"

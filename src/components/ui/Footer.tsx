@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer>
       <SpotlightCard
-        className="mt-24 group relative w-full flex items-center justify-center bg-white/10 backdrop-blur-md rounded-none px-4 py-3 md:px-6 md:py-2"
+        className="mt-24 group w-full flex flex-col md:flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-none px-4 py-3 md:px-6 md:py-2 gap-3 md:gap-0"
         spotlightColor="rgba(0, 229, 255, 0.2)">
         <div className="flex items-center gap-1.5">
           Made with
@@ -33,7 +33,7 @@ export default function Footer() {
           href="https://github.com/1thomas13/portfolio"
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute right-4 md:right-6 text-sm text-white/80 hover:text-white transition">
+          className="text-sm text-white/80 hover:text-white transition md:absolute md:right-4 md:right-6">
           {t.footer.viewSourceCode}
         </a>
       </SpotlightCard>

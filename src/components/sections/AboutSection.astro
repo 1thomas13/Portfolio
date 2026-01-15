@@ -7,7 +7,9 @@ const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
 const t = getI18N({ currentLocale })
 ---
 
-<section id="ai-team" class="py-12 md:py-24 lg:py-32 w-full m-auto max-w-5xl">
+<section
+  id="ai-team"
+  class="py-12 md:py-24 lg:py-32 w-full m-auto max-w-5xl mb-20">
   <div class="px-4 md:px-6">
     <h2
       class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
@@ -17,12 +19,12 @@ const t = getI18N({ currentLocale })
       client:load
       className="custom-spotlight-card p-6"
       spotlightColor="rgba(0, 229, 255, 0.2)">
-      <p class="text-white/90 text-lg leading-relaxed">
+      <p class="text-white/90 text-lg md:text-xl leading-relaxed">
         {t.about.description}
       </p>
     </SpotlightCard>
 
-    <div class="flex flax-wrap gap-6 mt-6">
+    <div class="flex flex-col md:flex-row gap-6 mt-6">
       <TechStackCards client:load />
     </div>
   </div>

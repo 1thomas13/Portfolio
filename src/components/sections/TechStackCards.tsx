@@ -8,13 +8,13 @@ export default function TechStackCards() {
   return (
     <>
       {t.techStackData.map((tech) => (
-        <SpotlightCard key={tech.category} className="h-52 w-124 p-2 m-auto" spotlightColor="rgba(0, 229, 255, 0.2)">
+        <SpotlightCard key={tech.category} className="md:h-52 w-full md:w-124 p-2 m-auto" spotlightColor="rgba(0, 229, 255, 0.2)">
           <h3 className="text-lg font-semibold mb-4">{tech.category}</h3>
           <div className="flex flex-wrap gap-2">
             {tech.skills.map((skill) => (
               <span
                 key={skill}
-                className="inline-flex items-center rounded-md bg-black px-2 py-1 text-sm font-medium text-white ring-1 ring-inset ring-primary/20"
+                className="text-center inline-flex items-center rounded-md bg-black px-2 py-1 text-sm font-medium text-white ring-1 ring-inset ring-primary/20"
               >
                 {skill}
               </span>

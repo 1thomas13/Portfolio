@@ -15,22 +15,16 @@
   },
   "about": {
     "title": "Sobre mí",
-    "description": "Desarrollador Full-Stack con 4 años de experiencia, especializado principalmente en Front-end. Me adapto rápidamente a nuevas tecnologías y disfruto involucrarme en la lógica del negocio para proponer soluciones que generen impacto. Trabajo de forma colaborativa en equipos multidisciplinarios y tengo experiencia liderando proyectos."
+    "description": "Desarrollador Full-Stack con 4 años de experiencia. Me adapto rápidamente a nuevas tecnologías y disfruto involucrarme en la lógica del negocio para proponer soluciones que generen impacto. Trabajo de forma colaborativa en equipos multidisciplinarios y tengo experiencia liderando proyectos."
   },
   "techStack": {
     "title": "Stack Tecnológico"
   },
   "techStackData": [
     {
-      "category": "Lenguajes",
-      "skills": [
-        "JavaScript",
-        "TypeScript"
-      ]
-    },
-    {
       "category": "Frontend",
       "skills": [
+        "TypeScript",
         "React",
         "Next.js",
         "CSS",
@@ -44,20 +38,23 @@
     {
       "category": "Backend",
       "skills": [
+        "TypeScript",
         "Node.js",
         "Express",
         "Nest.js",
+        "PostgreSQL",
         "MongoDB",
-        "MySQL",
         "Supabase"
       ]
     },
     {
-      "category": "Otros",
+      "category": "Others",
       "skills": [
-        "AWS",
+        "Docker",
         "Git",
-        "Docker"
+        "Linux",
+        "n8n",
+        "AWS"
       ]
     }
   ],
@@ -121,13 +118,30 @@
         "Optimización de la planificación y control de inventarios",
         "Desarrollé tanto el Front-End como el Back-End asegurando una integración fluida y una experiencia de usuario coherente"
       ]
+    },
+    {
+      "company": "DAIRA IT Groups",
+      "position": "Desarrollador Front-end",
+      "period": "Nov 2022 - Abr 2023",
+      "description": "Desarrollo front-end para una financiera, automatizando la interacción con el cliente y mejorando significativamente la experiencia de usuario.",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Svelte"
+      ],
+      "responsibilities": [
+        "Afronte un proyecto para una financiera donde se necesitaba automatizar la interacción con el cliente mejorando la experiencia de usuario significativamente",
+        "Rápida adaptación a nuevos entornos tecnológicos y metodologías de desarrollo, asegurando una transición suave y eficiente en los proyectos",
+        "Implementación de interfaces de usuario interactivas y responsivas utilizando HTML, CSS, JavaScript y Svelte"
+      ]
     }
   ],
   "projects": {
     "title": "Proyectos",
-    "description": "Algunos de mis proyectos personales o de clientes que muestran mis habilidades y experiencia.",
+    "description": "Algunos de mis proyectos personales o de clientes",
     "viewMore": "Ver Más",
-    "viewMoreUrl": "#",
+    "viewMoreUrl": "https://github.com/1thomas13",
     "view": "Ver",
     "github": "GitHub",
     "liveDemo": "Ver Demo"
@@ -145,7 +159,7 @@
       ],
       "image": "",
       "github": "#",
-      "demo": "#"
+      "demo": "https://mba-tutor.com/"
     },
     {
       "id": "project-2",
@@ -159,12 +173,12 @@
       ],
       "image": "",
       "github": "#",
-      "demo": "#"
+      "demo": "https://therockinchair-landing.vercel.app/"
     }
   ],
   "contact": {
     "title": "Conectemos",
-    "description": "Estoy abierto a conversaciones sobre empleo a tiempo completo, roles de contrato o colaboración en el ecosistema React. ¡Escríbeme!",
+    "description": "Actualmente estoy abierto a nuevas oportunidades o proyectos.",
     "email": "Email",
     "linkedin": "LinkedIn",
     "github": "GitHub",

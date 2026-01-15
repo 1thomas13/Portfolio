@@ -82,46 +82,48 @@ export function GlassmorphismNav() {
         </button>
       </div>
 
-      <nav className="fixed flex top-4 md:top-8 left-1/2 -translate-x-1/2 z-50 items-center gap-4">
-        <div className="md:max-w-4xl mx-auto">
-          <div className={`hidden md:block backdrop-blur-md border rounded-full px-4 py-3 md:px-6 md:py-2 transition-all duration-300 text-white ${isOverWhiteSection
-            ? "md:bg-black/60 md:border-black/20"
-            : "bg-white/10 border-white/20"
-            }`}>
-            <div className="flex items-center justify-between">
-              <div className="hidden md:flex items-center space-x-8">
-                {navigation.map((item) =>
-                (
-                  <button
-                    key={item.name}
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-nowrap hover:scale-105 transition-all duration-200 font-medium cursor-pointer opacity-80 hover:opacity-100"
-                  >
-                    {item.icon ?? item.name}
-                  </button>
-                ))}
-              </div>
+      <div className="fixed flex top-4 md:top-8 left-1/2 -translate-x-1/2 z-50 items-center gap-4">
+        <nav>
+          <div className="md:max-w-4xl mx-auto">
+            <div className={`hidden md:block backdrop-blur-md border rounded-full px-4 py-3 md:px-6 md:py-2 transition-all duration-300 text-white ${isOverWhiteSection
+              ? "md:bg-black/60 md:border-black/20"
+              : "bg-white/10 border-white/20"
+              }`}>
+              <div className="flex items-center justify-between">
+                <div className="hidden md:flex items-center space-x-8">
+                  {navigation.map((item) =>
+                  (
+                    <button
+                      key={item.name}
+                      onClick={() => scrollToSection(item.href)}
+                      className="text-nowrap hover:scale-105 transition-all duration-200 font-medium cursor-pointer opacity-80 hover:opacity-100"
+                    >
+                      {item.icon ?? item.name}
+                    </button>
+                  ))}
+                </div>
 
-              {/* Desktop CTA Button */}
-              <div className="hidden md:block ml-5">
-                <button
-                  className={`relative font-medium px-6 py-2 rounded-full flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer group ${isOverWhiteSection
-                    ? "bg-white text-black hover:bg-gray-100"
-                    : "bg-white hover:bg-gray-50 text-black"
-                    }`}
-                  onClick={() => scrollToSection("#contact")}
-                >
-                  <span className="mr-2">{t.nav.contact}</span>
-                </button>
+                {/* Desktop CTA Button */}
+                <div className="hidden md:block ml-5">
+                  <button
+                    className={`relative font-medium px-6 py-2 rounded-full flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer group ${isOverWhiteSection
+                      ? "bg-white text-black hover:bg-gray-100"
+                      : "bg-white hover:bg-gray-50 text-black"
+                      }`}
+                    onClick={() => scrollToSection("#contact")}
+                  >
+                    <span className="mr-2">{t.nav.contact}</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </nav>
         {/* Desktop SwitchLang - Outside nav but next to it */}
-        <div className="hidden md:block">
+        <div className="hidden md:block relative">
           <SwitchLang />
         </div>
-      </nav>
+      </div>
 
       {/* Mobile Full Screen Menu */}
       {isOpen && (
@@ -146,12 +148,6 @@ export function GlassmorphismNav() {
                     {item.name}
                   </button>
                 ))}
-                <button
-                  className="text-white/90 hover:text-white hover:bg-white/20 rounded-lg px-6 py-4 text-left transition-all duration-300 font-medium cursor-pointer transform hover:scale-[1.02] hover:translate-x-1 text-lg"
-                  onClick={() => scrollToSection("#contact")}
-                >
-                  {t.nav.contact}
-                </button>
               </div>
             </div>
           </div>
