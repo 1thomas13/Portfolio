@@ -1,0 +1,203 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "getStarted": "Comenzar",
+    "menu": "Menú"
+  },
+  "hero": {
+    "title": "Thomas Barreto",
+    "subtitle": "Desarrollador Full-Stack",
+    "viewCV": "Ver CV"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "description": "Desarrollador Full-Stack con 4 años de experiencia. Me adapto rápidamente a nuevas tecnologías y disfruto involucrarme en la lógica del negocio para proponer soluciones que generen impacto. Trabajo de forma colaborativa en equipos multidisciplinarios y tengo experiencia liderando proyectos."
+  },
+  "techStack": {
+    "title": "Stack Tecnológico"
+  },
+  "techStackData": [
+    {
+      "category": "Frontend",
+      "skills": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "CSS",
+        "Tailwind",
+        "Sass",
+        "Redux",
+        "React Native",
+        "Expo"
+      ]
+    },
+    {
+      "category": "Backend",
+      "skills": [
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "Nest.js",
+        "PostgreSQL",
+        "MongoDB",
+        "Supabase"
+      ]
+    },
+    {
+      "category": "Others",
+      "skills": [
+        "Docker",
+        "Git",
+        "Linux",
+        "n8n",
+        "AWS"
+      ]
+    }
+  ],
+  "experience": {
+    "title": "Experiencia",
+    "technologies": "Tecnologías:",
+    "keyResponsibilities": "Responsabilidades Clave:"
+  },
+  "experienceData": [
+    {
+      "company": "Bitskingdom",
+      "position": "Desarrollador Mobile",
+      "period": "Nov 2024 - Actualidad",
+      "description": "Desarrollé funcionalidades clave en una app multiplataforma con Expo (React Native), colaborando en la planificación y el despliegue.",
+      "technologies": [
+        "React Native",
+        "Expo",
+        "Supabase",
+        "TypeScript"
+      ],
+      "responsibilities": [
+        "Desarrollé funcionalidades clave en una app multiplataforma con Expo (React Native), colaborando en la planificación y el despliegue",
+        "Diseñé e implementé la arquitectura de datos con Supabase, incorporando autenticación segura, gestión de base de datos y almacenamiento de archivos",
+        "Integré APIs y funcionalidades en tiempo real, asegurando una experiencia de usuario fluida y consistente"
+      ]
+    },
+    {
+      "company": "WeGoGreenR",
+      "position": "Desarrollador Web",
+      "period": "Abr 2023 - Nov 2024",
+      "description": "Desarrollo de un SaaS (Software as a Service) B2B para mejorar alojamientos, ofreciendo herramientas de gestión sostenible, certificaciones y facilitando prácticas eco-responsables.",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "TypeScript",
+        "AWS",
+        "MongoDB"
+      ],
+      "responsibilities": [
+        "Optimización de servicios en AWS, reduciendo los costos mensuales en un 38%",
+        "Desarrollo y mantenimiento de nuevas funcionalidades en la plataforma B2C, mejorando la experiencia del usuario mediante la optimización de la interfaz y la navegación",
+        "Encabecé el proyecto tomando decisiones clave sobre la arquitectura del código y contribuyendo en la lógica del negocio",
+        "Implementación y ejecución de pruebas unitarias para garantizar la calidad del código y la funcionalidad del sistema"
+      ]
+    },
+    {
+      "company": "CHINOA",
+      "position": "Desarrollador Full-Stack",
+      "period": "Ene 2022 - Jul 2022",
+      "description": "Implementación de funcionalidades para gestionar el proceso de producción y los costos de materia prima, tiempo y otros recursos, optimizando la planificación y control de inventarios.",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "MySQL",
+        "JavaScript"
+      ],
+      "responsibilities": [
+        "Implementación de funcionalidades para gestionar el proceso de producción y los costos de materia prima, tiempo y otros recursos",
+        "Optimización de la planificación y control de inventarios",
+        "Desarrollé tanto el Front-End como el Back-End asegurando una integración fluida y una experiencia de usuario coherente"
+      ]
+    },
+    {
+      "company": "DAIRA IT Groups",
+      "position": "Desarrollador Front-end",
+      "period": "Nov 2022 - Abr 2023",
+      "description": "Desarrollo front-end para una financiera, automatizando la interacción con el cliente y mejorando significativamente la experiencia de usuario.",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Svelte"
+      ],
+      "responsibilities": [
+        "Afronte un proyecto para una financiera donde se necesitaba automatizar la interacción con el cliente mejorando la experiencia de usuario significativamente",
+        "Rápida adaptación a nuevos entornos tecnológicos y metodologías de desarrollo, asegurando una transición suave y eficiente en los proyectos",
+        "Implementación de interfaces de usuario interactivas y responsivas utilizando HTML, CSS, JavaScript y Svelte"
+      ]
+    }
+  ],
+  "projects": {
+    "title": "Proyectos",
+    "description": "Algunos de mis proyectos personales o de clientes",
+    "viewMore": "Ver Más",
+    "viewMoreUrl": "https://github.com/1thomas13",
+    "view": "Ver",
+    "github": "GitHub",
+    "liveDemo": "Ver Demo"
+  },
+  "projectsData": [
+    {
+      "id": "project-1",
+      "title": "MBA Tutor",
+      "description": "Landing page  desarrollada para una empresa de educación con más de 20 años de experiencia. Enfoque en UX, legibilidad y comunicación de confianza mediante datos reales y contenido estructurado.",
+      "technologies": [
+        "React",
+        "Astro",
+        "Tailwind",
+        "TypeScript"
+      ],
+      "image": "",
+      "github": "#",
+      "demo": "https://mba-tutor.com/"
+    },
+    {
+      "id": "project-2",
+      "title": "The Rockin’ Chair",
+      "description": "Plataforma enfocada en accesibilidad para conciertos y eventos en vivo. Incluye landing page, mobile app y una web app en desarrollo, con foco en UX y experiencia inclusiva.",
+      "technologies": [
+        "React Native",
+        "Expo",
+        "Supabase",
+        "TypeScript"
+      ],
+      "image": "",
+      "github": "#",
+      "demo": "https://therockinchair-landing.vercel.app/"
+    }
+  ],
+  "contact": {
+    "title": "Conectemos",
+    "description": "Actualmente estoy abierto a nuevas oportunidades o proyectos.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "visitProfile": "Visitar Perfil",
+    "viewCode": "Ver Código"
+  },
+  "contactData": {
+    "email": {
+      "value": "thomi.b137@gmail.com",
+      "href": "mailto:thomi.b137@gmail.com"
+    },
+    "linkedin": {
+      "href": "https://www.linkedin.com/in/thomas-barreto-50ab71204/"
+    },
+    "github": {
+      "href": "https://github.com/1thomas13"
+    }
+  },
+  "footer": {
+    "viewSourceCode": "Ver código fuente"
+  }
+}

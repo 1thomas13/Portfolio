@@ -1,0 +1,203 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About me",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact",
+    "getStarted": "Get Started",
+    "menu": "Menu"
+  },
+  "hero": {
+    "title": "Thomas Barreto",
+    "subtitle": "Full-Stack Developer",
+    "viewCV": "View CV"
+  },
+  "about": {
+    "title": "About me",
+    "description": "Full-Stack Developer with 4 years of experience. I quickly adapt to new technologies and enjoy getting involved in business logic to propose solutions that generate impact. I work collaboratively in multidisciplinary teams and have experience leading projects."
+  },
+  "techStack": {
+    "title": "Tech Stack"
+  },
+  "techStackData": [
+    {
+      "category": "Frontend",
+      "skills": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "CSS",
+        "Tailwind",
+        "Sass",
+        "Redux",
+        "React Native",
+        "Expo"
+      ]
+    },
+    {
+      "category": "Backend",
+      "skills": [
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "Nest.js",
+        "PostgreSQL",
+        "MongoDB",
+        "Supabase"
+      ]
+    },
+    {
+      "category": "Others",
+      "skills": [
+        "Docker",
+        "Git",
+        "Linux",
+        "n8n",
+        "AWS"
+      ]
+    }
+  ],
+  "experience": {
+    "title": "Experience",
+    "technologies": "Technologies:",
+    "keyResponsibilities": "Key Responsibilities:"
+  },
+  "experienceData": [
+    {
+      "company": "Bitskingdom",
+      "position": "Mobile Developer",
+      "period": "Nov 2024 - Present",
+      "description": "Developed key features in a multiplatform app with Expo (React Native), collaborating on planning and deployment.",
+      "technologies": [
+        "React Native",
+        "Expo",
+        "Supabase",
+        "TypeScript"
+      ],
+      "responsibilities": [
+        "Developed key features in a multiplatform app with Expo (React Native), collaborating on planning and deployment",
+        "Designed and implemented data architecture with Supabase, incorporating secure authentication, database management and file storage",
+        "Integrated APIs and real-time functionalities, ensuring a smooth and consistent user experience"
+      ]
+    },
+    {
+      "company": "WeGoGreenR",
+      "position": "Web Developer",
+      "period": "Apr 2023 - Nov 2024",
+      "description": "Development of a B2B SaaS (Software as a Service) to improve accommodations, offering sustainable management tools, certifications and facilitating eco-responsible practices.",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "TypeScript",
+        "AWS",
+        "MongoDB"
+      ],
+      "responsibilities": [
+        "Optimized AWS services, reducing monthly costs by 38%",
+        "Developed and maintained new features on the B2C platform, improving user experience through interface and navigation optimization",
+        "Led the project making key decisions about code architecture and contributing to business logic",
+        "Implementation and execution of unit tests to ensure code quality and system functionality"
+      ]
+    },
+    {
+      "company": "CHINOA",
+      "position": "Full-Stack Developer",
+      "period": "Jan 2022 - Jul 2022",
+      "description": "Implementation of features to manage the production process and costs of raw materials, time and other resources, optimizing planning and inventory control.",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "MySQL",
+        "JavaScript"
+      ],
+      "responsibilities": [
+        "Implementation of features to manage the production process and costs of raw materials, time and other resources",
+        "Optimization of planning and inventory control",
+        "Developed both Front-End and Back-End ensuring smooth integration and a coherent user experience"
+      ]
+    },
+    {
+      "company": "DAIRA IT Groups",
+      "position": "Front-end Developer",
+      "period": "Nov 2022 - Apr 2023",
+      "description": "Front-end development for a financial company, automating customer interaction and significantly improving user experience.",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Svelte"
+      ],
+      "responsibilities": [
+        "Tackled a project for a financial company where customer interaction automation was needed, significantly improving user experience",
+        "Quick adaptation to new technological environments and development methodologies, ensuring smooth and efficient transitions in projects",
+        "Implementation of interactive and responsive user interfaces using HTML, CSS, JavaScript and Svelte"
+      ]
+    }
+  ],
+  "projects": {
+    "title": "Projects",
+    "description": "Some of my personal or clients' projects",
+    "viewMore": "View More",
+    "viewMoreUrl": "https://github.com/1thomas13",
+    "view": "View",
+    "github": "GitHub",
+    "liveDemo": "Live Demo"
+  },
+  "projectsData": [
+    {
+      "id": "project-1",
+      "title": "MBA Tutor",
+      "description": "Landing page developed for an education company with over 20 years of experience. Focus on UX, readability and trust communication through real data and structured content.",
+      "technologies": [
+        "React",
+        "Astro",
+        "Tailwind",
+        "TypeScript"
+      ],
+      "image": "",
+      "github": "#",
+      "demo": "https://mba-tutor.com/"
+    },
+    {
+      "id": "project-2",
+      "title": "The Rockin' Chair",
+      "description": "Platform focused on accessibility for concerts and live events. Includes landing page, mobile app and a web app in development, with focus on UX and inclusive experience.",
+      "technologies": [
+        "React Native",
+        "Expo",
+        "Supabase",
+        "TypeScript"
+      ],
+      "image": "",
+      "github": "#",
+      "demo": "https://therockinchair-landing.vercel.app/"
+    }
+  ],
+  "contact": {
+    "title": "Let's Connect",
+    "description": "I’m currently open to new opportunities or projects.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "visitProfile": "Visit Profile",
+    "viewCode": "View Code"
+  },
+  "contactData": {
+    "email": {
+      "value": "thomi.b137@gmail.com",
+      "href": "mailto:thomi.b137@gmail.com"
+    },
+    "linkedin": {
+      "href": "https://linkedin.com/in/thomas-barreto"
+    },
+    "github": {
+      "href": "https://github.com/1thomas13"
+    }
+  },
+  "footer": {
+    "viewSourceCode": "View source code"
+  }
+}

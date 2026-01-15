@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets"
+import "../styles/global.css"
+import Aurora from "@/components/ui/Aurora"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Thomas Barreto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=optional"
+      rel="stylesheet"
+    />
+    <meta
+      name="description"
+      content="Accessible concerts for everyone — no barriers, just a rockin' good time at The Rockin' Chair."
+    />
+
+    <meta property="og:title" content="The Rockin' Chair" />
+    <meta
+      property="og:description"
+      content="Discover live music, events and authentic experiences."
+    />
+    <link rel="canonical" href="https://therockinchair-landing.vercel.app/" />
+    <meta property="og:image" content="/public/logo.png" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://therockinchair-landing.vercel.app/"
+    />
+  </head>
+
+  <body class="min-h-screen bg-black overflow-hidden">
+    <main class="min-h-screen relative overflow-hidden">
+      <div class="fixed inset-0 w-full h-full">
+        <Aurora
+          client:load
+          colorStops={["#475569", "#64748b", "#475569"]}
+          amplitude={1.2}
+          blend={0.6}
+          speed={0.8}
+        />
+      </div>
+      <div class="relative z-10">
+        <slot />
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  html {
+    height: 100%;
+  }
+
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    div[style*="border-radius: 50%"] {
+      width: 400px;
+      height: 400px;
+      bottom: -200px;
+      filter: blur(150px);
+    }
+  }
+</style>

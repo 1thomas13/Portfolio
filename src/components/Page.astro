@@ -1,0 +1,21 @@
+---
+import { GlassmorphismNav } from "./sections/Nav"
+import SwitchLang from "./ui/SwitchLang"
+import Hero from "./sections/Hero.astro"
+import AboutSection from "./sections/AboutSection.astro"
+import Experience from "./sections/Experience.astro"
+import ExperienceV2 from "./sections/ExperienceV2"
+import Projects from "./sections/Projects.astro"
+import Contact from "./sections/Contact.astro"
+import Footer from "./ui/Footer"
+---
+
+<GlassmorphismNav client:load />
+<Hero />
+
+<AboutSection />
+<ExperienceV2 client:load />
+<Projects />
+<Contact />
+
+<Footer client:load />
