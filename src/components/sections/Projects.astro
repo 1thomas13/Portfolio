@@ -1,0 +1,40 @@
+---
+import { getI18N } from "@/i18n"
+import ProjectsContainer from "./ProjectsContainer"
+import projectImage from "@/assets/project.png"
+import project2Image from "@/assets/projects2.png"
+
+const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
+const t = getI18N({ currentLocale })
+
+const projectImages: Record<string, string> = {
+  "project-1": projectImage.src,
+  "project-2": project2Image.src,
+}
+
+const projects = t.projectsData.map((project) => ({
+  ...project,
+  image: projectImages[project.id] || projectImage.src,
+}))
+---
+
+<section id="projects" class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto text-center justify-center">
+    <div class="mb-16">
+      <h2 class="text-5xl md:text-6xl font-bold mb-6 text-balance">
+        {t.projects.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        {t.projects.description}
+      </p>
+    </div>
+
+    <ProjectsContainer client:load projects={projects} />
+
+    <a
+      href={t.projects.viewMoreUrl}
+      class="m-auto mt-12 bg-white hover:bg-gray-50 text-black font-medium px-6 py-3 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-lg w-fit">
+      {t.projects.viewMore}
+    </a>
+  </div>
+</section>

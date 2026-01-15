@@ -1,0 +1,34 @@
+---
+import { getI18N } from "@/i18n"
+import GradientText from "../ui/GradientText"
+import Magnet from "../ui/Magnent"
+import { ArrowDown } from "lucide-react"
+
+const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
+const i18n = getI18N({ currentLocale })
+---
+
+<section
+  id="features"
+  class="h-screen relative flex flex-col justify-center items-center px-4 text-white">
+  <h1
+    class="text-3xl animate-fade-in-up sm:text-4xl md:text-6xl lg:text-7xl font-bold text-balance mb-6 animate-fade-in-heading">
+    {i18n.hero.title}
+  </h1>
+  <GradientText
+    client:load
+    colors={["#D227FF", "#FF9FFC", "#D19EEF", "#ffffff", "#ffffff", "#ffffff"]}>
+    <h2 class="text-center text-4xl sm:text-5xl font-semibold px-4">
+      {i18n.hero.subtitle}
+    </h2>
+  </GradientText>
+  <Magnet client:load padding={1500} disabled={false} magnetStrength={100}>
+    <button
+      class="relative bg-white hover:bg-gray-50 text-black font-medium px-6 py-3 rounded-full flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer group transform mt-8">
+      {i18n.hero.viewCV}
+    </button>
+  </Magnet>
+  <ArrowDown
+    className="w-8 h-8 absolute bottom-4 left-1/2 -translate-x-1/2 text-white mt-12 animate-bounce"
+  />
+</section>

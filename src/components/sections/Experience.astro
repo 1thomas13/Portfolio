@@ -1,0 +1,66 @@
+---
+import { getI18N } from "@/i18n"
+import SpotlightCard from "../ui/SpotlightCard"
+
+const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
+const t = getI18N({ currentLocale })
+
+const experiences = t.experienceData
+---
+
+<section
+  id="experience"
+  class="py-16 sm:py-24 relative z-10 bg-white/95 backdrop-blur-2xl rounded-[2rem] shadow-[0_20px_80px_-20px_rgba(0,0,0,0.3)] border border-white/40 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+    <div class="text-center mb-12 sm:mb-16 transition-all duration-1000">
+      <h2
+        class="text-center mb-12 sm:mb-16 transition-all duration-1000 text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 tracking-tight">
+        {t.experience.title}
+      </h2>
+    </div>
+    <div class="space-y-8">
+      {
+        experiences.map((exp, index) => (
+          <div>
+            <SpotlightCard
+              client:load
+              className="bg-white"
+              spotlightColor="rgba(0, 229, 255, 0.2)">
+              <div class="pb-2 text-black">
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+                  <div class="text-xl">{exp.position}</div>
+                  <div class="md:ml-auto w-fit">{exp.period}</div>
+                </div>
+                <div class="text-lg text-black font-medium">{exp.company}</div>
+              </div>
+              <div class="text-black">
+                <p class="mb-4">{exp.description}</p>
+
+                <div class="mb-4">
+                  <h4 class="text-sm font-semibold mb-2">
+                    {t.experience.technologies}
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech) => (
+                      <div class="text-xs">{tech}</div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold mb-2">
+                    {t.experience.keyResponsibilities}
+                  </h4>
+                  <ul class="list-disc pl-5 space-y-1">
+                    {exp.responsibilities.map((resp) => (
+                      <li class="text-sm">{resp}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </SpotlightCard>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
