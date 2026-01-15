@@ -1,12 +1,7 @@
 ---
 import { Image } from "astro:assets"
-import Button from "../components/Button.astro"
-import Header from "../components/Header.astro"
 import "../styles/global.css"
-import appStoreImage from "../assets/appStore.png"
-import googlePlayImage from "../assets/googlePlay.png"
-import facebookIcon from "../assets/Facebook.svg"
-import Aurora from "../components/Aurora"
+import Aurora from "@/components/ui/Aurora"
 ---
 
 <!doctype html>
@@ -14,7 +9,7 @@ import Aurora from "../components/Aurora"
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/icon.jpg" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="generator" content={Astro.generator} />
     <title>Thomas Barreto</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
