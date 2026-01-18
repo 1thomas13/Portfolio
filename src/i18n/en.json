@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "Thomas Barreto - Full-Stack Developer",
+    "description": "Full-Stack Developer. Specialized in React, Node.js, TypeScript and modern technologies. Personal portfolio with projects and professional experience.",
+    "siteUrl": "https://thomasbarreto.dev"
+  },
   "nav": {
     "home": "Home",
     "about": "About me",
@@ -54,7 +59,7 @@
         "Git",
         "Linux",
         "n8n",
-        "AWS"
+        "AWS (EC2, Lambda, S3, RDS, Amplify, CloudFront)"
       ]
     }
   ],
@@ -157,7 +162,7 @@
         "Tailwind",
         "TypeScript"
       ],
-      "image": "",
+      "image": "/src/assets/project.png",
       "github": "#",
       "demo": "https://mba-tutor.com/"
     },
@@ -169,9 +174,10 @@
         "React Native",
         "Expo",
         "Supabase",
-        "TypeScript"
+        "TypeScript",
+        "Next.js"
       ],
-      "image": "",
+      "image": "/src/assets/projects2.png",
       "github": "#",
       "demo": "https://therockinchair-landing.vercel.app/"
     }

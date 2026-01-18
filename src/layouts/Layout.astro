@@ -2,39 +2,41 @@
 import { Image } from "astro:assets"
 import "../styles/global.css"
 import Aurora from "@/components/ui/Aurora"
+import { getI18N } from "@/i18n"
+
+const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
+const t = getI18N({ currentLocale })
+const lang = currentLocale === "en" ? "en" : "es"
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="generator" content={Astro.generator} />
-    <title>Thomas Barreto</title>
+    <title>{t.meta.title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=optional"
       rel="stylesheet"
     />
-    <meta
-      name="description"
-      content="Accessible concerts for everyone — no barriers, just a rockin' good time at The Rockin' Chair."
-    />
+    <meta name="description" content={t.meta.description} />
+    <meta name="author" content="Thomas Barreto" />
 
-    <meta property="og:title" content="The Rockin' Chair" />
-    <meta
-      property="og:description"
-      content="Discover live music, events and authentic experiences."
-    />
-    <link rel="canonical" href="https://therockinchair-landing.vercel.app/" />
-    <meta property="og:image" content="/public/logo.png" />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="https://therockinchair-landing.vercel.app/"
-    />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={t.meta.siteUrl} />
+    <meta property="og:site_name" content="Thomas Barreto Portfolio" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t.meta.title} />
+    <meta name="twitter:description" content={t.meta.description} />
+
+    <link rel="canonical" href={t.meta.siteUrl} />
   </head>
 
   <body class="min-h-screen bg-black overflow-hidden">
