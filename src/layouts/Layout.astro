@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets"
+import Analytics from "@vercel/analytics/astro"
 import "../styles/global.css"
 import Aurora from "@/components/ui/Aurora"
 ---
@@ -35,6 +36,7 @@ import Aurora from "@/components/ui/Aurora"
       property="og:url"
       content="https://therockinchair-landing.vercel.app/"
     />
+    <Analytics />
   </head>
 
   <body class="min-h-screen bg-black overflow-hidden">
