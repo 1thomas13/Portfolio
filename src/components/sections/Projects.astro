@@ -8,13 +8,13 @@ const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
 const t = getI18N({ currentLocale })
 
 const projectImages: Record<string, string> = {
-  "project-1": projectImage.src,
-  "project-2": project2Image.src,
+  "/src/assets/project.png": projectImage.src,
+  "/src/assets/projects2.png": project2Image.src,
 }
 
 const projects = t.projectsData.map((project) => ({
   ...project,
-  image: projectImages[project.id] || projectImage.src,
+  image: projectImages[project.image] || project.image,
 }))
 ---
 
