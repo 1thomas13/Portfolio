@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets"
+import Analytics from "@vercel/analytics/astro"
 import "../styles/global.css"
 import Aurora from "@/components/ui/Aurora"
 import { getI18N } from "@/i18n"
@@ -37,6 +38,7 @@ const lang = currentLocale === "en" ? "en" : "es"
     <meta name="twitter:description" content={t.meta.description} />
 
     <link rel="canonical" href={t.meta.siteUrl} />
+    <Analytics />
   </head>
 
   <body class="min-h-screen bg-black overflow-hidden">
