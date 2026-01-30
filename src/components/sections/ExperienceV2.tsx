@@ -23,7 +23,7 @@ const ExperienceV2 = ({ className }: ExperienceV2Props) => {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-10 lg:space-y-20">
-        <div className="flex w-full items-end justify-between">
+        <div className="flex w-full items-end justify-between flex-wrap gap-4">
           <h1 className="text-5xl font-semibold tracking-tighter lg:text-6xl text-black" >
             {t.experience.title}
           </h1>
@@ -36,7 +36,6 @@ const ExperienceV2 = ({ className }: ExperienceV2Props) => {
             {t.hero.viewCV} <Download className="size-4" />
           </a>
         </div>
-
         <ul>
           {experiences.map((exp, index) => (
             <li
