@@ -1,0 +1,54 @@
+---
+import DiaryLayout from "@/layouts/DiaryLayout.astro"
+import { isConfigured, isLoggedIn, logIn } from "@/lib/diary/auth"
+
+export const prerender = false
+
+if (isLoggedIn(Astro.cookies)) return Astro.redirect("/diary/", 303)
+
+let failed = false
+if (Astro.request.method === "POST") {
+  const form = await Astro.request.formData()
+  if (await logIn(Astro.cookies, String(form.get("password") ?? ""))) return Astro.redirect("/diary/", 303)
+  failed = true
+  Astro.response.status = 401
+}
+---
+
+<DiaryLayout title="Entrar" nav={false}>
+  <div class="mx-auto max-w-[440px] border-2 border-fg p-6 md:p-10">
+    <p class="label">Privado</p>
+    <h1 class="display mt-4 text-[clamp(48px,12vw,80px)]"><span data-sel>Diary</span></h1>
+    <p class="mt-6 text-muted">Hey, esto no es parte del portfolio. Si llegaste por curiosidad, buen ojo, pero sin la contraseña no hay nada para leer.</p>
+    {
+      isConfigured() ? (
+        <form method="post" class="mt-8 grid gap-3">
+          <label for="password" class="font-mono text-sm uppercase">
+            Contraseña
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            autofocus
+            aria-invalid={failed ? "true" : undefined}
+            aria-describedby={failed ? "error" : undefined}
+            class="border-2 border-fg bg-cream px-3 py-2.5 text-base"
+          />
+          {failed && (
+            <p id="error" class="font-mono text-sm text-accent-text">
+              No es esa.
+            </p>
+          )}
+          <button class="btn mt-2 justify-center">Entrar</button>
+        </form>
+      ) : (
+        <p class="mt-8 text-muted">
+          Falta configurar <code class="font-mono">DIARY_PASSWORD</code> y <code class="font-mono">DIARY_SECRET</code>.
+        </p>
+      )
+    }
+  </div>
+</DiaryLayout>

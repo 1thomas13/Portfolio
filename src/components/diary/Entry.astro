@@ -1,0 +1,60 @@
+---
+import { typeLabel, type Entry } from "@/lib/diary/week"
+
+interface Props {
+  entry: Entry
+  label?: string
+  // Where it's stored, so it can be starred
+  at?: { week: string; date: string; index: number }
+}
+
+const { entry, label = typeLabel(entry.type), at } = Astro.props
+const parts = (text: string) => text.split(/(#[\p{L}\p{N}_-]+)/u)
+---
+
+<article class:list={["grid gap-1.5 border-b border-fg/25 py-4 last:border-b-0", entry.star && "border-l-4 border-l-accent pl-4"]}>
+  <div class="flex items-start justify-between gap-4">
+    <p class="font-mono text-xs tracking-[0.08em] text-accent-text uppercase">{label}</p>
+    {
+      at && (
+        <form method="post" action="/diary/star">
+          <input type="hidden" name="week" value={at.week} />
+          <input type="hidden" name="day" value={at.date} />
+          <input type="hidden" name="index" value={at.index} />
+          <input type="hidden" name="text" value={entry.text} />
+          <input type="hidden" name="back" value={Astro.url.pathname + Astro.url.search} />
+          <button
+            aria-pressed={entry.star ? "true" : "false"}
+            aria-label="Importante"
+            title={entry.star ? "Sacar de importantes" : "Marcar como importante"}
+            class:list={["-m-2 p-2 leading-none hover:text-accent-text", entry.star ? "text-accent-text" : "text-muted"]}
+          >
+            {entry.star ? "★" : "☆"}
+          </button>
+        </form>
+      )
+    }
+  </div>
+  <p class="leading-relaxed whitespace-pre-line">
+    {
+      parts(entry.text).map((part) =>
+        part.startsWith("#") ? (
+          <a href={`/diary/search?tag=${encodeURIComponent(part.slice(1).toLowerCase())}`} class="font-mono text-sm text-muted hover:text-accent-text">
+            {part}
+          </a>
+        ) : (
+          part
+        ),
+      )
+    }
+  </p>
+  {
+    entry.next && (
+      <p class="border-l-2 border-accent pl-3 text-muted whitespace-pre-line">
+        <span class="sr-only">Y ahora: </span>
+        <span aria-hidden="true">→ </span>
+        {entry.next}
+      </p>
+    )
+  }
+</article>

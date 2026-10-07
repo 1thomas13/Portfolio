@@ -1,0 +1,136 @@
+---
+import Entry from "@/components/diary/Entry.astro"
+import DiaryLayout from "@/layouts/DiaryLayout.astro"
+import { TYPES, formatDay, plain, slug, tagsOf, type Entry as EntryData, type Week } from "@/lib/diary/week"
+import { read } from "@/lib/diary/store"
+
+export const prerender = false
+
+const params = Astro.url.searchParams
+const type = params.get("type") ?? ""
+const tag = (params.get("tag") ?? "").toLowerCase()
+const q = (params.get("q") ?? "").trim()
+const starred = params.get("starred") === "1"
+
+let error = ""
+let weeks = new Map<string, Week>()
+try {
+  weeks = (await read()).weeks
+} catch (e) {
+  error = e instanceof Error ? e.message : String(e)
+}
+
+const CLOSE = { key: "close", label: "Cierres" }
+const all = [...weeks.values()]
+  .reverse()
+  .flatMap((week) => [
+    ...[...week.days].reverse().flatMap((day) =>
+      day.entries.map((entry, index) => ({ week: week.id, date: day.date, index, entry, key: slug(entry.type), label: undefined as string | undefined })),
+    ),
+    ...week.close
+      .filter((c) => c.answer.trim())
+      .map((c) => ({ week: week.id, date: "", index: -1, entry: { type: CLOSE.key, text: c.answer } as EntryData, key: CLOSE.key, label: `Cierre · ${c.question}` })),
+  ])
+
+const matchesText = (item: (typeof all)[number]) => !q || plain(`${item.entry.text} ${item.entry.next ?? ""}`).includes(plain(q))
+const matchesTag = (item: (typeof all)[number]) => (!tag || tagsOf(item.entry.text).includes(tag)) && (!starred || Boolean(item.entry.star))
+const results = all.filter((item) => (!type || item.key === type) && matchesTag(item) && matchesText(item))
+
+const typeCounts = [...TYPES, CLOSE].map((t) => ({ ...t, count: all.filter((i) => i.key === t.key && matchesTag(i) && matchesText(i)).length }))
+const tagCounts = Object.entries(
+  all
+    .filter((i) => (!type || i.key === type) && matchesText(i))
+    .flatMap((i) => tagsOf(i.entry.text))
+    .reduce<Record<string, number>>((acc, t) => ({ ...acc, [t]: (acc[t] ?? 0) + 1 }), {}),
+).sort((a, b) => b[1] - a[1])
+
+const groups = results.reduce<{ week: string; items: typeof results }[]>((acc, item) => {
+  if (acc.at(-1)?.week !== item.week) acc.push({ week: item.week, items: [] })
+  acc.at(-1)!.items.push(item)
+  return acc
+}, [])
+
+const href = (changes: Record<string, string>) => {
+  const next = new URLSearchParams({ type, tag, q, starred: starred ? "1" : "", ...changes })
+  for (const [key, value] of [...next]) if (!value) next.delete(key)
+  return `/diary/search${next.size ? `?${next}` : ""}`
+}
+const chip = "border-2 border-fg px-3 py-1.5 font-mono text-sm uppercase hover:bg-fg hover:text-bg aria-[current]:bg-fg aria-[current]:text-bg"
+---
+
+<DiaryLayout title="Buscar">
+  <h1 class="text-xl font-semibold md:text-2xl">Buscar</h1>
+
+  {
+    error && (
+      <p role="alert" class="mt-8 border-2 border-accent-text p-4 font-mono text-sm text-accent-text">
+        {error}
+      </p>
+    )
+  }
+
+  <form method="get" class="mt-6 flex max-w-[640px] gap-2" role="search">
+    {type && <input type="hidden" name="type" value={type} />}
+    {tag && <input type="hidden" name="tag" value={tag} />}
+    {starred && <input type="hidden" name="starred" value="1" />}
+    <label for="q" class="sr-only">Texto</label>
+    <input id="q" name="q" value={q} placeholder="redis, deploy, ansiedad…" class="w-full border-2 border-fg bg-cream px-3 py-2.5 text-base placeholder:text-muted" />
+    <button class="btn shrink-0 px-4">Buscar</button>
+  </form>
+
+  <nav aria-label="Tipo" class="mt-6 flex flex-wrap gap-2">
+    <a href={href({ starred: starred ? "" : "1" })} aria-current={starred ? "true" : undefined} class={chip}>★ Importantes</a>
+    <a href={href({ type: "" })} aria-current={!type ? "true" : undefined} class={chip}>Todo</a>
+    {
+      typeCounts.map((t) => (
+        <a href={href({ type: t.key })} aria-current={type === t.key ? "true" : undefined} class={chip}>
+          {t.label} <span class="opacity-70">{t.count}</span>
+        </a>
+      ))
+    }
+  </nav>
+
+  {
+    tagCounts.length > 0 && (
+      <nav aria-label="Etiquetas" class="mt-4 flex flex-wrap gap-x-4 gap-y-1 font-mono text-sm">
+        {tag && (
+          <a href={href({ tag: "" })} class="text-accent-text">
+            × #{tag}
+          </a>
+        )}
+        {tagCounts
+          .filter(([t]) => t !== tag)
+          .map(([t, count]) => (
+            <a href={href({ tag: t })} class="text-muted hover:text-accent-text">
+              #{t} {count}
+            </a>
+          ))}
+      </nav>
+    )
+  }
+
+  <p class="mt-8 label" aria-live="polite">{results.length} {results.length === 1 ? "entrada" : "entradas"}</p>
+
+  <div class="mt-2 max-w-[760px]">
+    {
+      groups.map((group) => {
+        const [year, number] = group.week.split("-W")
+        return (
+          <section class="mt-8">
+            <h2 class="flex justify-between border-b-2 border-fg pb-1 font-mono text-sm uppercase">
+              <a href={`/diary/?week=${group.week}`} class="hover:text-accent-text">
+                Semana {Number(number)} · {year}
+              </a>
+            </h2>
+            {group.items.map((item) => (
+              <div>
+                {item.date && <p class="mt-4 -mb-3 font-mono text-xs text-muted uppercase">{formatDay(item.date)}</p>}
+                <Entry entry={item.entry} label={item.label} at={item.date ? { week: item.week, date: item.date, index: item.index } : undefined} />
+              </div>
+            ))}
+          </section>
+        )
+      })
+    }
+  </div>
+</DiaryLayout>

@@ -1,0 +1,59 @@
+---
+import { DIARY_TZ } from "astro:env/server"
+import DiaryLayout from "@/layouts/DiaryLayout.astro"
+import { emptyWeek, isWeekId, parseWeek, serializeWeek, today, weekOf } from "@/lib/diary/week"
+import { read, update } from "@/lib/diary/store"
+
+export const prerender = false
+
+const param = Astro.url.searchParams.get("week") ?? ""
+const id = isWeekId(param) ? param : weekOf(today(DIARY_TZ))
+const [year, number] = id.split("-W")
+
+let error = ""
+let markdown = ""
+
+if (Astro.request.method === "POST") {
+  markdown = String((await Astro.request.formData()).get("markdown") ?? "")
+  try {
+    const week = parseWeek(id, markdown)
+    await update(`Manual edit of week ${id}`, ({ weeks }) => (weeks.set(id, week), [week]))
+    return Astro.redirect(`/diary/?week=${id}`, 303)
+  } catch (e) {
+    error = e instanceof Error ? e.message : String(e)
+    Astro.response.status = 400
+  }
+} else {
+  try {
+    markdown = serializeWeek((await read()).weeks.get(id) ?? emptyWeek(id))
+  } catch (e) {
+    error = e instanceof Error ? e.message : String(e)
+  }
+}
+---
+
+<DiaryLayout title={`Editar semana ${Number(number)}`}>
+  <p class="label">{year}</p>
+  <h1 class="mt-1 text-xl font-semibold md:text-2xl">Editar semana {Number(number)}</h1>
+
+  {
+    error && (
+      <p role="alert" class="mt-8 border-2 border-accent-text p-4 font-mono text-sm text-accent-text">
+        {error}
+      </p>
+    )
+  }
+
+  <form method="post" class="mt-6 grid max-w-[860px] gap-4">
+    <label for="markdown" class="sr-only">Markdown de la semana</label>
+    <textarea id="markdown" name="markdown" rows="24" spellcheck="true" class="w-full border-2 border-fg bg-cream p-4 font-mono text-sm leading-relaxed">{markdown}</textarea>
+    <p class="text-sm text-muted">
+      Entradas: <code class="font-mono">- [tipo] texto #etiqueta</code> (con <code class="font-mono">★</code> adelante del texto si es importante), y abajo <code class="font-mono">→ y ahora qué</code>. Pendientes:
+      <code class="font-mono">- [ ]</code>, <code class="font-mono">[x]</code> o <code class="font-mono">[&gt;]</code>. Para borrar algo, sacá la línea.
+    </p>
+    <div class="flex gap-4">
+      <button class="btn">Guardar</button>
+      <a href={`/diary/?week=${id}`} class="btn">Cancelar</a>
+    </div>
+  </form>
+</DiaryLayout>

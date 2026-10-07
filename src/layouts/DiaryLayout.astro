@@ -1,0 +1,102 @@
+---
+import "../styles/global.css"
+
+interface Props {
+  title: string
+  nav?: boolean
+}
+
+const { title, nav = true } = Astro.props
+const trim = (path: string) => path.replace(/\/$/, "")
+const current = trim(Astro.url.pathname)
+const links = [
+  { label: "Semana", href: "/diary/", icon: "M4 6h16v14H4zM4 10h16M9 3v4M15 3v4" },
+  { label: "Buscar", href: "/diary/search", icon: "M10.5 4a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13zM15.5 15.5 20 20" },
+  { label: "Guía", href: "/diary/guide", icon: "M5 4h9l5 5v11H5zM14 4v5h5M8 13h8M8 17h6" },
+  { label: "Avisos", href: "/diary/reminders", icon: "M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" },
+]
+---
+
+<!doctype html>
+<html lang="es" data-theme="sand" class="diary">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f1e9da" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/diary/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/diary/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/iosevka/Iosevka-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <title>{title} · Diary</title>
+    <!-- The diary is a tool: no page transitions (after saving, the old page showed on top of the
+         new one), no grain over the fields and no frame -->
+    <style is:inline>
+      @view-transition {
+        navigation: none;
+      }
+      html.diary body::after {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen">
+    <header class="sticky top-0 z-40 border-b-2 border-fg bg-bg">
+      <div class="container-x flex items-center justify-between gap-6 py-3 font-mono text-sm uppercase">
+        <a href="/diary/" class="font-bold">Diary</a>
+        {
+          nav && (
+            <div class="flex items-center gap-5">
+              <nav aria-label="Diary" class="hidden items-center gap-5 md:flex">
+                {links.map((link) => (
+                  <a
+                    href={link.href}
+                    aria-current={current === trim(link.href) ? "page" : undefined}
+                    class="underline-offset-4 hover:text-accent-text hover:underline aria-[current]:underline"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
+              <form method="post" action="/diary/logout">
+                <button class="-m-2 p-2 uppercase text-muted hover:text-accent-text">Salir</button>
+              </form>
+            </div>
+          )
+        }
+      </div>
+    </header>
+
+    <main class:list={["container-x pt-6 md:pt-10", nav ? "pb-28 md:pb-20" : "pb-20"]}>
+      <slot />
+    </main>
+
+    {
+      nav && (
+        <nav aria-label="Diary" class="fixed inset-x-0 bottom-0 z-40 border-t-2 border-fg bg-bg pb-[env(safe-area-inset-bottom)] md:hidden">
+          <ul class="grid grid-cols-4">
+            {links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  aria-current={current === trim(link.href) ? "page" : undefined}
+                  class="flex flex-col items-center gap-0.5 py-2.5 font-mono text-[11px] uppercase text-muted aria-[current]:bg-fg aria-[current]:text-bg"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" class="size-5 fill-none stroke-current stroke-2">
+                    <path d={link.icon} />
+                  </svg>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <script>
+      navigator.serviceWorker?.register("/diary/sw.js", { scope: "/diary/" })
+    </script>
+  </body>
+</html>

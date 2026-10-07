@@ -1,0 +1,155 @@
+---
+import { DIARY_VAPID_PUBLIC } from "astro:env/server"
+import type { PushSubscription } from "web-push"
+import DiaryLayout from "@/layouts/DiaryLayout.astro"
+import { pushConfigured, send } from "@/lib/diary/reminders"
+import { read, update } from "@/lib/diary/store"
+
+export const prerender = false
+
+// The page script sends JSON: { action: "enable" | "disable" | "test", subscription }
+if (Astro.request.method === "POST") {
+  const { action, subscription } = (await Astro.request.json().catch(() => ({}))) as { action?: string; subscription?: PushSubscription }
+  const endpoint = subscription?.endpoint
+  if (!endpoint || !/^https:\/\//.test(endpoint)) return Response.json({ error: "Suscripción inválida" }, { status: 400 })
+  try {
+    if (action === "enable") {
+      await update("Reminders: device added", ({ subscriptions }) =>
+        subscriptions.some((s) => s.endpoint === endpoint) ? {} : { subscriptions: [...subscriptions, subscription!] },
+      )
+    } else if (action === "disable") {
+      await update("Reminders: device removed", ({ subscriptions }) => ({ subscriptions: subscriptions.filter((s) => s.endpoint !== endpoint) }))
+    } else if (action === "test") {
+      await send([subscription!], { title: "Así te va a llegar", body: "Todas las noches a las 22, si no anotaste nada.", url: "/diary/" })
+    }
+    return Response.json({ ok: true })
+  } catch (e) {
+    return Response.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 })
+  }
+}
+
+let devices = 0
+try {
+  devices = (await read()).subscriptions.length
+} catch {}
+---
+
+<DiaryLayout title="Avisos">
+  <h1 class="text-xl font-semibold md:text-2xl">Avisos</h1>
+
+  <div class="mt-6 grid max-w-[640px] gap-6 text-lg leading-relaxed">
+    <p>
+      Todas las noches a las 22 te llega un aviso <b>solo si ese día no anotaste nada</b>. El domingo, si no cerraste la semana, te recuerda el cierre.
+    </p>
+
+    {
+      pushConfigured() ? (
+        <section class="grid gap-5 border-2 border-fg p-5 md:p-8" data-push data-key={DIARY_VAPID_PUBLIC}>
+          <p class="label" data-status aria-live="polite">
+            Revisando este dispositivo…
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <button type="button" class="btn" data-action="enable" hidden>
+              Activar en este dispositivo
+            </button>
+            <button type="button" class="btn" data-action="test" hidden>
+              Mandar uno de prueba
+            </button>
+            <button type="button" class="btn" data-action="disable" hidden>
+              Desactivar
+            </button>
+          </div>
+          <p class="font-mono text-sm text-muted">
+            {devices} {devices === 1 ? "dispositivo activado" : "dispositivos activados"} en total
+          </p>
+        </section>
+      ) : (
+        <p class="border-2 border-accent-text p-4 font-mono text-sm text-accent-text">
+          Faltan DIARY_VAPID_PUBLIC y DIARY_VAPID_PRIVATE en las variables de entorno.
+        </p>
+      )
+    }
+
+    <details class="text-base text-muted">
+      <summary class="cursor-pointer font-mono text-sm uppercase">Tenerlo como app en el celular</summary>
+      <p class="mt-3">
+        En Chrome para Android: menú ⋮ → <b>Agregar a la pantalla principal</b> (o <b>Instalar app</b>). Queda con ícono propio y el aviso abre el diario directo.
+      </p>
+    </details>
+  </div>
+</DiaryLayout>
+
+<script>
+  const box = document.querySelector<HTMLElement>("[data-push]")
+  if (box) {
+    const status = box.querySelector<HTMLElement>("[data-status]")!
+    const buttons = Object.fromEntries(
+      [...box.querySelectorAll<HTMLButtonElement>("[data-action]")].map((b) => [b.dataset.action!, b]),
+    ) as Record<"enable" | "test" | "disable", HTMLButtonElement>
+
+    const key = Uint8Array.from(atob(box.dataset.key!.replace(/-/g, "+").replace(/_/g, "/")), (c) => c.charCodeAt(0))
+
+    const post = async (action: string, subscription: PushSubscription) => {
+      const res = await fetch("/diary/reminders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action, subscription: subscription.toJSON() }),
+      })
+      const json = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(json.error ?? `Error ${res.status}`)
+    }
+
+    const render = (subscription: PushSubscription | null, message?: string) => {
+      buttons.enable.hidden = Boolean(subscription)
+      buttons.test.hidden = buttons.disable.hidden = !subscription
+      status.textContent = message ?? (subscription ? "Activado en este dispositivo" : "No activado en este dispositivo")
+    }
+
+    const run = async (task: () => Promise<void>) => {
+      Object.values(buttons).forEach((b) => (b.disabled = true))
+      try {
+        await task()
+      } catch (e) {
+        status.textContent = e instanceof Error ? e.message : String(e)
+      } finally {
+        Object.values(buttons).forEach((b) => (b.disabled = false))
+      }
+    }
+
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
+      status.textContent = "Este navegador no soporta avisos."
+    } else {
+      run(async () => render(await (await navigator.serviceWorker.ready).pushManager.getSubscription()))
+      const registration = () => navigator.serviceWorker.ready
+
+      buttons.enable.addEventListener("click", () =>
+        run(async () => {
+          if ((await Notification.requestPermission()) !== "granted") {
+            render(null, "Sin permiso para notificaciones. Se habilita desde los ajustes del sitio en el navegador.")
+            return
+          }
+          const subscription = await (await registration()).pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: key })
+          await post("enable", subscription)
+          render(subscription)
+        }),
+      )
+      buttons.test.addEventListener("click", () =>
+        run(async () => {
+          const subscription = await (await registration()).pushManager.getSubscription()
+          if (subscription) await post("test", subscription)
+          status.textContent = "Enviado. Tendría que llegar en unos segundos."
+        }),
+      )
+      buttons.disable.addEventListener("click", () =>
+        run(async () => {
+          const subscription = await (await registration()).pushManager.getSubscription()
+          if (subscription) {
+            await post("disable", subscription)
+            await subscription.unsubscribe()
+          }
+          render(null)
+        }),
+      )
+    }
+  }
+</script>

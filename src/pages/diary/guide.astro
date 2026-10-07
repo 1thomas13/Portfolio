@@ -1,0 +1,111 @@
+---
+import DiaryLayout from "@/layouts/DiaryLayout.astro"
+
+export const prerender = false
+
+const why = [
+  {
+    title: "Reflexionar sobre lo aprendido mejora el aprendizaje",
+    text: "Empleados en capacitación que dedicaron 15 minutos al final del día a escribir qué habían aprendido rindieron alrededor de un 20% más en la evaluación final que los que no. Lo que ayudó fue escribir las lecciones, no solo lo que pasó.",
+    source: "Di Stefano, Gino, Pisano y Staats (2014), Harvard Business School",
+  },
+  {
+    title: "Ver el avance motiva",
+    text: "En unas 12.000 entradas de diario de 238 profesionales, lo que más mejoraba el ánimo y la motivación era sentir que avanzaban en algo con sentido, aunque fuera poco. Anotar lo que hiciste hace visible un avance que de otra forma se olvida.",
+    source: "Amabile y Kramer (2011), The Progress Principle",
+  },
+  {
+    title: "Escribir lo que te pasa ayuda, aunque poco",
+    text: "Escribir sobre experiencias que te movieron muestra beneficios en bienestar. En promedio el efecto es chico: suma, pero no hace milagros.",
+    source: "Pennebaker y Beall (1986); revisión de Frattaroli (2006)",
+  },
+  {
+    title: "Lo malo, escribirlo; lo bueno, revivirlo",
+    text: "Escribir y analizar algo que salió mal ayuda a ordenarlo y cerrarlo. Con lo que salió bien pasa lo contrario: analizarlo le baja el efecto, conviene recordarlo y disfrutarlo.",
+    source: "Lyubomirsky, Sousa y Dickerhoof (2006)",
+  },
+  {
+    title: "Preguntate qué, no por qué",
+    text: "«¿Qué pasó?» y «¿qué puedo hacer?» llevan a acciones. «¿Por qué soy así?» tiende a dar vueltas sin salida.",
+    source: "Eurich (2017), Insight",
+  },
+]
+---
+
+<DiaryLayout title="Guía">
+  <h1 class="text-xl font-semibold md:text-2xl">Guía</h1>
+
+  <div class="mt-6 grid max-w-[720px] gap-14 text-lg leading-relaxed">
+    <section aria-labelledby="para-que">
+      <h2 id="para-que" class="label">Para qué</h2>
+      <ul class="mt-4 grid list-disc gap-2 pl-5">
+        <li>Tener registro real de lo que hiciste y aprendiste. Meses después, la memoria guarda una versión resumida y a veces distinta.</li>
+        <li>Llegar a una entrevista o una charla con ejemplos concretos.</li>
+        <li>Ver patrones: con qué te trabás seguido, qué te sale bien, qué cambió.</li>
+        <li>Ordenar la cabeza, también fuera del trabajo.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="como">
+      <h2 id="como" class="label">Cómo</h2>
+
+      <h3 class="mt-6 font-semibold">Cada día · 2 minutos</h3>
+      <p class="mt-2">Una o dos entradas. No hace falta más.</p>
+      <ol class="mt-3 grid list-decimal gap-1.5 pl-5">
+        <li><b>Qué pasó</b>, concreto: dónde, con qué, cuánto tiempo.</li>
+        <li><b>Qué esperabas</b> o qué creías antes.</li>
+        <li><b>¿Y ahora qué?</b> Qué te llevás o qué hacés distinto.</li>
+      </ol>
+      <p class="mt-4">Contalo como se lo contarías a alguien. La definición de algo está en Google; lo que no está es cómo te pasó a vos.</p>
+      <div class="mt-4 grid gap-3 font-mono text-base">
+        <p class="border-l-4 border-fg/30 pl-4 text-muted"><span class="sr-only">Mejor no: </span>✗ Aprendí qué es Redis.</p>
+        <p class="border-l-4 border-accent pl-4">
+          <span class="sr-only">Mejor así: </span>✓ Redis no es solo caché: lo puedo usar para encolar tareas, como los mails que hoy se mandan dentro del request.
+        </p>
+        <p class="border-l-4 border-accent pl-4">
+          ✓ Se cayó un sitio porque se actualizó una dependencia sin tocar el package.json. Creía que eso no podía pasar. → Fijar versiones y commitear el lockfile.
+        </p>
+      </div>
+
+      <h3 class="mt-8 font-semibold">★ Lo importante</h3>
+      <p class="mt-2">
+        Marcá con ★ lo que contarías en una entrevista o lo que te cambió algo. La mayoría de los días no van a tener nada así, y está bien: los días comunes también sirven para ver patrones.
+      </p>
+
+      <h3 class="mt-8 font-semibold">Etiquetas</h3>
+      <p class="mt-2">Una por proyecto (<code class="font-mono text-base">#wgg</code>) o por área (<code class="font-mono text-base">#personal</code>). Después filtrás todo lo de una.</p>
+
+      <h3 class="mt-8 font-semibold">El domingo · 10 minutos</h3>
+      <p class="mt-2">El cierre: qué avanzaste, qué te costó y qué te destrabó, qué te llevás para la semana que viene.</p>
+
+      <h3 class="mt-8 font-semibold">Una vez por mes</h3>
+      <p class="mt-2">
+        Mirá en <a href="/diary/search?starred=1" class="underline underline-offset-4 hover:text-accent-text">Buscar</a> las ★ y los «me trabé». Las ★ son tus historias para entrevistas: situación, qué hiciste, cómo terminó.
+      </p>
+    </section>
+
+    <section aria-labelledby="por-que">
+      <h2 id="por-que" class="label">Por qué funciona</h2>
+      <div class="mt-4 grid gap-8">
+        {
+          why.map((item) => (
+            <div>
+              <h3 class="font-semibold">{item.title}</h3>
+              <p class="mt-2">{item.text}</p>
+              <p class="mt-2 font-mono text-sm text-muted">{item.source}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section aria-labelledby="cuidado">
+      <h2 id="cuidado" class="label">Cuidado con</h2>
+      <ul class="mt-4 grid list-disc gap-2 pl-5">
+        <li>Anotar solo lo malo: puede volverse rumiar. Sumale qué harías distinto.</li>
+        <li>Querer escribir mucho: es mejor poco y seguido. Si un día no anotás, no pasa nada.</li>
+        <li>Escribir para quedar bien: nadie más lo lee. Lo que salió mal es lo que más enseña.</li>
+      </ul>
+    </section>
+  </div>
+</DiaryLayout>
