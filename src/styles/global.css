@@ -95,24 +95,26 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* The painted backgrounds fade slowly and cheaply. The ink (--fg) feeds almost every element, so
+   fading it recomputes the whole page each frame: it gets a short fade around the middle instead of
+   the full second, which kept scrolling smooth on slow phones */
 html {
+  --theme-fade: 1s cubic-bezier(0.45, 0, 0.25, 1);
   background: var(--bg);
   color: var(--fg);
   transition:
-    --bg 1s cubic-bezier(0.45, 0, 0.25, 1),
-    --fg 1s cubic-bezier(0.45, 0, 0.25, 1);
+    background-color var(--theme-fade),
+    --fg 0.3s ease 0.35s;
 }
 
-/* During the fade the whole page's color is recomputed every frame, which stutters scrolling on
-   slow phones */
-@media (pointer: coarse) {
-  html {
-    transition-duration: 0.3s;
-  }
+.theme-fade {
+  transition: background-color var(--theme-fade);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  .theme-fade,
+  .page-frame {
     transition: none;
   }
 }
@@ -193,19 +195,20 @@ html.lenis body {
   backdrop-filter: none !important;
 }
 
+/* Paper grain. It sits over the text too, so the page-wide layer stays light */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 80;
   pointer-events: none;
-  opacity: 0.42;
+  opacity: 0.36;
   mix-blend-mode: multiply;
   background-image: var(--grain);
 }
 
 :root[data-theme='red'] body::after {
-  opacity: 0.6;
+  opacity: 0.51;
 }
 
 [data-print]::after {
@@ -292,6 +295,7 @@ h1.display {
   z-index: 95;
   pointer-events: none;
   border: 6px solid var(--bg);
+  transition: border-color var(--theme-fade);
   view-transition-name: tb-frame;
 }
 
@@ -353,7 +357,9 @@ h1.display {
 /* The Experience timeline is stuck at the bottom while the page is still on the Projects red:
    hide it until the page is back on paper */
 [data-timeline] {
-  transition: opacity 0.4s;
+  transition:
+    opacity 0.4s,
+    background-color var(--theme-fade);
 }
 
 html[data-theme='red'] [data-timeline] {

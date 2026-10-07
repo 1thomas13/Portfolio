@@ -40,8 +40,9 @@ const label = "w-fit bg-(--red-page) px-2 py-1 font-mono text-xs text-cream uppe
           </a>
         </div>
         <div class="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <button type="button" data-demo-open class="btn w-fit cursor-pointer border-cream text-cream">▶ {t.projects.demo}</button>
-          <a href={trc.demo} target="_blank" rel="noopener noreferrer" class="font-mono text-sm underline-offset-4 hover:underline">{t.projects.visit} ↗</a>
+          {/* Demo hidden for now; the dialog below and its script stay ready
+          <button type="button" data-demo-open class="btn w-fit cursor-pointer border-cream text-cream">▶ {t.projects.demo}</button> */}
+          <a href={trc.demo} target="_blank" rel="noopener noreferrer" class="btn w-fit border-cream text-cream">{t.projects.visit} ↗</a>
         </div>
         <span class="mt-auto pt-6 font-mono text-xs text-cream/70">{trc.stack}</span>
       </div>
@@ -82,6 +83,7 @@ const label = "w-fit bg-(--red-page) px-2 py-1 font-mono text-xs text-cream uppe
     </article>
   </div>
 
+  {/* Demo hidden for now
   <dialog data-demo class="m-auto w-[min(1100px,calc(100vw-32px))] border-2 border-cream bg-ink p-0 text-cream backdrop:bg-ink/85">
     <div class="flex items-center justify-between px-4 py-2.5 font-mono text-xs uppercase">
       <span>{trc.title} · demo</span>
@@ -91,6 +93,7 @@ const label = "w-fit bg-(--red-page) px-2 py-1 font-mono text-xs text-cream uppe
       <source src="/projects/trc-demo.mp4" type="video/mp4" />
     </video>
   </dialog>
+  */}
 
   <div class="mx-auto w-full max-w-[1400px] px-5 md:px-10 mt-12 flex flex-col gap-3 md:flex-row md:items-baseline md:gap-6">
     <a href={t.projects.moreUrl} target="_blank" rel="noopener noreferrer" class="shrink-0 font-mono text-sm underline-offset-4 hover:underline">

@@ -4,7 +4,7 @@
     "description": "Full-stack developer from Río Grande, Tierra del Fuego. Apps and websites in production with React, Next.js, React Native and AWS.",
     "siteUrl": "https://thomasbarreto.vercel.app",
     "cv": "/Thomas Barreto CV - English.pdf",
-    "cvUpdated": "2026-10-06",
+    "cvUpdated": "2026-10-07",
     "cvUpdatedLabel": "Updated"
   },
   "nav": {
@@ -120,7 +120,7 @@
     "title": "Experience",
     "technologies": "Technologies",
     "cv": "View CV",
-    "summary": "{Years} years building product in startups and small teams: front-end, back-end, mobile, infrastructure and, when it was needed, leading the team.",
+    "summary": "{Years} years building product in startups and small teams, from front-end to infrastructure.",
     "now": "now"
   },
   "experienceData": [
@@ -198,7 +198,7 @@
       "location": "France · remote",
       "start": "2023-03",
       "end": "2024-11",
-      "summary": "B2B SaaS for accommodations to manage their sustainability and certifications.",
+      "summary": "Sustainable travel platform: a B2B SaaS for accommodations to manage their sustainability and certifications, and a B2C site where travelers book.",
       "highlights": [
         "Joined as a front-end developer and ended up leading the tech team of 4.",
         "We built a new front-end that ran alongside the old one and migrated to it piece by piece.",

@@ -32,10 +32,12 @@ const jobs = t.experienceData.map((job, i, all) => {
     <h2 data-reveal class="display text-[clamp(96px,15vw,190px)]">{t.experience.title}</h2>
     <div class="max-w-[36ch]">
       <p data-years-text={t.experience.summary} class="text-lg leading-relaxed text-muted">{fillYears(t.experience.summary, currentLocale)}</p>
-      <a href={t.meta.cv} target="_blank" rel="noopener noreferrer" class="btn mt-5 bg-fg text-bg">
-        {t.experience.cv} ↓
-      </a>
-      <p class="mt-1.5 font-mono text-[11px] text-muted">{t.meta.cvUpdatedLabel} {formatDate(t.meta.cvUpdated, currentLocale)}</p>
+      <p class="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-sm">
+        <a href={t.meta.cv} target="_blank" rel="noopener noreferrer" class="uppercase underline underline-offset-4 hover:text-accent-text">
+          {t.experience.cv} ↓
+        </a>
+        <span class="text-[11px] text-muted">{t.meta.cvUpdatedLabel} {formatDate(t.meta.cvUpdated, currentLocale)}</span>
+      </p>
     </div>
   </div>
 
@@ -77,7 +79,7 @@ const jobs = t.experienceData.map((job, i, all) => {
                 <span class="block font-mono text-[13px] uppercase text-muted md:inline md:pl-3">{job.position}</span>
               </h3>
               <p class="mt-3 max-w-[62ch] text-lg leading-relaxed">{job.summary}</p>
-              {job.highlights.length > 0 && (
+              {job.highlights?.length ? (
                 <ul class="mt-3 max-w-[62ch] space-y-1.5 text-[15px] leading-relaxed text-muted">
                   {job.highlights.map((item) => (
                     <li class="flex gap-3">
@@ -86,7 +88,7 @@ const jobs = t.experienceData.map((job, i, all) => {
                     </li>
                   ))}
                 </ul>
-              )}
+              ) : null}
             </div>
 
             <ul class="flex flex-wrap content-start gap-2 md:justify-end" aria-label={t.experience.technologies}>
