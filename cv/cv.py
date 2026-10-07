@@ -25,7 +25,7 @@ CV = {
                 "Developed most of the system and managed the project, including the client relationship.",
             ]),
             ("WeGoGreenR", "Web Developer → Tech Lead", "France (remote)", "March 2023 – November 2024", [
-                "B2B SaaS for managing sustainability and certifications in accommodations.",
+                "Sustainable travel platform: B2B SaaS for managing accommodations' sustainability and certifications, plus a B2C booking site for travelers.",
                 "Joined as a front-end developer and took over leadership of the 4-person tech team.",
                 "Progressively migrated the front-end to a new version running alongside the legacy one.",
                 "Developed new features and improved the interface and navigation of the B2C platform.",
@@ -70,7 +70,7 @@ CV = {
                 "Responsable de la mayor parte del desarrollo y de la gestión del proyecto, incluida la relación con el cliente.",
             ]),
             ("WeGoGreenR", "Desarrollador Web → Tech Lead", "Francia (remoto)", "Marzo 2023 – Noviembre 2024", [
-                "SaaS B2B para la gestión de la sostenibilidad y las certificaciones de alojamientos.",
+                "Plataforma de turismo sostenible: SaaS B2B de sostenibilidad y certificaciones para alojamientos, y sitio B2C de reservas.",
                 "Ingresé como desarrollador front-end y asumí el liderazgo del equipo técnico, de 4 personas.",
                 "Migración progresiva del front-end a una nueva versión, en convivencia con la anterior.",
                 "Desarrollo de nuevas funcionalidades y mejoras de interfaz y navegación en la plataforma B2C.",
