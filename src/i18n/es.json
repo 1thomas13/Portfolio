@@ -316,6 +316,7 @@
       "Edición Nº 4",
       "Río Grande · 53°S"
     ],
+    "pastIssues": "ver anteriores",
     "colophonTitle": "Colofón",
     "colophon": "Esta es la cuarta edición de este sitio. Diseñada y programada por Thomas Barreto en Río Grande, Tierra del Fuego. Compuesta en Unique, Inter e Iosevka; impresa a dos tintas sobre papel arena. Hecha con Astro y Tailwind.",
     "previousTitle": "Ediciones",
