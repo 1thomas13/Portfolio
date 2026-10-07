@@ -1,0 +1,85 @@
+---
+import { getEditions, getI18N, getLocale, ordinal } from "@/i18n"
+import PageCorner from "./edition/PageCorner.astro"
+import { monthsOfExperience } from "@/scripts/years"
+
+const currentLocale = getLocale(Astro.url)
+const t = getI18N({ currentLocale })
+const home = currentLocale === "en" ? "/en/" : "/"
+
+const nowMonths = monthsOfExperience()
+const formatXp = (months: number) =>
+  months >= 24 ? `${Math.floor(months / 12)} ${t.versions.years}` : `${months} ${t.versions.months}`
+
+const previous = getEditions(currentLocale)
+const first = previous[0]
+const editions = [
+  { ...t.versions.now, story: t.versions.now.context, months: nowMonths, number: ordinal(previous.length + 1, currentLocale), href: home, current: true },
+  ...previous.map((edition) => ({ ...edition, current: false })).reverse(),
+]
+---
+
+<header class="border-b-2 border-fg">
+  <div class="container-x flex items-center justify-between py-4 font-mono text-sm uppercase">
+    <a href={home} class="font-bold">Thomas Barreto</a>
+    <a href={home} class="hover:text-accent-text">← {t.versions.back}</a>
+  </div>
+</header>
+
+<main class="container-x pt-12 pb-24 md:pt-16 md:pb-32">
+  <p class="label border-t-2 border-fg pt-4">{t.versions.label}</p>
+  <div class="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10">
+    <h1 data-reveal class="display text-[clamp(72px,12vw,150px)]"><span data-sel>{t.versions.title}</span></h1>
+    <p class="max-w-[42ch] text-lg leading-relaxed text-muted">{t.versions.intro}</p>
+  </div>
+
+  <ol class="mt-16 border-b-2 border-fg md:mt-20">
+    {
+      editions.map((edition) => (
+        <li class="grid gap-6 border-t-2 border-fg py-10 md:grid-cols-12 md:gap-10 md:py-12">
+          <div class="md:col-span-3">
+            <p class:list={["display text-[clamp(88px,9vw,128px)]", edition.current && "text-accent"]}>{edition.number}</p>
+            <p class="mt-3 font-mono text-sm text-muted">
+              {edition.year} · {edition.id}
+            </p>
+            {edition.current && <p class="mt-2 font-mono text-xs text-accent-text uppercase">{t.versions.current}</p>}
+          </div>
+
+          <a href={edition.href} class="group block md:col-span-5" aria-label={`${t.versions.open} ${edition.number}`}>
+            <div class="overflow-hidden border-2 border-fg bg-cream">
+              <img
+                src={`/versions/${edition.id}.webp`}
+                alt=""
+                loading="lazy"
+                class="aspect-16/10 w-full object-cover object-top transition-transform duration-1000 ease-out-expo group-hover:scale-[1.03]"
+              />
+            </div>
+          </a>
+
+          <div class="flex flex-col md:col-span-4">
+            <p class="font-mono text-[13px] text-muted">{edition.stack}</p>
+            <p class="mt-3 text-lg leading-relaxed">{edition.story}</p>
+
+            <div class="mt-8 font-mono text-[13px]">
+              <div class="flex justify-between text-muted">
+                <span>{t.versions.xp}</span>
+                <span class="text-fg">{formatXp(edition.months)}</span>
+              </div>
+              <div class="mt-2 h-2 bg-fg/10">
+                <div class:list={["h-full", edition.current ? "bg-accent" : "bg-fg/80"]} style={`width:${Math.max(3, (edition.months / nowMonths) * 100)}%`} />
+              </div>
+            </div>
+
+            {!edition.current && (
+              <a href={edition.href} class="btn mt-8 w-fit md:mt-auto">
+                {t.versions.open} {edition.number} →
+              </a>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+  {/* #222: the 1st edition's background, peeking underneath */}
+  <PageCorner href={first.href} label={`${first.number} ${t.edition.edition}`} under="#222222" underText="var(--cream)" />
+</main>

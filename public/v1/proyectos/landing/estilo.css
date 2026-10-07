@@ -1,0 +1,220 @@
+* {margin:0;
+    padding:0;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+#header {background: #ffde59;;
+    height: 10vh;
+    width: 100%;
+    position:fixed;
+    display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#header-img {height:90%;
+    padding-left: 7px;
+}
+
+#nav-bar {
+    display: flex;
+	align-items: center;
+}
+
+#nav-bar a{ color: #000;
+    text-decoration: none; 
+    padding: 20px 50px;
+}
+
+#nav-bar a:hover{
+    border-bottom:6px solid transparent;
+}
+
+#presentation {
+    height:100vh;
+    background: #223;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+}
+
+#presentation h1{padding: 55px 0 5px 0}
+#presentation h2{padding-bottom:20px ;}
+
+#video {width: 60%;
+    height: 69%;
+    border: 3px solid #112;
+    margin: 0 auto;
+}
+
+#section {
+    display: flex;
+    background: #ffde59;
+}
+.ventajas { color: #fff;
+    background:#223;
+    width: 30%;
+    height: 200px;
+    margin: 32px;
+    display: flex;
+    align-items: center;
+    text-align: center ;
+}
+
+.ventajas p {padding: 3px;}
+.icon {width: 30%;
+}
+.icon2 {
+    padding: 5px;
+}
+
+.section-guitar {
+    display:flex;
+    background: #112;
+    flex-direction: column;
+}
+
+#form {background: #223;
+    margin: 12.7px;
+    overflow: hidden;
+    padding: 33px;
+    color: #fff;
+}
+
+.guitar {float: left;
+    width: 850px;
+    border: 3px solid #000;
+    margin: auto;
+}
+
+.description {
+    height: 456px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    justify-content: space-evenly;
+    font-size: 15px;
+}
+
+.description h5{font-weight: 500;
+    font-size: 25px;
+}
+
+.description h3 {font-size: 23px;
+}
+
+.description a {text-decoration: none;
+    color: #8bf;
+}
+
+#buy {background:#ffde59;
+    padding: 10px 10%;
+    color: #000;
+    font-weight: 800;
+    text-align: center;
+}
+
+#buy:hover{
+    background: #ffce49;
+}
+
+footer {display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4vh;
+    background:#ffce49;
+    font-size: 18px; 
+    font-weight: 800;
+}
+
+@media (max-width: 1125px){
+    .ventajas {height: 150px;}
+    .guitar {width:700px;}
+    .description {padding-left: 10px;}
+    #form {padding: 10px;}
+    .description h3{font-size: 20;}
+    #video {height: 57%;}
+}
+
+@media (max-width: 1000px){
+    .guitar {float: none;
+        width: 700px;
+        margin: auto;
+        display: block;}
+    .ventajas {font-size: 13px;
+        margin: 12px;
+        width: 32%;}
+    #video {width: 80%;
+        height: 67%;}
+    #form {width: 80vw;
+        margin: 10px auto;}
+    .description {text-align: center;}
+    #buy {width: 50%;
+    margin: 0 auto;}
+}
+@media (max-width:882px){
+    #presentation h1 {padding:0px ;}
+    .guitar {width:600px;}
+    .ventajas {margin: 7px;}
+    .description {
+        height: 356px;}
+    #video {height: 60%;}
+}
+@media (max-width:756px){
+    .guitar {width: 500px;}
+    .ventajas {flex-direction: column;
+    height: 150px;
+    margin:10px ;}
+    .icon {padding: 10px 0 0 0;}
+    .description {
+        height: 356px;}
+    #header {height: 8vh;}
+    #video {height: 52%;}
+}
+@media (max-width: 632px){
+    .guitar {width:400px ;}
+    .ventajas {margin:7px;}
+    #nav-bar a{padding: 20px 40px;}
+    #video {height: 42%;}
+}
+@media (max-width: 560px){
+    #video {width: 94%;
+    height: 43.5%;}
+    #nav-bar a{padding: 10px 20px;}
+    #header { height: 6vh;}
+}
+@media (max-width: 508px){
+    #form {width: 100%; 
+        padding:10px 0 ;}
+    #section {flex-direction: column;
+    width: 100%;}
+    .ventajas {width: 80%;
+    margin: 10px auto;
+    font-size: 15px;
+    flex-direction: row;}
+    .icon2 {padding: 0 4px;}
+    #video {height: 40%;}
+}
+
+@media (max-width: 450px){
+    .guitar {width:350px ;}
+    #presentation {
+        height:80vh;}
+    #video {height: 44%;}
+}
+
+@media (max-width: 400px){
+    .guitar {width:300px ;}
+    #video {height: 38%;}
+    #nav-bar a{padding: 50px 10px;}
+    #presentation h1{padding: 0 0 5px 0;
+        font-size: 26px; }
+    #presentation h2{margin: 0 0 0 35px ;}
+    footer {font-size: 14px;}
+    }
+
+@media (max-width: 350px){
+    #video {height: 34%;}
+}

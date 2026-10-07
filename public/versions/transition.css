@@ -1,0 +1,38 @@
+/* Page transition, shared with the old editions. Each page also declares @view-transition in its
+   <head>: if the opt-in only comes in this file, the first visit doesn't animate */
+@view-transition {
+  navigation: auto;
+}
+
+/* Only the corner (data-turn="corner") animates; every other navigation switches instantly */
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+html:active-view-transition-type(corner)::view-transition-old(root) {
+  z-index: 2;
+  animation: tb-peel 0.8s cubic-bezier(0.6, 0, 0.25, 1) both;
+}
+
+html:active-view-transition-type(corner)::view-transition-new(root) {
+  z-index: 1;
+}
+
+@keyframes tb-peel {
+  from {
+    clip-path: polygon(0 0, 200% 0, 0 200%);
+    filter: brightness(1);
+  }
+  to {
+    clip-path: polygon(0 0, 0 0, 0 0);
+    filter: brightness(0.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:active-view-transition-type(corner)::view-transition-old(root) {
+    animation: none;
+  }
+}

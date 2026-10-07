@@ -1,0 +1,142 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    border-style: none;
+}
+
+#welcome-section {
+    height: 100vh;
+    width: 100%;
+    background-color: #222;
+    color: beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.divHeader {
+    width: 100vw;
+}
+
+header{
+    display: block;
+    position: fixed;
+}
+nav {
+    width: 100vw; 
+}
+
+.sec {
+    padding: 5em 10em;
+    height: 100vh;
+    width: 100%;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+a img {
+    width: 100%;
+}
+
+.proyect {
+    display: inline-block;
+    width: 20vw;
+    margin: 1em;
+   
+}
+
+.proyect a {
+    text-decoration: none;
+}
+
+
+.footerProyect {
+    
+    background-color: #222;
+    color: beige;
+}
+
+#contact {
+    height: 50vh;
+    width: 100%;
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+a {
+    padding: 4px;
+    text-decoration: none;
+    color: beige;
+}
+
+h3 {
+    
+    color: beige;
+}
+
+a:hover {
+    color: azure;
+}
+/* Proyectos: grilla de 2 x 2, todas las tarjetas del mismo tamaño */
+.sec {
+    height: auto;
+    min-height: 100vh;
+    padding: 5em 1em;
+    display: grid;
+    grid-template-columns: repeat(2, 300px);
+    justify-content: center;
+    align-content: center;
+    gap: 2em;
+}
+
+.proyect {
+    width: auto;
+    margin: 0;
+}
+
+.proyect a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.proyect img {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+}
+
+.footerProyect {
+    flex-grow: 1;
+    padding: .6em .8em;
+}
+
+.footerProyect h4 {
+    font-size: 1.25rem;
+    margin: .3em 0 .2em;
+}
+
+.footerProyect small {
+    display: block;
+    opacity: .7;
+}
+
+@media (max-width: 700px) {
+    .sec {
+        grid-template-columns: minmax(0, 340px);
+    }
+}
+
+.proyect a {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+}

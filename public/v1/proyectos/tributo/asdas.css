@@ -1,0 +1,122 @@
+* {margin: 0;
+	padding: 0;
+color:#fff;
+}
+*::selection {background-color: #38f;
+	color: #222;
+}
+ 
+ body {
+	background:#111320;
+}
+
+header {background: #123;
+}
+
+#title {text-align: center;
+padding: 7px;
+} 
+
+h2 { color:#4f5 ;
+	padding-top: 7px;
+}
+
+#img-div {
+	padding: 30px;
+	margin: auto;
+}
+
+#image {
+	margin: auto;
+display: block;
+border: solid #158;
+}
+
+
+#img-caption { text-align: center;
+	font-size: 13px;
+}
+
+#section {background: #123;
+	width: 70vw;
+	margin: auto;
+	font-size:19px;
+}
+
+section h3{
+text-align: center;
+padding-bottom: 20px;
+font-size: 23px;
+color: #4f5;
+}
+
+#tribute-info { 
+	margin: 0em 5em;
+	padding: 30px;
+}
+
+.img-info {
+	padding: 20px;
+	margin:0  auto;
+	display: block;
+}
+
+#facebook, #familia {display: block;
+	width: 22em;
+	margin:auto;
+	border: solid #158;
+}
+
+i {color: #4f5;
+}
+.link {text-align: center;
+	padding: 25px;
+}
+
+#tribute-link { color: #4f5;
+ }
+
+ /* responsive design*/
+
+ @media (max-width: 1125px) {
+	 #tribute-info {margin:0em 1em;
+	}
+ }	
+
+ @media (max-width: 860px) {
+	#section {width: 85vw;}
+   }
+
+ @media (max-width: 768px) {
+	 #section {width: 100vw;
+	}
+	 #image {width:500px;
+	 }
+	 #facebook, #familia { width:350px;
+	 }
+	}	
+
+@media (max-width: 600px) {
+	#image {width:400px;
+	}
+}
+
+@media (max-width: 500px) {
+	#image {width:350px;}
+	#img-div {padding: 0;}
+	#facebook, #familia { width:300px;}
+	.img-info {padding: 1em 0;}
+	#tribute-info {font-size: 16px;
+	padding: 10px;}
+	#title h1 {font-size:25px ;}
+	#title h2 {font-size: 20px;}
+}	
+
+@media (max-width: 446px) {
+	#image {width:300px;}
+	#facebook, #familia { width:250px;}
+	#tribute-info {padding:0 5 0 0px;}
+}
+
+@media (max-width: 359px) {
+	#tribute-info {padding:0 3px 0 0;}}
