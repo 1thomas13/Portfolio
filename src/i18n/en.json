@@ -313,10 +313,10 @@
   },
   "edition": {
     "masthead": [
-      "Issue No. 4",
+      "Edition No. 4",
       "Río Grande · 53°S"
     ],
-    "pastIssues": "see past issues",
+    "pastEditions": "see past editions",
     "colophonTitle": "Colophon",
     "colophon": "This is the fourth edition of this site. Designed and built by Thomas Barreto in Río Grande, Tierra del Fuego. Set in Unique, Inter and Iosevka; printed in two inks on sand-colored paper. Made with Astro and Tailwind.",
     "previousTitle": "Editions",
@@ -325,7 +325,7 @@
     "current": "You're reading this one",
     "all": "See each edition in detail",
     "article": "Article",
-    "contents": "In this issue"
+    "contents": "In this edition"
   },
   "archive": {
     "label": "Archive",
