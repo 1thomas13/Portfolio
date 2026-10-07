@@ -78,10 +78,13 @@ const editions = [
               </div>
             </div>
 
+            {/* mt-auto alone left no gap when the text filled the column */}
             {!edition.current && (
-              <a href={edition.href} class="btn mt-8 w-fit md:mt-auto">
-                {t.versions.open} {edition.number} →
-              </a>
+              <div class="mt-8 md:mt-auto md:pt-8">
+                <a href={edition.href} class="btn w-fit">
+                  {t.versions.open} {edition.number} →
+                </a>
+              </div>
             )}
           </div>
         </li>
