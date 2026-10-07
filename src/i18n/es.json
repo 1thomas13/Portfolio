@@ -260,7 +260,13 @@
       "context": "3 meses de experiencia · octubre de 2021",
       "months": 3,
       "story": "La primera de todas: HTML, CSS y Bootstrap a mano, con los proyectos de la certificación de freeCodeCamp.",
-      "note": "Solo le sumé los proyectos que tenía en ese momento."
+      "note": "Solo le sumé los proyectos que tenía en ese momento.",
+      "projects": [
+        "Página tributo",
+        "Documentación de JS",
+        "Landing Fender",
+        "Delilah Restó API"
+      ]
     },
     {
       "id": "v2",
@@ -269,7 +275,15 @@
       "context": "5 meses de experiencia · actualizada hasta 2024",
       "months": 5,
       "story": "Chakra UI, Framer Motion y muchas ganas. La fui parchando hasta 2024.",
-      "note": "Solo le sumé dos proyectos de esa época (la calculadora y AlkyBank) y vistas previas."
+      "note": "Solo le sumé dos proyectos de esa época (la calculadora y AlkyBank) y vistas previas.",
+      "projects": [
+        "Tasky",
+        "Finance-manager",
+        "Delilah Resto",
+        "Template Portfolio",
+        "Calculator",
+        "AlkyBank"
+      ]
     },
     {
       "id": "v3",
@@ -277,7 +291,11 @@
       "stack": "Astro · React · WebGL",
       "context": "4 años de experiencia · fondo aurora y glassmorphism",
       "months": 48,
-      "story": "Migré a Astro: fondo aurora en WebGL, glassmorphism y efectos por todos lados."
+      "story": "Migré a Astro: fondo aurora en WebGL, glassmorphism y efectos por todos lados.",
+      "projects": [
+        "MBA Tutor",
+        "The Rockin' Chair"
+      ]
     }
   ],
   "contactData": {
@@ -300,6 +318,8 @@
     "intro": "Cada edición de este portfolio, tal como quedó. Cada una muestra los proyectos de su época, así que los más recientes están solo en esta. Las dejo online porque muestran el camino mejor que cualquier CV.",
     "current": "Estás leyendo esta",
     "open": "Abrir la",
+    "projects": "Proyectos",
+    "projectsHere": "Los de esta página",
     "xp": "Experiencia al hacerla",
     "months": "meses",
     "years": "años",

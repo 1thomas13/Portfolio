@@ -260,7 +260,13 @@
       "context": "3 months of experience · October 2021",
       "months": 3,
       "story": "The very first one: hand-written HTML, CSS and Bootstrap, with my freeCodeCamp certification projects.",
-      "note": "I only added the projects I had at the time."
+      "note": "I only added the projects I had at the time.",
+      "projects": [
+        "Tribute page",
+        "JS documentation",
+        "Fender landing",
+        "Delilah Restó API"
+      ]
     },
     {
       "id": "v2",
@@ -269,7 +275,15 @@
       "context": "5 months of experience · updated through 2024",
       "months": 5,
       "story": "Chakra UI, Framer Motion and a lot of enthusiasm. Patched up through 2024.",
-      "note": "I only added two projects from that time (the calculator and AlkyBank) and previews."
+      "note": "I only added two projects from that time (the calculator and AlkyBank) and previews.",
+      "projects": [
+        "Tasky",
+        "Finance-manager",
+        "Delilah Resto",
+        "Template Portfolio",
+        "Calculator",
+        "AlkyBank"
+      ]
     },
     {
       "id": "v3",
@@ -277,7 +291,11 @@
       "stack": "Astro · React · WebGL",
       "context": "4 years of experience · aurora background and glassmorphism",
       "months": 48,
-      "story": "Moved to Astro: WebGL aurora background, glassmorphism and effects everywhere."
+      "story": "Moved to Astro: WebGL aurora background, glassmorphism and effects everywhere.",
+      "projects": [
+        "MBA Tutor",
+        "The Rockin' Chair"
+      ]
     }
   ],
   "contactData": {
@@ -300,6 +318,8 @@
     "intro": "Every edition of this portfolio, as it was. Each one shows the projects from its time, so the most recent ones are only in this one. I keep them online because they show the path better than any CV.",
     "current": "You're reading this one",
     "open": "Open the",
+    "projects": "Projects",
+    "projectsHere": "The ones on this page",
     "xp": "Experience when I made it",
     "months": "months",
     "years": "years",
