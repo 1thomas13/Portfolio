@@ -37,21 +37,16 @@ function initAnchors(lenis: Lenis | null) {
 function initThemes() {
   const sections = $$("[data-theme-section]")
   const root = document.documentElement
-  // With data-themes on <html> (e.g. "sand" for the fixed background) sections with a disallowed
-  // theme stay on paper. Read on every update because the test toggle changes it
   const update = () => {
-    const allowed = root.dataset.themes?.split(" ")
     const middle = window.innerHeight / 2
     const current = sections.find((section) => {
       const rect = section.getBoundingClientRect()
       return rect.top <= middle && rect.bottom > middle
     })
-    let theme = current?.dataset.themeSection
-    if (theme && allowed && !allowed.includes(theme)) theme = "sand"
+    const theme = current?.dataset.themeSection
     if (theme && root.dataset.theme !== theme) root.dataset.theme = theme
   }
   window.addEventListener("scroll", update, { passive: true })
-  window.addEventListener("themes-change", update)
   update()
 }
 

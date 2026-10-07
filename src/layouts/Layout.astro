@@ -10,13 +10,9 @@ interface Props {
   title?: string
   description?: string
   noindex?: boolean
-  // Variants: the only themes the page may switch to while scrolling. Sections with any other
-  // theme stay on paper (without themes, every section uses its own)
-  themes?: ("sand" | "red" | "ink")[]
 }
 
-const { title = t.meta.title, description = t.meta.description, themes } = Astro.props
-const noindex = Astro.props.noindex || !!themes
+const { title = t.meta.title, description = t.meta.description, noindex } = Astro.props
 
 const path = Astro.url.pathname.replace(/(.)\/$/, "$1")
 const esPath = Object.keys(PAIRS).find((es) => es === path || PAIRS[es].replace(/\/$/, "") === path)
@@ -34,7 +30,7 @@ const person = {
 ---
 
 <!doctype html>
-<html lang={lang} data-theme="sand" data-themes={themes?.join(" ")}>
+<html lang={lang} data-theme="sand">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -22,36 +22,3 @@ const t = getI18N({ currentLocale })
   <Contact />
   <PageCorner href={currentLocale === "en" ? "/en/versions" : "/versiones"} label={t.versions.title} />
 </main>
-
-<!-- TEMPORARY, for comparing: background that changes per section vs. fixed on paper. Saved in
-     this browser. Remove this button (and its script) once decided -->
-<button type="button" data-bg-toggle class="fixed bottom-4 left-4 z-[97] border-2 border-fg bg-bg px-3 py-2 font-mono text-xs text-fg uppercase md:bottom-5 md:left-5">
-  Fondo: <span data-bg-label>con cambios</span>
-</button>
-
-<script>
-  const button = document.querySelector<HTMLButtonElement>("[data-bg-toggle]")
-  const label = button?.querySelector("[data-bg-label]")
-  // Variant pages (/fondo-fijo, /papel-chocolate) set their own themes: keep them
-  const original = document.documentElement.dataset.themes
-  const apply = (fixed: boolean) => {
-    if (fixed) document.documentElement.dataset.themes = "sand"
-    else if (original) document.documentElement.dataset.themes = original
-    else delete document.documentElement.dataset.themes
-    if (label) label.textContent = fixed ? "fijo" : "con cambios"
-    button?.setAttribute("aria-pressed", String(fixed))
-    window.dispatchEvent(new Event("themes-change"))
-  }
-  let fixed = false
-  try {
-    fixed = localStorage.getItem("tb-fixed-bg") === "1"
-  } catch {}
-  apply(fixed)
-  button?.addEventListener("click", () => {
-    fixed = !fixed
-    try {
-      localStorage.setItem("tb-fixed-bg", fixed ? "1" : "0")
-    } catch {}
-    apply(fixed)
-  })
-</script>

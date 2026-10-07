@@ -265,17 +265,6 @@ body::after {
   color: var(--fg);
 }
 
-/* Variants without chocolate or red (data-themes): Contact and Projects stay on paper.
-   background-color rather than background, so the grain isn't wiped */
-:root[data-themes]:not([data-themes~='ink']) #contacto h2.display {
-  background-color: var(--ink);
-  color: var(--sand);
-}
-
-:root[data-themes]:not([data-themes~='red']) [data-stack-card] {
-  border-color: var(--ink);
-}
-
 h1.display {
   line-height: 0.98;
 }
