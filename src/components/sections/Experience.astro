@@ -1,66 +1,205 @@
 ---
-import { getI18N } from "@/i18n"
-import SpotlightCard from "../ui/SpotlightCard"
+import { formatDate, getI18N, getLocale } from "@/i18n"
+import { START, durationWords, fillYears, formatDuration } from "@/scripts/years"
 
-const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
+const currentLocale = getLocale(Astro.url)
 const t = getI18N({ currentLocale })
 
-const experiences = t.experienceData
+const toMonths = (date: string) => {
+  const [year, month] = date.split("-").map(Number)
+  return year * 12 + (month - 1)
+}
+const today = new Date()
+const nowMonths = today.getFullYear() * 12 + today.getMonth() + 1
+const startMonths = START.year * 12 + START.month
+const span = nowMonths - startMonths
+const position = (months: number) => ((months - startMonths) / span) * 100
+const years = Array.from({ length: today.getFullYear() - START.year + 1 }, (_, i) => START.year + i)
+
+// If a job ended the same month the next one in its lane started, its bar stops there
+const jobs = t.experienceData.map((job, i, all) => {
+  const from = toMonths(job.start)
+  // The end month counts in full (Nov 2024 – May 2026 includes May), as in a CV
+  const end = job.end ? toMonths(job.end) + 1 : nowMonths
+  const newer = all.slice(0, i).reverse().find((other) => other.parallel === job.parallel)
+  const to = Math.min(end, newer ? toMonths(newer.start) : Infinity)
+  return { ...job, from, to, current: !job.end, left: position(from), width: position(to) - position(from), duration: formatDuration(end - from, durationWords(currentLocale)) }
+})
 ---
 
-<section
-  id="experience"
-  class="py-16 sm:py-24 relative z-10 bg-white/95 backdrop-blur-2xl rounded-[2rem] shadow-[0_20px_80px_-20px_rgba(0,0,0,0.3)] border border-white/40 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
-    <div class="text-center mb-12 sm:mb-16 transition-all duration-1000">
-      <h2
-        class="text-center mb-12 sm:mb-16 transition-all duration-1000 text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 tracking-tight">
-        {t.experience.title}
-      </h2>
+<section id="experiencia" data-theme-section="sand" data-experience data-start={startMonths} class="container-x py-20 md:py-28">
+  <div class="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10">
+    <h2 data-reveal class="display text-[clamp(96px,15vw,190px)]">{t.experience.title}</h2>
+    <div class="max-w-[36ch]">
+      <p data-years-text={t.experience.summary} class="text-lg leading-relaxed text-muted">{fillYears(t.experience.summary, currentLocale)}</p>
+      <a href={t.meta.cv} target="_blank" rel="noopener noreferrer" class="btn mt-5 bg-fg text-bg">
+        {t.experience.cv} ↓
+      </a>
+      <p class="mt-1.5 font-mono text-[11px] text-muted">{t.meta.cvUpdatedLabel} {formatDate(t.meta.cvUpdated, currentLocale)}</p>
     </div>
-    <div class="space-y-8">
-      {
-        experiences.map((exp, index) => (
-          <div>
-            <SpotlightCard
-              client:load
-              className="bg-white"
-              spotlightColor="rgba(0, 229, 255, 0.2)">
-              <div class="pb-2 text-black">
-                <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-                  <div class="text-xl">{exp.position}</div>
-                  <div class="md:ml-auto w-fit">{exp.period}</div>
-                </div>
-                <div class="text-lg text-black font-medium">{exp.company}</div>
-              </div>
-              <div class="text-black">
-                <p class="mb-4">{exp.description}</p>
+  </div>
 
-                <div class="mb-4">
-                  <h4 class="text-sm font-semibold mb-2">
-                    {t.experience.technologies}
-                  </h4>
-                  <div class="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech) => (
-                      <div class="text-xs">{tech}</div>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h4 class="text-sm font-semibold mb-2">
-                    {t.experience.keyResponsibilities}
-                  </h4>
-                  <ul class="list-disc pl-5 space-y-1">
-                    {exp.responsibilities.map((resp) => (
-                      <li class="text-sm">{resp}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </SpotlightCard>
-          </div>
+  <ol>
+    {
+      jobs.map((job, i) =>
+        "short" in job && job.short ? (
+          <li data-job={i} class="grid gap-x-6 gap-y-2 border-t-2 border-fg py-5 md:grid-cols-[170px_1fr_200px]">
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[13px] text-muted md:flex-col md:items-start md:gap-1.5">
+              <span class="flex items-center gap-2">
+                <span class="round size-2 rounded-full bg-fg/40" />
+                {job.period}
+              </span>
+              <span class="text-xs">{job.location}</span>
+            </div>
+            <div>
+              <h3>
+                <span class="display text-[clamp(28px,2.6vw,38px)]">{job.company}</span>
+                <span class="block font-mono text-[13px] uppercase text-muted md:inline md:pl-3">{job.position}</span>
+              </h3>
+              <p class="mt-1.5 max-w-[62ch] leading-relaxed text-muted">{job.short}</p>
+            </div>
+            <p class="font-mono text-xs text-muted uppercase md:text-right">{job.technologies.join(" · ")}</p>
+          </li>
+        ) : (
+          <li data-job={i} class="grid gap-x-6 gap-y-4 border-t-2 border-fg py-7 md:grid-cols-[170px_1fr_200px] md:py-8">
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[13px] text-muted md:flex-col md:items-start md:gap-1.5">
+              <span class="flex items-center gap-2">
+                <span class:list={["round size-2 rounded-full", job.current ? "bg-accent" : "bg-fg/40"]} />
+                {job.period}
+              </span>
+              <span class="text-xs" data-duration-from={job.current ? job.from : undefined}>{job.duration}</span>
+              <span class="text-xs">{job.location}</span>
+            </div>
+
+            <div>
+              <h3>
+                <span class="display text-[clamp(36px,3.6vw,54px)]">{job.company}</span>
+                <span class="block font-mono text-[13px] uppercase text-muted md:inline md:pl-3">{job.position}</span>
+              </h3>
+              <p class="mt-3 max-w-[62ch] text-lg leading-relaxed">{job.summary}</p>
+              {job.highlights.length > 0 && (
+                <ul class="mt-3 max-w-[62ch] space-y-1.5 text-[15px] leading-relaxed text-muted">
+                  {job.highlights.map((item) => (
+                    <li class="flex gap-3">
+                      <span class="text-accent">—</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <ul class="flex flex-wrap content-start gap-2 md:justify-end" aria-label={t.experience.technologies}>
+              {job.technologies.map((tech) => (
+                <li class="border-2 border-fg px-2.5 py-1 font-mono text-xs uppercase">{tech}</li>
+              ))}
+            </ul>
+          </li>
+        ),
+      )
+    }
+  </ol>
+
+  <div data-timeline aria-hidden="true" class="sticky bottom-0 z-10 border-t-2 border-fg bg-bg pt-2.5 pb-2 md:pt-3 md:pb-3">
+    <p data-timeline-label class="mb-2 hidden truncate font-mono text-xs text-fg md:block">&nbsp;</p>
+    {
+      [false, true].map((parallel) => (
+        <div class:list={["relative bg-fg/[0.07]", parallel ? "mt-1 h-2" : "h-3.5"]}>
+          {jobs.map(
+            (job, i) =>
+              job.parallel === parallel && (
+                <span
+                  data-job-bar={i}
+                  data-label={`${job.company} · ${job.period}`}
+                  data-from={job.from}
+                  data-to={job.current ? undefined : job.to}
+                  class:list={["absolute inset-y-0 border-bg bg-fg/70 transition-colors duration-300", parallel ? "border" : "border-2"]}
+                  style={`left:${job.left}%;width:${job.width}%`}
+                />
+              ),
+          )}
+        </div>
+      ))
+    }
+    <div data-years class="relative mt-1.5 h-4 font-mono text-[11px] text-muted md:mt-2 md:text-xs">
+      {
+        years.map((year) => (
+          <span data-year class="absolute -translate-x-1/2 first:translate-x-0" style={`left:${position(year * 12)}%`}>
+            {year}
+          </span>
         ))
       }
+      <span class="absolute right-0 bg-bg pl-2 text-fg">{t.experience.now}</span>
     </div>
   </div>
 </section>
+
+<script>
+  import { durationWords, formatDuration } from "@/scripts/years"
+
+  // Recomputed with the visitor's date so new years show up without redeploying
+  const experience = document.querySelector<HTMLElement>("[data-experience]")
+  if (experience) {
+    const today = new Date()
+    const now = today.getFullYear() * 12 + today.getMonth() + 1
+    const start = Number(experience.dataset.start)
+    const position = (months: number) => ((months - start) / (now - start)) * 100
+    experience.querySelectorAll<HTMLElement>("[data-job-bar]").forEach((bar) => {
+      const from = Number(bar.dataset.from)
+      const to = bar.dataset.to ? Number(bar.dataset.to) : now
+      bar.style.left = `${position(from)}%`
+      bar.style.width = `${position(to) - position(from)}%`
+    })
+    const years = experience.querySelector<HTMLElement>("[data-years]")
+    const template = years?.querySelector<HTMLElement>("[data-year]")
+    if (years && template) {
+      years.querySelectorAll("[data-year]").forEach((year) => year.remove())
+      // Backwards: each year is prepended, so they end up in order
+      for (let year = today.getFullYear(); year >= start / 12; year--) {
+        // Early in the year the new label would collide with "now": skip it
+        if (position(year * 12) > 90) continue
+        const label = template.cloneNode() as HTMLElement
+        label.textContent = String(year)
+        label.style.left = `${position(year * 12)}%`
+        years.prepend(label)
+      }
+    }
+    const words = durationWords(document.documentElement.lang)
+    experience.querySelectorAll<HTMLElement>("[data-duration-from]").forEach((el) => {
+      el.textContent = formatDuration(now - Number(el.dataset.durationFrom), words)
+    })
+  }
+
+  const bars = experience ? [...experience.querySelectorAll<HTMLElement>("[data-job-bar]")] : []
+  const rows = experience ? [...experience.querySelectorAll<HTMLElement>("[data-job]")] : []
+  const label = experience?.querySelector<HTMLElement>("[data-timeline-label]")
+  const hint = label?.textContent ?? ""
+  let hovered: string | null = null
+
+  const paint = (active: string | null) => {
+    bars.forEach((bar) => {
+      const on = bar.dataset.jobBar === active
+      bar.classList.toggle("bg-accent", on)
+      bar.classList.toggle("bg-fg/70", active === null)
+      bar.classList.toggle("bg-fg/25", active !== null && !on)
+    })
+    if (label) label.textContent = active === null ? hint : (bars.find((bar) => bar.dataset.jobBar === active)?.dataset.label ?? hint)
+  }
+
+  const update = () => {
+    if (hovered !== null) return paint(hovered)
+    const line = window.innerHeight * 0.4
+    const current = rows.find((row) => {
+      const rect = row.getBoundingClientRect()
+      return rect.top <= line && rect.bottom > line
+    })
+    paint(current?.dataset.job ?? null)
+  }
+
+  rows.forEach((row) => {
+    row.addEventListener("mouseenter", () => ((hovered = row.dataset.job ?? null), update()))
+    row.addEventListener("mouseleave", () => ((hovered = null), update()))
+  })
+  window.addEventListener("scroll", update, { passive: true })
+  update()
+</script>

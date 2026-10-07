@@ -1,0 +1,88 @@
+---
+import { getEditions, getI18N, getLocale, ordinal } from "@/i18n"
+
+const currentLocale = getLocale(Astro.url)
+const t = getI18N({ currentLocale })
+
+const editions = getEditions(currentLocale)
+
+// Contact lays it out in two columns: the colophon under the contact info, the editions beside it
+interface Props {
+  part: "note" | "editions"
+}
+const { part } = Astro.props
+---
+
+{
+  part === "note" && (
+    <div class="border-t-2 border-fg pt-4">
+      <p class="label">{t.edition.colophonTitle}</p>
+      <p class="mt-3 max-w-[46ch] text-[15px] leading-relaxed text-muted">{t.edition.colophon}</p>
+    </div>
+  )
+}
+
+{
+  part === "editions" && (
+  <div>
+    <p class="label">{t.edition.previousTitle}</p>
+    <p class="mt-1 font-mono text-xs text-muted">{t.edition.previousNote}</p>
+    <ol class="mt-3 border-b-2 border-fg">
+      {
+        editions.map((edition) => (
+          <li class="border-t-2 border-fg">
+            <a
+              href={edition.href}
+              data-edition-link={edition.id}
+              data-stack={edition.stack}
+              data-context={edition.context}
+              class="group grid grid-cols-[3.5rem_1fr_auto] items-center gap-x-4 py-[1.6svh] transition-colors hover:text-accent-text md:grid-cols-[4.5rem_1fr_auto]">
+              <span class="display text-[clamp(36px,min(4vw,6.4svh),56px)]">{edition.number}</span>
+              <span>
+                <span class="block font-mono text-xs text-muted">{edition.year}</span>
+                <span class="mt-1 block text-sm leading-snug text-muted">{edition.story}</span>
+              </span>
+              <span class="font-mono text-sm transition-transform group-hover:translate-x-1">↗</span>
+            </a>
+          </li>
+        ))
+      }
+      <li class="grid grid-cols-[3.5rem_1fr] items-center gap-x-4 border-t-2 border-fg py-[1.6svh] text-accent-text md:grid-cols-[4.5rem_1fr]">
+        <span class="display text-[clamp(36px,min(4vw,6.4svh),56px)]">{ordinal(editions.length + 1, currentLocale)}</span>
+        <span class="font-mono text-xs uppercase">{t.versions.now.year} · {t.edition.current}</span>
+      </li>
+    </ol>
+    <a href={currentLocale === "en" ? "/en/versions" : "/versiones"} class="mt-4 inline-block font-mono text-xs uppercase hover:text-accent-text">
+      {t.edition.all} →
+    </a>
+  </div>
+  )
+}
+
+<div data-edition-preview class="pointer-events-none fixed z-100 hidden w-64 border-2 border-cream bg-ink font-mono text-cream" aria-hidden="true">
+  <img alt="" class="aspect-16/10 w-full object-cover object-top" />
+  <div class="space-y-1 p-3 text-xs">
+    <p data-preview-stack class="opacity-70"></p>
+    <p data-preview-context></p>
+  </div>
+</div>
+
+<script>
+  const preview = document.querySelector<HTMLElement>("[data-edition-preview]")
+  const image = preview?.querySelector("img")
+  const stack = preview?.querySelector<HTMLElement>("[data-preview-stack]")
+  const context = preview?.querySelector<HTMLElement>("[data-preview-context]")
+  document.querySelectorAll<HTMLAnchorElement>("[data-edition-link]").forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      if (!preview || !image || !matchMedia("(hover: hover)").matches) return
+      const rect = link.getBoundingClientRect()
+      image.src = `/versions/${link.dataset.editionLink}.webp`
+      if (stack) stack.textContent = link.dataset.stack ?? ""
+      if (context) context.textContent = link.dataset.context ?? ""
+      preview.style.left = `${Math.min(rect.left, innerWidth - 272)}px`
+      preview.style.bottom = `${innerHeight - rect.top + 12}px`
+      preview.classList.remove("hidden")
+    })
+    link.addEventListener("mouseleave", () => preview?.classList.add("hidden"))
+  })
+</script>

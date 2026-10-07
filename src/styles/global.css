@@ -1,133 +1,361 @@
 @import 'tailwindcss';
-@import 'tailwind-animations';
+@import '@fontsource-variable/inter';
 
-@custom-variant dark (&:is(.dark *));
-@plugin "@tailwindcss/typography";
+/* Two-ink riso print: chocolate (--ink) and red (--red) on paper. Each section declares its theme
+   with data-theme-section and motion.ts switches html[data-theme] while scrolling */
 
-@plugin 'tailwindcss-animate';
-
-@theme {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+/* Unique, by Rajesh Rajput: free for personal and commercial use (license in public/fonts/unique) */
+@font-face {
+  font-family: 'Unique';
+  src: url('/fonts/unique/Unique-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
 }
 
-html,
-body {
-  overflow-x: hidden;
-  color: white;
+@font-face {
+  font-family: 'Unique';
+  src: url('/fonts/unique/Unique-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
 }
 
-.aurora-container {
-  width: 100%;
-  height: 100%;
+/* Subset to the characters the site uses (the full font is almost 1 MB). To add a monospace glyph,
+   regenerate it from @fontsource/iosevka with python -m fontTools.subset */
+@font-face {
+  font-family: 'Iosevka';
+  src: url('/fonts/iosevka/Iosevka-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-.aurora-container canvas {
-  display: block;
+/* Registered so theme changes can transition */
+@property --bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f1e9da;
 }
 
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+@property --fg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #3b2216;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sand: #f1e9da;
+  --ink: #3b2216;
+  --red: #e5463a;
+  --cream: #fbf5ea;
+  --on-red: var(--cream);
+  /* AA contrast: the red page and small red text use deeper shades than --red, which is kept for
+     large headings and fills */
+  --red-page: #c4352b;
+
+  --bg: var(--sand);
+  --fg: var(--ink);
+  --accent: var(--red);
+  --accent-text: #bf3329;
+  --muted: color-mix(in srgb, var(--fg) 70%, var(--bg));
+  --line: color-mix(in srgb, var(--fg) 14%, transparent);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0 0.25 0 0 0 1.4 -0.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
+:root[data-theme='red'] {
+  --bg: var(--red-page);
+  --fg: var(--on-red);
+  --accent: var(--ink);
+  --accent-text: var(--fg);
+  --muted: var(--fg);
 }
 
+:root[data-theme='ink'] {
+  --bg: var(--ink);
+  --fg: var(--cream);
+  --accent: var(--red);
+  --accent-text: #f0665b;
+}
 
 @theme inline {
-  --animate-aurora: aurora 60s linear infinite;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-mono: 'Iosevka', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-display: 'Unique', 'Arial Narrow', 'Inter Variable', system-ui, sans-serif;
 
-  @keyframes aurora {
-    from {
-      background-position:
-        50% 50%,
-        50% 50%;
-    }
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-red: var(--red);
+  --color-cream: var(--cream);
 
-    to {
-      background-position:
-        350% 50%,
-        350% 50%;
-    }
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  transition:
+    --bg 1s cubic-bezier(0.45, 0, 0.25, 1),
+    --fg 1s cubic-bezier(0.45, 0, 0.25, 1);
+}
+
+/* During the fade the whole page's color is recomputed every frame, which stutters scrolling on
+   slow phones */
+@media (pointer: coarse) {
+  html {
+    transition-duration: 0.3s;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    transition: none;
+  }
+}
+
+body {
+  overflow-x: clip;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 0.84;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+  }
+
+  .label {
+    @apply font-mono text-[13px] tracking-[0.08em] text-muted uppercase;
+  }
+
+  .container-x {
+    @apply mx-auto w-full max-w-[1200px] px-6 sm:px-10 lg:px-12;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2.5 border-2 border-fg px-5 py-3 font-mono text-sm font-medium tracking-[0.04em] uppercase transition-colors duration-150 hover:bg-fg hover:text-bg;
+  }
+}
+
+.btn:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--on-red);
+}
+
+/* Only with JS and motion allowed; otherwise everything stays visible */
+html.motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1s var(--ease-out-expo),
+    transform 1s var(--ease-out-expo);
+}
+
+html.motion [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Everything square and flat. Anything that must stay a circle gets .round */
+*:not(.round) {
+  border-radius: 0 !important;
+}
+
+* {
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+  background-image: var(--grain);
+}
+
+:root[data-theme='red'] body::after {
+  opacity: 0.6;
+}
+
+[data-print]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  background-size: 140px;
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+}
+
+/* What I do: on hover, a red highlighter and the second ink offset like a misregistered riso
+   print */
+[data-what] h3 {
+  width: fit-content;
+  transition: text-shadow 0.25s;
+}
+
+[data-what] > li:hover h3 {
+  color: var(--fg);
+  background: linear-gradient(transparent 58%, var(--red) 58% 88%, transparent 88%);
+  text-shadow: 0.04em 0.035em 0 color-mix(in srgb, var(--red) 80%, transparent);
+}
+
+.display sup {
+  text-shadow: none;
+}
+
+/* Main headings styled as selected text: an ink block with paper-colored letters */
+:is(h1 [data-big], h1 [data-sel], #proyectos h2.display, #experiencia h2.display, #contacto h2.display) {
+  width: fit-content;
+  background: var(--ink);
+  color: var(--sand);
+  padding: 0.04em 0.16em 0 0.06em;
+  text-shadow: 0.04em 0.035em 0 color-mix(in srgb, var(--red) 80%, transparent);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* On chocolate the selection is paper-colored, and it stays hidden until the background changes
+   (otherwise it would be cream on paper) */
+#contacto h2.display {
+  background: var(--cream);
+  color: var(--ink);
+  transition:
+    background-color 1s cubic-bezier(0.45, 0, 0.25, 1),
+    color 1s cubic-bezier(0.45, 0, 0.25, 1);
+}
+
+:root:not([data-theme='ink']) #contacto h2.display {
+  background: transparent;
+  color: var(--fg);
+}
+
+/* Variants without chocolate or red (data-themes): Contact and Projects stay on paper.
+   background-color rather than background, so the grain isn't wiped */
+:root[data-themes]:not([data-themes~='ink']) #contacto h2.display {
+  background-color: var(--ink);
+  color: var(--sand);
+}
+
+:root[data-themes]:not([data-themes~='red']) [data-stack-card] {
+  border-color: var(--ink);
+}
+
+h1.display {
+  line-height: 0.98;
+}
+
+/* Solid-ink mottling on the selected blocks. Must come after the selection rule, whose background
+   shorthand would wipe the image */
+:is(h1 [data-big], h1 [data-sel], #proyectos h2.display, #experiencia h2.display, #contacto h2.display, [data-ink-block]) {
+  background-image: var(--grain);
+  background-size: 120px;
+  background-blend-mode: soft-light;
+}
+
+/* Page frame. Its own view-transition-name keeps it from turning with the page on navigation */
+.page-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  border: 6px solid var(--bg);
+  view-transition-name: tb-frame;
+}
+
+.page-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--fg);
+}
+
+@media (min-width: 768px) {
+  .page-frame {
+    border-width: 10px;
+  }
+}
+
+::view-transition-group(tb-frame) {
+  z-index: 10;
+  animation: none;
+}
+
+::view-transition-old(tb-frame) {
+  animation: tb-frame-out 0.2s both;
+}
+
+::view-transition-new(tb-frame) {
+  animation: none;
+}
+
+@keyframes tb-frame-out {
+  to {
+    opacity: 0;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* The Experience timeline is stuck at the bottom while the page is still on the Projects red:
+   hide it until the page is back on paper */
+[data-timeline] {
+  transition: opacity 0.4s;
+}
+
+html[data-theme='red'] [data-timeline] {
+  opacity: 0;
 }

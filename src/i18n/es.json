@@ -1,96 +1,192 @@
 {
   "meta": {
-    "title": "Thomas Barreto - Desarrollador Full-Stack",
-    "description": "Desarrollador Full-Stack. Especializado en React, Node.js, TypeScript y tecnologías modernas. Portfolio personal con proyectos y experiencia profesional.",
-    "siteUrl": "https://thomasbarreto.dev"
+    "title": "Thomas Barreto — Full-stack developer",
+    "description": "Full-stack developer desde Río Grande, Tierra del Fuego. Apps y webs en producción con React, Next.js, React Native y AWS.",
+    "siteUrl": "https://thomasbarreto.vercel.app",
+    "cv": "/Thomas Barreto CV - Español.pdf",
+    "cvUpdated": "2026-10-06",
+    "cvUpdatedLabel": "Actualizado"
   },
   "nav": {
-    "home": "Inicio",
-    "about": "Sobre mí",
-    "experience": "Experiencia",
+    "what": "Con qué trabajo",
     "projects": "Proyectos",
+    "experience": "Experiencia",
     "contact": "Contacto",
-    "getStarted": "Comenzar",
-    "menu": "Menú"
+    "location": "Río Grande",
+    "menu": "Menú",
+    "close": "Cerrar",
+    "skip": "Saltar al contenido"
   },
   "hero": {
-    "title": "Thomas Barreto",
-    "subtitle": "Desarrollador Full-Stack",
-    "viewCV": "Ver CV"
+    "name": "Thomas Barreto,",
+    "title": "Full-stack",
+    "titleLead": "developer desde el",
+    "titleAccent": "fin del mundo.",
+    "sub": "Hago apps y webs de punta a punta, de la idea a las tiendas. Pasé por startups de Francia y Uruguay, siempre en remoto, y hoy soy full-stack en Amaze.",
+    "talk": "Hablemos",
+    "cv": "Descargar CV"
   },
-  "about": {
-    "title": "Sobre mí",
-    "description": "Desarrollador Full-Stack con 4 años de experiencia. Me adapto rápidamente a nuevas tecnologías y disfruto involucrarme en la lógica del negocio para proponer soluciones que generen impacto. Trabajo de forma colaborativa en equipos multidisciplinarios y tengo experiencia liderando proyectos."
+  "what": {
+    "label": "01 — Con qué trabajo",
+    "items": [
+      {
+        "area": "Web",
+        "text": "Landings y plataformas: MBA Tutor, WeGoGreenR, Amaze y Bitskingdom.",
+        "tech": [
+          "React",
+          "Next.js",
+          "Astro",
+          "TypeScript",
+          "Tailwind"
+        ]
+      },
+      {
+        "area": "Mobile",
+        "text": "Apps con Expo, de punta a punta: The Rockin' Chair y Bitskingdom.",
+        "tech": [
+          "React Native",
+          "Expo",
+          "Supabase",
+          "RevenueCat"
+        ]
+      },
+      {
+        "hidden": true,
+        "area": "IA",
+        "text": "En Amaze, campañas con videos generados por IA, personalizados para cada usuario. Y en el día a día programo con agentes de IA como Claude Code.",
+        "tech": [
+          "IA generativa",
+          "Claude Code",
+          "Next.js",
+          "Node.js"
+        ]
+      },
+      {
+        "area": "Backend",
+        "text": "Supabase y Node: autenticación, base de datos, archivos y tiempo real. Pagos con Stripe y RevenueCat.",
+        "tech": [
+          "Node.js",
+          "Nest.js",
+          "Stripe",
+          "PostgreSQL",
+          "MongoDB"
+        ]
+      },
+      {
+        "area": "Cloud",
+        "text": "En WeGoGreenR bajé un 38 % los costos mensuales de AWS.",
+        "tech": [
+          "AWS · EC2, Lambda, S3, RDS",
+          "CloudFront",
+          "Docker",
+          "Linux"
+        ]
+      }
+    ]
   },
-  "techStack": {
-    "title": "Stack Tecnológico"
+  "projects": {
+    "title": "Proyectos",
+    "description": "Productos reales, en producción, desarrollados y publicados de punta a punta.",
+    "visit": "Ver sitio",
+    "more": "Más en GitHub",
+    "moreUrl": "https://github.com/1thomas13",
+    "moreNote": "Casi todo mi trabajo está en repos privados de clientes y empresas.",
+    "demo": "Ver demo",
+    "close": "Cerrar"
   },
-  "techStackData": [
+  "projectsData": [
     {
-      "category": "Frontend",
-      "skills": [
-        "TypeScript",
-        "React",
-        "Next.js",
-        "CSS",
-        "Tailwind",
-        "Sass",
-        "Redux",
-        "React Native",
-        "Expo"
-      ]
+      "id": "trc",
+      "title": "The Rockin' Chair",
+      "description": "Conciertos accesibles para cualquier fan. Landing, app y web app.",
+      "stack": "Expo · React Native · Supabase · RevenueCat · Next.js",
+      "demo": "https://www.therockinchair.net/",
+      "role": "Soy el único developer, junto a un diseñador: hice la landing, la app mobile (publicada en App Store y Google Play) y la web app.",
+      "appStore": "https://apps.apple.com/app/id6751782613",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.therockinchair.trc2",
+      "kind": "Mobile + web"
     },
     {
-      "category": "Backend",
-      "skills": [
-        "TypeScript",
-        "Node.js",
-        "Express",
-        "Nest.js",
-        "PostgreSQL",
-        "MongoDB",
-        "Supabase"
-      ]
-    },
-    {
-      "category": "Others",
-      "skills": [
-        "Docker",
-        "Git",
-        "Linux",
-        "n8n",
-        "AWS (EC2, Lambda, S3, RDS, Amplify, CloudFront)"
-      ]
+      "id": "mba",
+      "title": "MBA Tutor",
+      "description": "Landing para una academia con más de 20 años de trayectoria.",
+      "stack": "Astro · React · Tailwind",
+      "demo": "https://mba-tutor.com/",
+      "role": "Desarrollé la landing con Astro, enfocada en claridad y velocidad.",
+      "kind": "Web"
     }
   ],
   "experience": {
     "title": "Experiencia",
-    "technologies": "Tecnologías:",
-    "keyResponsibilities": "Responsabilidades Clave:"
+    "technologies": "Tecnologías",
+    "cv": "Ver CV",
+    "summary": "{Years} años haciendo producto en startups y equipos chicos: front, back, mobile, infraestructura y, cuando tocó, liderar el equipo.",
+    "now": "hoy"
   },
   "experienceData": [
     {
+      "company": "Amaze",
+      "position": "Desarrollador Full-stack",
+      "period": "Jun 2026 - Actualidad",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Next.js",
+        "IA"
+      ],
+      "location": "Argentina",
+      "start": "2026-06",
+      "end": "",
+      "summary": "Desarrollo experiencias personalizadas a escala: en cada campaña, cada usuario recibe una versión distinta, pensada para él.",
+      "highlights": [
+        "También desarrollo herramientas internas con IA que automatizan trabajo del equipo."
+      ],
+      "parallel": false
+    },
+    {
       "company": "Bitskingdom",
-      "position": "Desarrollador Mobile",
-      "period": "Nov 2024 - Actualidad",
-      "description": "Desarrollé funcionalidades clave en una app multiplataforma con Expo (React Native), colaborando en la planificación y el despliegue.",
+      "position": "Desarrollador Full-stack",
+      "period": "Nov 2024 - May 2026",
       "technologies": [
         "React Native",
         "Expo",
         "Supabase",
         "TypeScript"
       ],
-      "responsibilities": [
-        "Desarrollé funcionalidades clave en una app multiplataforma con Expo (React Native), colaborando en la planificación y el despliegue",
-        "Diseñé e implementé la arquitectura de datos con Supabase, incorporando autenticación segura, gestión de base de datos y almacenamiento de archivos",
-        "Integré APIs y funcionalidades en tiempo real, asegurando una experiencia de usuario fluida y consistente"
-      ]
+      "location": "Uruguay · remoto",
+      "start": "2024-11",
+      "end": "2026-05",
+      "summary": "Trabajé en dos productos para clientes de la agencia: una app de eventos y una plataforma para asignar árbitros.",
+      "highlights": [
+        "App de eventos con Expo: hice la mayoría de las funciones, incluidos los pagos in-app en iOS.",
+        "Plataforma de árbitros, con más de 8.700 usuarios: notificaciones y rendimiento."
+      ],
+      "parallel": false
+    },
+    {
+      "company": "IPES",
+      "position": "Desarrollador Full-stack · líder de proyecto",
+      "period": "Jun 2024 - Dic 2025",
+      "technologies": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind",
+        "Drizzle"
+      ],
+      "location": "Freelance · medio tiempo",
+      "start": "2024-06",
+      "end": "2025-12",
+      "summary": "Sistema de gestión académica para un instituto de nivel superior: alumnos, carreras, materias y mesas de examen.",
+      "highlights": [
+        "Hice casi todo el desarrollo y llevé el proyecto, incluido el trato con el cliente."
+      ],
+      "parallel": true
     },
     {
       "company": "WeGoGreenR",
-      "position": "Desarrollador Web",
-      "period": "Abr 2023 - Nov 2024",
-      "description": "Desarrollo de un SaaS (Software as a Service) B2B para mejorar alojamientos, ofreciendo herramientas de gestión sostenible, certificaciones y facilitando prácticas eco-responsables.",
+      "position": "Desarrollador Web → Tech Lead",
+      "period": "Mar 2023 - Nov 2024",
       "technologies": [
         "React",
         "Next.js",
@@ -99,98 +195,91 @@
         "AWS",
         "MongoDB"
       ],
-      "responsibilities": [
-        "Optimización de servicios en AWS, reduciendo los costos mensuales en un 38%",
-        "Desarrollo y mantenimiento de nuevas funcionalidades en la plataforma B2C, mejorando la experiencia del usuario mediante la optimización de la interfaz y la navegación",
-        "Encabecé el proyecto tomando decisiones clave sobre la arquitectura del código y contribuyendo en la lógica del negocio",
-        "Implementación y ejecución de pruebas unitarias para garantizar la calidad del código y la funcionalidad del sistema"
-      ]
-    },
-    {
-      "company": "CHINOA",
-      "position": "Desarrollador Full-Stack",
-      "period": "Ene 2022 - Jul 2022",
-      "description": "Implementación de funcionalidades para gestionar el proceso de producción y los costos de materia prima, tiempo y otros recursos, optimizando la planificación y control de inventarios.",
-      "technologies": [
-        "React",
-        "Node.js",
-        "Express",
-        "MySQL",
-        "JavaScript"
+      "location": "Francia · remoto",
+      "start": "2023-03",
+      "end": "2024-11",
+      "summary": "SaaS B2B para que los alojamientos gestionen su sostenibilidad y certificaciones.",
+      "highlights": [
+        "Entré como front-end y terminé liderando el equipo técnico, de 4 personas.",
+        "Armamos un front nuevo que convivía con el viejo y lo fuimos migrando de a poco.",
+        "En la plataforma B2C sumé funciones nuevas y mejoré la interfaz y la navegación.",
+        "Bajé un 38 % los costos mensuales de AWS.",
+        "En mi etapa, la plataforma sumó la mitad de sus usuarios y el 43 % de sus reservas."
       ],
-      "responsibilities": [
-        "Implementación de funcionalidades para gestionar el proceso de producción y los costos de materia prima, tiempo y otros recursos",
-        "Optimización de la planificación y control de inventarios",
-        "Desarrollé tanto el Front-End como el Back-End asegurando una integración fluida y una experiencia de usuario coherente"
-      ]
+      "parallel": false
     },
     {
       "company": "DAIRA IT Groups",
       "position": "Desarrollador Front-end",
       "period": "Nov 2022 - Abr 2023",
-      "description": "Desarrollo front-end para una financiera, automatizando la interacción con el cliente y mejorando significativamente la experiencia de usuario.",
       "technologies": [
         "HTML",
         "CSS",
         "JavaScript",
         "Svelte"
       ],
-      "responsibilities": [
-        "Afronte un proyecto para una financiera donde se necesitaba automatizar la interacción con el cliente mejorando la experiencia de usuario significativamente",
-        "Rápida adaptación a nuevos entornos tecnológicos y metodologías de desarrollo, asegurando una transición suave y eficiente en los proyectos",
-        "Implementación de interfaces de usuario interactivas y responsivas utilizando HTML, CSS, JavaScript y Svelte"
-      ]
-    }
-  ],
-  "projects": {
-    "title": "Proyectos",
-    "description": "Algunos de mis proyectos personales o de clientes",
-    "viewMore": "Ver Más",
-    "viewMoreUrl": "https://github.com/1thomas13",
-    "view": "Ver",
-    "github": "GitHub",
-    "liveDemo": "Ver Demo"
-  },
-  "projectsData": [
-    {
-      "id": "project-1",
-      "title": "MBA Tutor",
-      "description": "Landing page  desarrollada para una empresa de educación con más de 20 años de experiencia. Enfoque en UX, legibilidad y comunicación de confianza mediante datos reales y contenido estructurado.",
-      "technologies": [
-        "React",
-        "Astro",
-        "Tailwind",
-        "TypeScript"
-      ],
-      "image": "/src/assets/project.png",
-      "github": "#",
-      "demo": "https://mba-tutor.com/"
+      "location": "Argentina",
+      "start": "2022-11",
+      "end": "2023-04",
+      "parallel": false,
+      "short": "Front-end para una financiera: automatización de la atención al cliente, con Svelte."
     },
     {
-      "id": "project-2",
-      "title": "The Rockin’ Chair",
-      "description": "Plataforma enfocada en accesibilidad para conciertos y eventos en vivo. Incluye landing page, mobile app y una web app en desarrollo, con foco en UX y experiencia inclusiva.",
+      "company": "CHINOA",
+      "position": "Desarrollador Full-stack · pasantía",
+      "period": "Ene 2022 - Jul 2022",
       "technologies": [
-        "React Native",
-        "Expo",
-        "Supabase",
-        "TypeScript",
-        "Next.js"
+        "React",
+        "Node.js",
+        "Express",
+        "MySQL"
       ],
-      "image": "/src/assets/projects2.png",
-      "github": "#",
-      "demo": "https://therockinchair-landing.vercel.app/"
+      "location": "Río Grande, TDF",
+      "start": "2022-01",
+      "end": "2022-07",
+      "parallel": false,
+      "short": "Sistema de pedidos, stock y costos para una fábrica de chocolates de Río Grande. Lo hice solo, en 4 meses."
     }
   ],
   "contact": {
-    "title": "Conectemos",
-    "description": "Actualmente estoy abierto a nuevas oportunidades o proyectos.",
-    "email": "Email",
-    "linkedin": "LinkedIn",
-    "github": "GitHub",
-    "visitProfile": "Visitar Perfil",
-    "viewCode": "Ver Código"
+    "label": "04 — Contacto",
+    "title": "Hablemos",
+    "cv": "CV",
+    "copy": "Copiar",
+    "copied": "Copiado"
   },
+  "footer": {
+    "rights": "Río Grande, Tierra del Fuego",
+    "source": "Código fuente"
+  },
+  "editions": [
+    {
+      "id": "v1",
+      "year": "2021",
+      "stack": "HTML · CSS · Bootstrap",
+      "context": "3 meses de experiencia · octubre de 2021",
+      "months": 3,
+      "story": "La primera de todas: HTML, CSS y Bootstrap a mano, con los proyectos de la certificación de freeCodeCamp.",
+      "note": "Solo le sumé los proyectos que tenía en ese momento."
+    },
+    {
+      "id": "v2",
+      "year": "2022",
+      "stack": "React · Chakra UI · Framer Motion",
+      "context": "5 meses de experiencia · actualizada hasta 2024",
+      "months": 5,
+      "story": "Chakra UI, Framer Motion y muchas ganas. La fui parchando hasta 2024.",
+      "note": "Solo le sumé dos proyectos de esa época (la calculadora y AlkyBank) y vistas previas."
+    },
+    {
+      "id": "v3",
+      "year": "2026",
+      "stack": "Astro · React · WebGL",
+      "context": "4 años de experiencia · fondo aurora y glassmorphism",
+      "months": 48,
+      "story": "Migré a Astro: fondo aurora en WebGL, glassmorphism y efectos por todos lados."
+    }
+  ],
   "contactData": {
     "email": {
       "value": "thomi.b137@gmail.com",
@@ -203,7 +292,75 @@
       "href": "https://github.com/1thomas13"
     }
   },
-  "footer": {
-    "viewSourceCode": "Ver código fuente"
+  "versions": {
+    "metaTitle": "Ediciones — Thomas Barreto",
+    "metaDescription": "Todas las ediciones del portfolio de Thomas Barreto, tal como quedaron, con los proyectos de cada época.",
+    "label": "Archivo",
+    "title": "Ediciones",
+    "intro": "Cada edición de este portfolio, tal como quedó. Cada una muestra los proyectos de su época, así que los más recientes están solo en esta. Las dejo online porque muestran el camino mejor que cualquier CV.",
+    "current": "Estás leyendo esta",
+    "open": "Abrir la",
+    "xp": "Experiencia al hacerla",
+    "months": "meses",
+    "years": "años",
+    "back": "Volver al portfolio",
+    "now": {
+      "id": "v4",
+      "year": "2026",
+      "stack": "Astro · Unique · Tailwind",
+      "context": "La que estás leyendo: una publicación a dos tintas, menos efectos y más orden."
+    }
+  },
+  "edition": {
+    "masthead": [
+      "Edición Nº 4",
+      "Río Grande · 53°S"
+    ],
+    "colophonTitle": "Colofón",
+    "colophon": "Esta es la cuarta edición de este sitio. Diseñada y programada por Thomas Barreto en Río Grande, Tierra del Fuego. Compuesta en Unique, Inter e Iosevka; impresa a dos tintas sobre papel arena. Hecha con Astro y Tailwind.",
+    "previousTitle": "Ediciones",
+    "previousNote": "Cada una con los proyectos de su época.",
+    "edition": "edición",
+    "current": "Estás leyendo esta",
+    "all": "Ver cada edición en detalle",
+    "article": "Artículo",
+    "contents": "En esta edición"
+  },
+  "archive": {
+    "label": "Archivo",
+    "youAre": "Estás en la",
+    "head": "Hice esto con {xp} de experiencia.",
+    "note": "Quedó tal cual, sin retoques.",
+    "then": "Entonces",
+    "today": "Hoy",
+    "look": "Mirar igual",
+    "back": "Volver a la 4ª",
+    "pill": "4ª edición",
+    "detour": {
+      "head": "¡Hey! Avanzaste demasiado 👀",
+      "body": "Esto es un proyecto de {year}, de cuando estaba aprendiendo.",
+      "back": "Volver al portfolio"
+    }
+  },
+  "errata": {
+    "title": "Fe de erratas — Thomas Barreto",
+    "heading": "Fe de erratas",
+    "otherLanguage": "English",
+    "intro": "Esta página no salió en esta edición. Puede que el link sea viejo, que tenga un error de tipeo o que la página haya quedado en una edición anterior.",
+    "cols": [
+      "Página",
+      "Dice",
+      "Debe decir"
+    ],
+    "front": "La portada",
+    "older": {
+      "ask": "¿Buscabas algo de antes?",
+      "label": "Las ediciones anteriores"
+    },
+    "contact": {
+      "ask": "¿Querías escribirme?",
+      "label": "Hablemos"
+    },
+    "sorry": "El editor pide disculpas por las molestias."
   }
 }

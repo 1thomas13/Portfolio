@@ -7,6 +7,12 @@ dist/
 # dependencies
 node_modules/
 
+# separate Remotion project for the promo video, not part of the site
+video/
+
+# vercel cli
+.vercel/
+
 # logs
 npm-debug.log*
 yarn-debug.log*
@@ -14,11 +20,19 @@ yarn-error.log*
 pnpm-debug.log*
 
 # environment variables
-.env
-.env.production
+.env*
+!.env.example
 
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
+
+# diary: in dev, weeks are stored here (in production they go to a private repo)
+/diary-data/
+
+# CV: only cv.py and cv.mjs are tracked; the published PDFs live in public/
+cv/*.html
+cv/*.pdf
+cv/*.png

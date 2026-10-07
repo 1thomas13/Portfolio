@@ -1,96 +1,192 @@
 {
   "meta": {
-    "title": "Thomas Barreto - Full-Stack Developer",
-    "description": "Full-Stack Developer. Specialized in React, Node.js, TypeScript and modern technologies. Personal portfolio with projects and professional experience.",
-    "siteUrl": "https://thomasbarreto.dev"
+    "title": "Thomas Barreto — Full-stack developer",
+    "description": "Full-stack developer from Río Grande, Tierra del Fuego. Apps and websites in production with React, Next.js, React Native and AWS.",
+    "siteUrl": "https://thomasbarreto.vercel.app",
+    "cv": "/Thomas Barreto CV - English.pdf",
+    "cvUpdated": "2026-10-06",
+    "cvUpdatedLabel": "Updated"
   },
   "nav": {
-    "home": "Home",
-    "about": "About me",
-    "experience": "Experience",
+    "what": "What I work with",
     "projects": "Projects",
+    "experience": "Experience",
     "contact": "Contact",
-    "getStarted": "Get Started",
-    "menu": "Menu"
+    "location": "Río Grande",
+    "menu": "Menu",
+    "close": "Close",
+    "skip": "Skip to content"
   },
   "hero": {
-    "title": "Thomas Barreto",
-    "subtitle": "Full-Stack Developer",
-    "viewCV": "View CV"
+    "name": "Thomas Barreto,",
+    "title": "Full-stack",
+    "titleLead": "developer from the",
+    "titleAccent": "end of the world.",
+    "sub": "I build apps and websites end to end, from idea to the app stores. I've worked remotely with startups in France and Uruguay, and I'm now a full-stack developer at Amaze.",
+    "talk": "Let's talk",
+    "cv": "Download CV"
   },
-  "about": {
-    "title": "About me",
-    "description": "Full-Stack Developer with 4 years of experience. I quickly adapt to new technologies and enjoy getting involved in business logic to propose solutions that generate impact. I work collaboratively in multidisciplinary teams and have experience leading projects."
+  "what": {
+    "label": "01 — What I work with",
+    "items": [
+      {
+        "area": "Web",
+        "text": "Landing pages and platforms: MBA Tutor, WeGoGreenR, Amaze and Bitskingdom.",
+        "tech": [
+          "React",
+          "Next.js",
+          "Astro",
+          "TypeScript",
+          "Tailwind"
+        ]
+      },
+      {
+        "area": "Mobile",
+        "text": "Expo apps, end to end: The Rockin' Chair and Bitskingdom.",
+        "tech": [
+          "React Native",
+          "Expo",
+          "Supabase",
+          "RevenueCat"
+        ]
+      },
+      {
+        "hidden": true,
+        "area": "AI",
+        "text": "At Amaze, campaigns with AI-generated videos personalized for each user. Day to day, I build with AI agents like Claude Code.",
+        "tech": [
+          "Generative AI",
+          "Claude Code",
+          "Next.js",
+          "Node.js"
+        ]
+      },
+      {
+        "area": "Backend",
+        "text": "Supabase and Node: authentication, databases, file storage and real-time updates. Payments with Stripe and RevenueCat.",
+        "tech": [
+          "Node.js",
+          "Nest.js",
+          "Stripe",
+          "PostgreSQL",
+          "MongoDB"
+        ]
+      },
+      {
+        "area": "Cloud",
+        "text": "At WeGoGreenR I cut monthly AWS costs by 38%.",
+        "tech": [
+          "AWS · EC2, Lambda, S3, RDS",
+          "CloudFront",
+          "Docker",
+          "Linux"
+        ]
+      }
+    ]
   },
-  "techStack": {
-    "title": "Tech Stack"
+  "projects": {
+    "title": "Projects",
+    "description": "Real products, in production, built and shipped end to end.",
+    "visit": "Visit site",
+    "more": "More on GitHub",
+    "moreUrl": "https://github.com/1thomas13",
+    "moreNote": "Most of my work lives in private repos of clients and companies.",
+    "demo": "Watch demo",
+    "close": "Close"
   },
-  "techStackData": [
+  "projectsData": [
     {
-      "category": "Frontend",
-      "skills": [
-        "TypeScript",
-        "React",
-        "Next.js",
-        "CSS",
-        "Tailwind",
-        "Sass",
-        "Redux",
-        "React Native",
-        "Expo"
-      ]
+      "id": "trc",
+      "title": "The Rockin' Chair",
+      "description": "Accessible concerts for every fan. Landing page, app and web app.",
+      "stack": "Expo · React Native · Supabase · RevenueCat · Next.js",
+      "demo": "https://www.therockinchair.net/",
+      "role": "I'm the only developer, working with a designer: I built the landing page, the mobile app (live on the App Store and Google Play) and the web app.",
+      "appStore": "https://apps.apple.com/app/id6751782613",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.therockinchair.trc2",
+      "kind": "Mobile + web"
     },
     {
-      "category": "Backend",
-      "skills": [
-        "TypeScript",
-        "Node.js",
-        "Express",
-        "Nest.js",
-        "PostgreSQL",
-        "MongoDB",
-        "Supabase"
-      ]
-    },
-    {
-      "category": "Others",
-      "skills": [
-        "Docker",
-        "Git",
-        "Linux",
-        "n8n",
-        "AWS (EC2, Lambda, S3, RDS, Amplify, CloudFront)"
-      ]
+      "id": "mba",
+      "title": "MBA Tutor",
+      "description": "Landing page for an academy with over 20 years of history.",
+      "stack": "Astro · React · Tailwind",
+      "demo": "https://mba-tutor.com/",
+      "role": "I built the landing page with Astro, focused on clarity and speed.",
+      "kind": "Web"
     }
   ],
   "experience": {
     "title": "Experience",
-    "technologies": "Technologies:",
-    "keyResponsibilities": "Key Responsibilities:"
+    "technologies": "Technologies",
+    "cv": "View CV",
+    "summary": "{Years} years building product in startups and small teams: front-end, back-end, mobile, infrastructure and, when it was needed, leading the team.",
+    "now": "now"
   },
   "experienceData": [
     {
+      "company": "Amaze",
+      "position": "Full-stack Developer",
+      "period": "Jun 2026 - Present",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Next.js",
+        "AI"
+      ],
+      "location": "Argentina",
+      "start": "2026-06",
+      "end": "",
+      "summary": "I build personalized experiences at scale: in each campaign, every user gets a different version, made for them.",
+      "highlights": [
+        "I also build internal AI tools that automate work for the team."
+      ],
+      "parallel": false
+    },
+    {
       "company": "Bitskingdom",
-      "position": "Mobile Developer",
-      "period": "Nov 2024 - Present",
-      "description": "Developed key features in a multiplatform app with Expo (React Native), collaborating on planning and deployment.",
+      "position": "Full-stack Developer",
+      "period": "Nov 2024 - May 2026",
       "technologies": [
         "React Native",
         "Expo",
         "Supabase",
         "TypeScript"
       ],
-      "responsibilities": [
-        "Developed key features in a multiplatform app with Expo (React Native), collaborating on planning and deployment",
-        "Designed and implemented data architecture with Supabase, incorporating secure authentication, database management and file storage",
-        "Integrated APIs and real-time functionalities, ensuring a smooth and consistent user experience"
-      ]
+      "location": "Uruguay · remote",
+      "start": "2024-11",
+      "end": "2026-05",
+      "summary": "I worked on two products for the agency's clients: an events app and a platform for assigning referees.",
+      "highlights": [
+        "Events app with Expo: built most of the features, including in-app payments on iOS.",
+        "Referee platform, with over 8,700 users: notifications and performance."
+      ],
+      "parallel": false
+    },
+    {
+      "company": "IPES",
+      "position": "Full-stack Developer · project lead",
+      "period": "Jun 2024 - Dec 2025",
+      "technologies": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind",
+        "Drizzle"
+      ],
+      "location": "Freelance · part-time",
+      "start": "2024-06",
+      "end": "2025-12",
+      "summary": "Academic management system for a higher-education institute: students, programs, subjects and exam sessions.",
+      "highlights": [
+        "Built most of it and ran the project, including the client relationship."
+      ],
+      "parallel": true
     },
     {
       "company": "WeGoGreenR",
-      "position": "Web Developer",
-      "period": "Apr 2023 - Nov 2024",
-      "description": "Development of a B2B SaaS (Software as a Service) to improve accommodations, offering sustainable management tools, certifications and facilitating eco-responsible practices.",
+      "position": "Web Developer → Tech Lead",
+      "period": "Mar 2023 - Nov 2024",
       "technologies": [
         "React",
         "Next.js",
@@ -99,111 +195,172 @@
         "AWS",
         "MongoDB"
       ],
-      "responsibilities": [
-        "Optimized AWS services, reducing monthly costs by 38%",
-        "Developed and maintained new features on the B2C platform, improving user experience through interface and navigation optimization",
-        "Led the project making key decisions about code architecture and contributing to business logic",
-        "Implementation and execution of unit tests to ensure code quality and system functionality"
-      ]
-    },
-    {
-      "company": "CHINOA",
-      "position": "Full-Stack Developer",
-      "period": "Jan 2022 - Jul 2022",
-      "description": "Implementation of features to manage the production process and costs of raw materials, time and other resources, optimizing planning and inventory control.",
-      "technologies": [
-        "React",
-        "Node.js",
-        "Express",
-        "MySQL",
-        "JavaScript"
+      "location": "France · remote",
+      "start": "2023-03",
+      "end": "2024-11",
+      "summary": "B2B SaaS for accommodations to manage their sustainability and certifications.",
+      "highlights": [
+        "Joined as a front-end developer and ended up leading the tech team of 4.",
+        "We built a new front-end that ran alongside the old one and migrated to it piece by piece.",
+        "On the B2C platform, I built new features and improved the interface and navigation.",
+        "Cut monthly AWS costs by 38%.",
+        "During my time there, the platform gained half of its total users and 43% of all its bookings."
       ],
-      "responsibilities": [
-        "Implementation of features to manage the production process and costs of raw materials, time and other resources",
-        "Optimization of planning and inventory control",
-        "Developed both Front-End and Back-End ensuring smooth integration and a coherent user experience"
-      ]
+      "parallel": false
     },
     {
       "company": "DAIRA IT Groups",
       "position": "Front-end Developer",
       "period": "Nov 2022 - Apr 2023",
-      "description": "Front-end development for a financial company, automating customer interaction and significantly improving user experience.",
       "technologies": [
         "HTML",
         "CSS",
         "JavaScript",
         "Svelte"
       ],
-      "responsibilities": [
-        "Tackled a project for a financial company where customer interaction automation was needed, significantly improving user experience",
-        "Quick adaptation to new technological environments and development methodologies, ensuring smooth and efficient transitions in projects",
-        "Implementation of interactive and responsive user interfaces using HTML, CSS, JavaScript and Svelte"
-      ]
-    }
-  ],
-  "projects": {
-    "title": "Projects",
-    "description": "Some of my personal or clients' projects",
-    "viewMore": "View More",
-    "viewMoreUrl": "https://github.com/1thomas13",
-    "view": "View",
-    "github": "GitHub",
-    "liveDemo": "Live Demo"
-  },
-  "projectsData": [
-    {
-      "id": "project-1",
-      "title": "MBA Tutor",
-      "description": "Landing page developed for an education company with over 20 years of experience. Focus on UX, readability and trust communication through real data and structured content.",
-      "technologies": [
-        "React",
-        "Astro",
-        "Tailwind",
-        "TypeScript"
-      ],
-      "image": "/src/assets/project.png",
-      "github": "#",
-      "demo": "https://mba-tutor.com/"
+      "location": "Argentina",
+      "start": "2022-11",
+      "end": "2023-04",
+      "parallel": false,
+      "short": "Front-end in Svelte for a financial company, automating customer service."
     },
     {
-      "id": "project-2",
-      "title": "The Rockin' Chair",
-      "description": "Platform focused on accessibility for concerts and live events. Includes landing page, mobile app and a web app in development, with focus on UX and inclusive experience.",
+      "company": "CHINOA",
+      "position": "Full-stack Developer · internship",
+      "period": "Jan 2022 - Jul 2022",
       "technologies": [
-        "React Native",
-        "Expo",
-        "Supabase",
-        "TypeScript",
-        "Next.js"
+        "React",
+        "Node.js",
+        "Express",
+        "MySQL"
       ],
-      "image": "/src/assets/projects2.png",
-      "github": "#",
-      "demo": "https://therockinchair-landing.vercel.app/"
+      "location": "Río Grande, TDF",
+      "start": "2022-01",
+      "end": "2022-07",
+      "parallel": false,
+      "short": "Order, inventory and cost management system for a chocolate factory in Río Grande. Built it on my own in 4 months."
     }
   ],
   "contact": {
-    "title": "Let's Connect",
-    "description": "I’m currently open to new opportunities or projects.",
-    "email": "Email",
-    "linkedin": "LinkedIn",
-    "github": "GitHub",
-    "visitProfile": "Visit Profile",
-    "viewCode": "View Code"
+    "label": "04 — Contact",
+    "title": "Let's talk",
+    "cv": "CV",
+    "copy": "Copy",
+    "copied": "Copied"
   },
+  "footer": {
+    "rights": "Río Grande, Tierra del Fuego",
+    "source": "Source code"
+  },
+  "editions": [
+    {
+      "id": "v1",
+      "year": "2021",
+      "stack": "HTML · CSS · Bootstrap",
+      "context": "3 months of experience · October 2021",
+      "months": 3,
+      "story": "The very first one: hand-written HTML, CSS and Bootstrap, with my freeCodeCamp certification projects.",
+      "note": "I only added the projects I had at the time."
+    },
+    {
+      "id": "v2",
+      "year": "2022",
+      "stack": "React · Chakra UI · Framer Motion",
+      "context": "5 months of experience · updated through 2024",
+      "months": 5,
+      "story": "Chakra UI, Framer Motion and a lot of enthusiasm. Patched up through 2024.",
+      "note": "I only added two projects from that time (the calculator and AlkyBank) and previews."
+    },
+    {
+      "id": "v3",
+      "year": "2026",
+      "stack": "Astro · React · WebGL",
+      "context": "4 years of experience · aurora background and glassmorphism",
+      "months": 48,
+      "story": "Moved to Astro: WebGL aurora background, glassmorphism and effects everywhere."
+    }
+  ],
   "contactData": {
     "email": {
       "value": "thomi.b137@gmail.com",
       "href": "mailto:thomi.b137@gmail.com"
     },
     "linkedin": {
-      "href": "https://linkedin.com/in/thomas-barreto"
+      "href": "https://www.linkedin.com/in/thomas-barreto-50ab71204/"
     },
     "github": {
       "href": "https://github.com/1thomas13"
     }
   },
-  "footer": {
-    "viewSourceCode": "View source code"
+  "versions": {
+    "metaTitle": "Editions — Thomas Barreto",
+    "metaDescription": "Every edition of Thomas Barreto's portfolio, as it was, with the projects from each period.",
+    "label": "Archive",
+    "title": "Editions",
+    "intro": "Every edition of this portfolio, as it was. Each one shows the projects from its time, so the most recent ones are only in this one. I keep them online because they show the path better than any CV.",
+    "current": "You're reading this one",
+    "open": "Open the",
+    "xp": "Experience when I made it",
+    "months": "months",
+    "years": "years",
+    "back": "Back to portfolio",
+    "now": {
+      "id": "v4",
+      "year": "2026",
+      "stack": "Astro · Unique · Tailwind",
+      "context": "The one you're reading: a two-ink publication, fewer effects and more order."
+    }
+  },
+  "edition": {
+    "masthead": [
+      "Issue No. 4",
+      "Río Grande · 53°S"
+    ],
+    "colophonTitle": "Colophon",
+    "colophon": "This is the fourth edition of this site. Designed and built by Thomas Barreto in Río Grande, Tierra del Fuego. Set in Unique, Inter and Iosevka; printed in two inks on sand-colored paper. Made with Astro and Tailwind.",
+    "previousTitle": "Editions",
+    "previousNote": "Each one with the projects from its time.",
+    "edition": "edition",
+    "current": "You're reading this one",
+    "all": "See each edition in detail",
+    "article": "Article",
+    "contents": "In this issue"
+  },
+  "archive": {
+    "label": "Archive",
+    "youAre": "You're in the",
+    "head": "I built this with {xp} of experience.",
+    "note": "Left exactly as it was, no touch-ups.",
+    "then": "Then",
+    "today": "Today",
+    "look": "Look anyway",
+    "back": "Back to the 4th",
+    "pill": "4th edition",
+    "detour": {
+      "head": "Hey! You went too far 👀",
+      "body": "This is a project from {year}, back when I was learning.",
+      "back": "Back to the portfolio"
+    }
+  },
+  "errata": {
+    "title": "Errata — Thomas Barreto",
+    "heading": "Errata",
+    "otherLanguage": "Español",
+    "intro": "This page didn't make it into this edition. The link may be old, have a typo, or the page may belong to a previous edition.",
+    "cols": [
+      "Page",
+      "Reads",
+      "Should read"
+    ],
+    "front": "The front page",
+    "older": {
+      "ask": "Looking for something older?",
+      "label": "Previous editions"
+    },
+    "contact": {
+      "ask": "Want to get in touch?",
+      "label": "Let's talk"
+    },
+    "sorry": "The editor apologizes for the inconvenience."
   }
 }

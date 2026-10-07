@@ -1,40 +1,121 @@
 ---
-import { getI18N } from "@/i18n"
-import ProjectsContainer from "./ProjectsContainer"
-import projectImage from "@/assets/project.png"
-import project2Image from "@/assets/projects2.png"
+import { Image } from "astro:assets"
+import { getI18N, getLocale } from "@/i18n"
+import appStore from "@/assets/trc/appstore.png"
+import googlePlay from "@/assets/trc/googleplay.png"
 
-const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
+const currentLocale = getLocale(Astro.url)
 const t = getI18N({ currentLocale })
 
-const projectImages: Record<string, string> = {
-  "/src/assets/project.png": projectImage.src,
-  "/src/assets/projects2.png": project2Image.src,
-}
+const trc = t.projectsData.find((p) => p.id === "trc")!
+const mba = t.projectsData.find((p) => p.id === "mba")!
 
-const projects = t.projectsData.map((project) => ({
-  ...project,
-  image: projectImages[project.image] || project.image,
-}))
+// On desktop the cards stack while scrolling (data-stack-card, see motion.ts)
+const article =
+  "grid origin-top overflow-hidden border-2 border-cream bg-ink text-cream md:sticky md:min-h-[min(560px,74vh)] md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+const text = "flex flex-col gap-3.5 p-6 md:p-9"
+// Deep red label: the regular red doesn't reach AA contrast with small light text
+const label = "w-fit bg-(--red-page) px-2 py-1 font-mono text-xs text-cream uppercase"
 ---
 
-<section id="projects" class="py-20 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-6xl mx-auto text-center justify-center">
-    <div class="mb-16">
-      <h2 class="text-5xl md:text-6xl font-bold mb-6 text-balance">
-        {t.projects.title}
-      </h2>
-      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-        {t.projects.description}
-      </p>
+<section id="proyectos" data-theme-section="red" class="pt-20 pb-14 md:pt-28 md:pb-16">
+  <div class="mx-auto w-full max-w-[1400px] px-5 md:px-10 mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10">
+    <h2 data-reveal class="display text-[clamp(96px,15vw,190px)]">{t.projects.title}</h2>
+    <p class="max-w-[34ch] text-lg leading-relaxed">{t.projects.description}</p>
+  </div>
+
+  <div class="mx-auto grid w-full max-w-[1400px] gap-16 px-5 md:gap-[14vh] md:px-10">
+    <article data-stack-card class={article} style="top: 84px">
+      <div class={text}>
+        <span data-ink-block class={label}>{t.edition.article} 01 · {trc.kind}</span>
+        <h3 class="display text-[clamp(48px,5vw,76px)]">{trc.title}</h3>
+        <p class="max-w-[40ch] text-cream/75">{trc.description}</p>
+        <p class="max-w-[42ch]">{trc.role}</p>
+        <div class="mt-2 flex flex-wrap items-center gap-3">
+          <a href={trc.appStore} target="_blank" rel="noopener noreferrer" class="transition-transform hover:-translate-y-0.5">
+            <Image src={appStore} alt="App Store" height={40} class="h-10 w-auto" />
+          </a>
+          <a href={trc.googlePlay} target="_blank" rel="noopener noreferrer" class="transition-transform hover:-translate-y-0.5">
+            <Image src={googlePlay} alt="Google Play" height={40} class="h-10 w-auto" />
+          </a>
+        </div>
+        <div class="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <button type="button" data-demo-open class="btn w-fit cursor-pointer border-cream text-cream">▶ {t.projects.demo}</button>
+          <a href={trc.demo} target="_blank" rel="noopener noreferrer" class="font-mono text-sm underline-offset-4 hover:underline">{t.projects.visit} ↗</a>
+        </div>
+        <span class="mt-auto pt-6 font-mono text-xs text-cream/70">{trc.stack}</span>
+      </div>
+      <div class="px-6 pb-8 md:py-10 md:pr-9 md:pl-0">
+        <div class="relative aspect-[100/66] w-full">
+          <div data-print class="absolute top-0 left-0 w-[80%] overflow-hidden border-2 border-cream bg-black">
+            <div class="flex gap-1.5 bg-[#1b1b1b] px-3 py-2"><i class="round size-2 rounded-full bg-white/25" /><i class="round size-2 rounded-full bg-white/25" /><i class="round size-2 rounded-full bg-white/25" /></div>
+            <video data-autoplay class="block aspect-[16/10] w-full object-cover object-top" poster="/projects/trc-landing-poster.webp" muted loop playsinline preload="none" aria-label={`${trc.title}: landing`}>
+              <source src="/projects/trc-landing.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div data-print class="absolute right-0 bottom-0 aspect-[540/1168] w-[28%] overflow-hidden border-2 border-cream bg-black">
+            <video data-autoplay class="block h-full w-full object-cover object-top" poster="/projects/trc-app-poster.webp" muted loop playsinline preload="none" aria-label={`${trc.title}: app`}>
+              <source src="/projects/trc-app.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article data-stack-card class={article} style="top: 104px">
+      <div class={text}>
+        <span data-ink-block class={label}>{t.edition.article} 02 · {mba.kind}</span>
+        <h3 class="display text-[clamp(48px,5vw,76px)]">{mba.title}</h3>
+        <p class="max-w-[40ch] text-cream/75">{mba.description}</p>
+        <p class="max-w-[42ch]">{mba.role}</p>
+        <a href={mba.demo} target="_blank" rel="noopener noreferrer" class="btn mt-2 w-fit border-cream text-cream">{t.projects.visit} ↗</a>
+        <span class="mt-auto pt-6 font-mono text-xs text-cream/70">{mba.stack}</span>
+      </div>
+      <div class="relative grid place-items-center overflow-hidden min-h-[260px] px-[6%] py-10">
+      <a href={mba.demo} target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true" class="relative block w-full overflow-hidden border-2 border-cream bg-white">
+        <div class="flex gap-1.5 bg-[#f1ede6] px-3 py-2.5"><i class="round size-2 rounded-full bg-black/15" /><i class="round size-2 rounded-full bg-black/15" /><i class="round size-2 rounded-full bg-black/15" /></div>
+        <video data-autoplay class="block aspect-[16/10] w-full object-cover object-top" poster="/projects/mba-poster.webp" muted loop playsinline preload="none">
+          <source src="/projects/mba-tutor.mp4" type="video/mp4" />
+        </video>
+      </a>
+      </div>
+    </article>
+  </div>
+
+  <dialog data-demo class="m-auto w-[min(1100px,calc(100vw-32px))] border-2 border-cream bg-ink p-0 text-cream backdrop:bg-ink/85">
+    <div class="flex items-center justify-between px-4 py-2.5 font-mono text-xs uppercase">
+      <span>{trc.title} · demo</span>
+      <button type="button" data-demo-close class="cursor-pointer hover:text-red">{t.projects.close} ✕</button>
     </div>
+    <video data-demo-video class="block aspect-video w-full bg-black" poster="/projects/trc-poster.webp" controls playsinline preload="none">
+      <source src="/projects/trc-demo.mp4" type="video/mp4" />
+    </video>
+  </dialog>
 
-    <ProjectsContainer client:load projects={projects} />
-
-    <a
-      href={t.projects.viewMoreUrl}
-      class="m-auto mt-12 bg-white hover:bg-gray-50 text-black font-medium px-6 py-3 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-lg w-fit">
-      {t.projects.viewMore}
+  <div class="mx-auto w-full max-w-[1400px] px-5 md:px-10 mt-12 flex flex-col gap-3 md:flex-row md:items-baseline md:gap-6">
+    <a href={t.projects.moreUrl} target="_blank" rel="noopener noreferrer" class="shrink-0 font-mono text-sm underline-offset-4 hover:underline">
+      {t.projects.more} ↗
     </a>
+    <p class="max-w-[60ch] text-sm">{t.projects.moreNote}</p>
   </div>
 </section>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("[data-demo]")
+  const video = dialog?.querySelector<HTMLVideoElement>("[data-demo-video]")
+  document.querySelectorAll("[data-demo-open]").forEach((button) =>
+    button.addEventListener("click", () => {
+      dialog?.showModal()
+      if (!video) return
+      video.currentTime = 0
+      // If the browser blocks autoplay with sound, start muted
+      video.play().catch(() => {
+        video.muted = true
+        video.play().catch(() => {})
+      })
+    }),
+  )
+  dialog?.querySelector("[data-demo-close]")?.addEventListener("click", () => dialog.close())
+  dialog?.addEventListener("click", (event) => event.target === dialog && dialog.close())
+  dialog?.addEventListener("close", () => video?.pause())
+</script>

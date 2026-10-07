@@ -1,92 +1,82 @@
 ---
-import { getI18N } from "@/i18n"
-import Magnet from "../ui/Magnent"
-import SpotlightCard from "../ui/SpotlightCard"
-import { Mail, Linkedin, Github, ExternalLink } from "lucide-react"
+import { getI18N, getLocale } from "@/i18n"
+import Colophon from "../edition/Colophon.astro"
 
-const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
+const currentLocale = getLocale(Astro.url)
 const t = getI18N({ currentLocale })
 
-const contactMethods = [
-  {
-    icon: Mail,
-    label: t.contact.email,
-    value: t.contactData.email.value,
-    href: t.contactData.email.href,
-    color: "from-red-500 to-pink-500",
-    external: true,
-  },
-  {
-    icon: Linkedin,
-    label: t.contact.linkedin,
-    value: t.contact.visitProfile,
-    href: t.contactData.linkedin.href,
-    color: "from-blue-500 to-cyan-500",
-    external: true,
-  },
-  {
-    icon: Github,
-    label: t.contact.github,
-    value: t.contact.viewCode,
-    href: t.contactData.github.href,
-    color: "from-gray-600 to-gray-800",
-    external: true,
-  },
+const email = t.contactData.email.value
+const links = [
+  { label: "LinkedIn", href: t.contactData.linkedin.href },
+  { label: "GitHub", href: t.contactData.github.href },
+  { label: t.contact.cv, href: t.meta.cv },
 ]
 ---
 
-<section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-4xl mx-auto text-center">
-    <div class="mb-16">
-      <h2 class="text-5xl md:text-6xl font-bold mb-6 text-balance">
-        {t.contact.title}
+<section id="contacto" data-theme-section="ink" class="container-x flex flex-col pt-16 pb-8 md:min-h-[calc(100svh-62px)] md:pt-[5svh] md:pb-[3svh]">
+  <p class="label border-t-2 border-fg pt-4">{t.contact.label}</p>
+
+  <div class="mt-8 grid gap-14 md:mt-[4svh] md:grid-cols-[1fr_1fr] md:gap-16">
+    <div class="flex flex-col gap-8 md:gap-[4svh]">
+      <h2 data-reveal class="display text-[clamp(96px,min(14vw,24svh),210px)]">
+        {t.contact.title}<span class="text-accent">.</span>
       </h2>
-      <div class="w-20 h-1 from-primary to-accent rounded-full mx-auto mb-6">
+
+      <div>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+          <a href={`mailto:${email}`} class="border-b-2 border-accent text-[clamp(22px,2.4vw,32px)] font-semibold tracking-[-0.03em]">{email}</a>
+          <button
+            type="button"
+            data-copy={email}
+            data-copied={t.contact.copied}
+            class="cursor-pointer border-2 border-fg px-3.5 py-1.5 font-mono text-xs uppercase text-fg transition-colors hover:bg-fg hover:text-bg">
+            {t.contact.copy}
+          </button>
+        </div>
+        <ul class="mt-5 flex gap-7 text-lg">
+          {
+            links.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noopener noreferrer" class="hover:text-accent-text">
+                  {link.label} ↗
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
-      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-        {t.contact.description}
-      </p>
+
+      <Colophon part="note" />
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-24">
-      {
-        contactMethods.map((method) => {
-          const Icon = method.icon
-          return (
-            <Magnet
-              client:load
-              padding={500}
-              disabled={false}
-              magnetStrength={32}>
-              <SpotlightCard
-                client:load
-                className="custom-spotlight-card"
-                spotlightColor="rgba(0, 229, 255, 0.2)">
-                <div
-                  class={`w-12 h-12 rounded-lg bg-gradient-to-br ${method.color} flex items-center justify-center mx-auto mb-4`}>
-                  <Icon className="w-6 h-6 text-white" aria-hidden="true" />
-                </div>
-                <h3 class="font-bold mb-3 text-white">{method.label}</h3>
-                <a
-                  href={method.href}
-                  target={method.external ? "_blank" : undefined}
-                  rel={method.external ? "noopener noreferrer" : undefined}
-                  class="text-white hover:underline text-sm flex items-center justify-center gap-1 focus:outline-none focus:ring-2 focus:ring-primary focus:rounded"
-                  aria-label={
-                    method.external
-                      ? `Visit ${method.label} profile (opens in new window)`
-                      : undefined
-                  }>
-                  {method.value}
-                  {method.external && (
-                    <ExternalLink className="w-3 h-3" aria-hidden="true" />
-                  )}
-                </a>
-              </SpotlightCard>
-            </Magnet>
-          )
-        })
-      }
-    </div>
+    <Colophon part="editions" />
   </div>
+
+  <footer class="mt-auto flex flex-col justify-between gap-3 pt-16 font-mono md:pt-[4svh] text-[13px] text-muted md:flex-row">
+    <span>© <span data-current-year>{new Date().getFullYear()}</span> Thomas Barreto · {t.footer.rights}</span>
+    <a href="https://github.com/1thomas13/Portfolio" target="_blank" rel="noopener noreferrer" class="hover:text-fg hover:underline">
+      {t.footer.source} ↗
+    </a>
+  </footer>
 </section>
+
+<script>
+  document.querySelectorAll("[data-current-year]").forEach((el) => (el.textContent = String(new Date().getFullYear())))
+
+  // Without clipboard permission, select the text so it can be copied by hand
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((button) => {
+    const label = button.textContent?.trim() ?? ""
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy ?? "")
+        button.textContent = button.dataset.copied ?? label
+        setTimeout(() => (button.textContent = label), 1800)
+      } catch {
+        const range = document.createRange()
+        range.selectNodeContents(button.previousElementSibling as Node)
+        getSelection()?.removeAllRanges()
+        getSelection()?.addRange(range)
+      }
+    })
+  })
+</script>

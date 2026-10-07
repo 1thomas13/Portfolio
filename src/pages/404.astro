@@ -1,0 +1,122 @@
+---
+// A single 404 for the whole site: it carries both languages and the script shows one
+import Layout from "../layouts/Layout.astro"
+import { getI18N } from "@/i18n"
+
+const COPY = Object.fromEntries(
+  (["es", "en"] as const).map((lang) => {
+    const t = getI18N({ currentLocale: lang })
+    const home = lang === "en" ? "/en/" : "/"
+    return [
+      lang,
+      {
+        ...t.errata,
+        home,
+        issue: t.edition.masthead[0],
+        other: { label: t.errata.otherLanguage, href: lang === "en" ? "/" : "/en/", lang: lang === "en" ? "es" : "en" },
+        rows: [
+          { ask: null, label: t.errata.front, href: home },
+          { ...t.errata.older, href: lang === "en" ? "/en/versions" : "/versiones" },
+          { ...t.errata.contact, href: home + "#contacto" },
+        ],
+      },
+    ]
+  }),
+)
+---
+
+<Layout title={COPY.es.title} noindex>
+  {
+    (["es", "en"] as const).map((lang) => {
+      const c = COPY[lang]
+      return (
+        <div data-lang={lang} data-title={c.title} lang={lang} hidden={lang === "en"}>
+          <header class="border-b-2 border-fg">
+            <div class="container-x flex items-center justify-between py-4 font-mono text-sm uppercase">
+              <a href={c.home} class="font-bold">
+                Thomas Barreto
+              </a>
+              <a href={c.other.href} data-lang-pick={c.other.lang} lang={c.other.lang} class="hover:text-accent-text">
+                {c.other.label}
+              </a>
+            </div>
+          </header>
+
+          <main class="container-x flex min-h-[calc(100svh-62px)] flex-col justify-center py-16">
+            <div class="relative mx-auto w-full max-w-[760px] border-2 border-dashed border-fg/60 p-6 md:p-12">
+              <span class="absolute -top-3.5 left-8 bg-bg px-2 font-mono text-lg" aria-hidden="true">
+                ✂
+              </span>
+
+              <div class="flex flex-wrap justify-between gap-2 border-y-2 border-fg py-2 font-mono text-[11px] tracking-[0.08em] uppercase md:text-xs">
+                <span>{c.issue}</span>
+                <span>Error 404</span>
+              </div>
+
+              <h1 class="display mt-8 text-[clamp(56px,10vw,112px)]">
+                <span data-sel>{c.heading}</span>
+              </h1>
+              <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-muted">{c.intro}</p>
+
+              <table class="mt-10 w-full border-collapse text-left">
+                <thead class="font-mono text-xs text-muted uppercase">
+                  <tr class="border-b-2 border-fg">
+                    <th class="py-2 pr-4 font-normal">{c.cols[0]}</th>
+                    <th class="py-2 pr-4 font-normal">{c.cols[1]}</th>
+                    <th class="py-2 font-normal">{c.cols[2]}</th>
+                  </tr>
+                </thead>
+                <tbody class="align-top">
+                  {c.rows.map((row) => (
+                    <tr class="border-b border-fg/25">
+                      <td class="py-3 pr-4 font-mono text-sm">{row.ask ? "—" : "404"}</td>
+                      <td class="py-3 pr-4">
+                        {row.ask ? (
+                          <span class="text-muted">{row.ask}</span>
+                        ) : (
+                          <code data-path class="font-mono text-sm break-all text-accent-text line-through">
+                            /…
+                          </code>
+                        )}
+                      </td>
+                      <td class="py-3">
+                        <a href={row.href} class="font-semibold underline-offset-4 hover:text-accent-text hover:underline">
+                          {row.label} →
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <p class="mt-8 font-mono text-xs text-muted">{c.sorry}</p>
+            </div>
+          </main>
+        </div>
+      )
+    })
+  }
+</Layout>
+
+<script>
+  // The URL's language, the one picked earlier with ES / EN, or the browser's
+  const saved = (() => {
+    try {
+      return localStorage.getItem("tb-lang")
+    } catch {
+      return null
+    }
+  })()
+  const browser = (navigator.languages?.length ? navigator.languages : [navigator.language]).some((l) => /^es/i.test(l)) ? "es" : "en"
+  const lang = location.pathname.startsWith("/en/") ? "en" : (saved ?? browser)
+  document.querySelectorAll<HTMLElement>("[data-lang]").forEach((block) => {
+    const on = block.dataset.lang === lang
+    block.hidden = !on
+    if (on) {
+      document.documentElement.lang = lang
+      document.title = block.dataset.title ?? document.title
+    }
+  })
+
+  document.querySelectorAll("[data-path]").forEach((el) => (el.textContent = decodeURIComponent(location.pathname + location.search)))
+</script>

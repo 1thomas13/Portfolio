@@ -1,0 +1,92 @@
+---
+import { getI18N, getLocale } from "@/i18n"
+
+const currentLocale = getLocale(Astro.url)
+const t = getI18N({ currentLocale })
+
+const links = [
+  { label: t.nav.what, href: "#que-hago" },
+  { label: t.nav.projects, href: "#proyectos" },
+  { label: t.nav.experience, href: "#experiencia" },
+  { label: t.nav.contact, href: "#contacto" },
+]
+---
+
+<header class="sticky top-0 z-50 border-b-2 border-fg bg-bg">
+  <nav class="grid grid-cols-[1fr_auto] items-center px-5 py-4 text-[15px] md:grid-cols-[1fr_auto_1fr] md:px-10 md:py-5">
+    <a href="#top" data-scroll-to="#top" class="font-mono text-sm font-bold tracking-[0.04em] uppercase">Thomas Barreto</a>
+
+    <ul class="hidden gap-8 font-mono text-sm tracking-[0.04em] uppercase md:flex">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} data-scroll-to={link.href} class="underline-offset-4 hover:text-accent-text hover:underline">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center justify-end gap-6 font-mono text-sm text-muted">
+      <span class="hidden whitespace-nowrap sm:inline md:hidden lg:inline">
+        {t.nav.location} <b data-clock class="font-normal text-fg">--:--</b><span data-weather class="hidden"> · <b class="font-normal text-fg"></b></span>
+      </span>
+      <span class="flex gap-1.5">
+        <a href="/" lang="es" data-lang-pick="es" aria-label="ES, Español" class:list={["-m-2.5 p-2.5", currentLocale === "es" ? "text-fg" : "hover:text-fg"]}>ES</a>
+        /
+        <a href="/en/" lang="en" data-lang-pick="en" aria-label="EN, English" class:list={["-m-2.5 p-2.5", currentLocale === "en" ? "text-fg" : "hover:text-fg"]}>EN</a>
+      </span>
+      <button type="button" data-menu-toggle data-open={t.nav.menu} data-close={t.nav.close} class="text-fg md:hidden" aria-expanded="false" aria-controls="mobile-menu">
+        <span data-menu-label>{t.nav.menu}</span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" data-menu class="hidden border-t-2 border-fg px-5 pb-8 md:hidden">
+    <ul>
+      {
+        links.map((link) => (
+          <li class="border-b-2 border-fg">
+            <a href={link.href} data-scroll-to={link.href} class="display block py-4 text-[44px]">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]")
+  const label = document.querySelector<HTMLElement>("[data-menu-label]")
+  const menu = document.querySelector<HTMLElement>("[data-menu]")
+
+  const setOpen = (open: boolean) => {
+    menu?.classList.toggle("hidden", !open)
+    toggle?.setAttribute("aria-expanded", String(open))
+    if (label) label.textContent = (open ? toggle?.dataset.close : toggle?.dataset.open) ?? ""
+  }
+
+  toggle?.addEventListener("click", () => setOpen(menu?.classList.contains("hidden") ?? false))
+  document.addEventListener("nav:close", () => setOpen(false))
+
+  const clock = document.querySelector<HTMLElement>("[data-clock]")
+  const format = new Intl.DateTimeFormat("es-AR", { timeZone: "America/Argentina/Ushuaia", hour: "2-digit", minute: "2-digit", hour12: false })
+  const tick = () => clock && (clock.textContent = format.format(new Date()))
+  tick()
+  setInterval(tick, 10_000)
+
+  // Current temperature in Río Grande (Open-Meteo, no key). If it fails, only the time shows
+  const weather = document.querySelector<HTMLElement>("[data-weather]")
+  fetch("https://api.open-meteo.com/v1/forecast?latitude=-53.79&longitude=-67.71&current=temperature_2m")
+    .then((res) => res.json())
+    .then((data) => {
+      const temp = data?.current?.temperature_2m
+      if (typeof temp !== "number" || !weather) return
+      weather.querySelector("b")!.textContent = `${Math.round(temp)}°C`
+      weather.classList.remove("hidden")
+    })
+    .catch(() => {})
+</script>

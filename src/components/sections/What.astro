@@ -1,0 +1,29 @@
+---
+import { getI18N, getLocale } from "@/i18n"
+
+const currentLocale = getLocale(Astro.url)
+const t = getI18N({ currentLocale })
+---
+
+<section id="que-hago" data-theme-section="sand" class="container-x pt-20 pb-10 md:pt-28 md:pb-12">
+  <h2 class="label border-t-2 border-fg pt-4">{t.what.label}</h2>
+
+  <ol data-what class="mt-8 md:mt-10">
+    {
+      t.what.items.filter((item) => !("hidden" in item && item.hidden)).map((item, i) => (
+        <li
+          data-reveal
+          class="group grid gap-x-10 gap-y-3 py-3 md:grid-cols-[19rem_minmax(0,1fr)] lg:grid-cols-[24rem_minmax(0,34rem)] md:items-center md:py-1">
+          <h3 class="display flex items-start gap-3 text-[clamp(60px,9vw,140px)] transition-colors duration-150 group-hover:text-accent-text">
+            {item.area}
+            <sup class="pt-[0.12em] font-mono text-xs font-normal tracking-normal text-muted normal-case">{String(i + 1).padStart(2, "0")}</sup>
+          </h3>
+          <div>
+            <p class="text-lg leading-snug">{item.text}</p>
+            <p class="mt-2 font-mono text-[13px] text-muted uppercase">{item.tech.join(" / ")}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>

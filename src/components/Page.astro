@@ -1,21 +1,57 @@
 ---
-import { GlassmorphismNav } from "./sections/Nav"
-import SwitchLang from "./ui/SwitchLang"
+import Nav from "./sections/Nav.astro"
 import Hero from "./sections/Hero.astro"
-import AboutSection from "./sections/AboutSection.astro"
-import Experience from "./sections/Experience.astro"
-import ExperienceV2 from "./sections/ExperienceV2"
+import What from "./sections/What.astro"
 import Projects from "./sections/Projects.astro"
+import Experience from "./sections/Experience.astro"
 import Contact from "./sections/Contact.astro"
-import Footer from "./ui/Footer"
+import PageCorner from "./edition/PageCorner.astro"
+import { getI18N, getLocale } from "@/i18n"
+
+const currentLocale = getLocale(Astro.url)
+const t = getI18N({ currentLocale })
 ---
 
-<GlassmorphismNav client:load />
-<Hero />
+<a href="#contenido" class="skip-link">{t.nav.skip}</a>
+<Nav />
+<main id="contenido">
+  <Hero />
+  <What />
+  <Projects />
+  <Experience />
+  <Contact />
+  <PageCorner href={currentLocale === "en" ? "/en/versions" : "/versiones"} label={t.versions.title} />
+</main>
 
-<AboutSection />
-<ExperienceV2 client:load />
-<Projects />
-<Contact />
+<!-- TEMPORARY, for comparing: background that changes per section vs. fixed on paper. Saved in
+     this browser. Remove this button (and its script) once decided -->
+<button type="button" data-bg-toggle class="fixed bottom-4 left-4 z-[97] border-2 border-fg bg-bg px-3 py-2 font-mono text-xs text-fg uppercase md:bottom-5 md:left-5">
+  Fondo: <span data-bg-label>con cambios</span>
+</button>
 
-<Footer client:load />
+<script>
+  const button = document.querySelector<HTMLButtonElement>("[data-bg-toggle]")
+  const label = button?.querySelector("[data-bg-label]")
+  // Variant pages (/fondo-fijo, /papel-chocolate) set their own themes: keep them
+  const original = document.documentElement.dataset.themes
+  const apply = (fixed: boolean) => {
+    if (fixed) document.documentElement.dataset.themes = "sand"
+    else if (original) document.documentElement.dataset.themes = original
+    else delete document.documentElement.dataset.themes
+    if (label) label.textContent = fixed ? "fijo" : "con cambios"
+    button?.setAttribute("aria-pressed", String(fixed))
+    window.dispatchEvent(new Event("themes-change"))
+  }
+  let fixed = false
+  try {
+    fixed = localStorage.getItem("tb-fixed-bg") === "1"
+  } catch {}
+  apply(fixed)
+  button?.addEventListener("click", () => {
+    fixed = !fixed
+    try {
+      localStorage.setItem("tb-fixed-bg", fixed ? "1" : "0")
+    } catch {}
+    apply(fixed)
+  })
+</script>
