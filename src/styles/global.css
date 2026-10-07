@@ -111,6 +111,13 @@ html {
   transition: background-color var(--theme-fade);
 }
 
+/* Even the short ink fade drops frames while scrolling on phones: the text switches at once */
+@media (pointer: coarse) {
+  html {
+    transition: background-color var(--theme-fade);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html,
   .theme-fade,
@@ -205,6 +212,7 @@ body::after {
   opacity: 0.36;
   mix-blend-mode: multiply;
   background-image: var(--grain);
+  will-change: transform;
 }
 
 :root[data-theme='red'] body::after {
@@ -286,6 +294,8 @@ h1.display {
   border: 6px solid var(--bg);
   transition: border-color var(--theme-fade);
   view-transition-name: tb-frame;
+  /* Own GPU layer: it stays put while scrolling even when the main thread is busy */
+  will-change: transform;
 }
 
 .page-frame::after {
