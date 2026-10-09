@@ -79,14 +79,18 @@ const links = [
   setInterval(tick, 10_000)
 
   // Current temperature in Río Grande (Open-Meteo, no key). If it fails, only the time shows
+  // Deferred to idle so it doesn't compete with the initial load (Safari has no requestIdleCallback)
   const weather = document.querySelector<HTMLElement>("[data-weather]")
-  fetch("https://api.open-meteo.com/v1/forecast?latitude=-53.79&longitude=-67.71&current=temperature_2m")
-    .then((res) => res.json())
-    .then((data) => {
-      const temp = data?.current?.temperature_2m
-      if (typeof temp !== "number" || !weather) return
-      weather.querySelector("b")!.textContent = `${Math.round(temp)}°C`
-      weather.classList.remove("hidden")
-    })
-    .catch(() => {})
+  const loadWeather = () =>
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=-53.79&longitude=-67.71&current=temperature_2m")
+      .then((res) => res.json())
+      .then((data) => {
+        const temp = data?.current?.temperature_2m
+        if (typeof temp !== "number" || !weather) return
+        weather.querySelector("b")!.textContent = `${Math.round(temp)}°C`
+        weather.classList.remove("hidden")
+      })
+      .catch(() => {})
+  if ("requestIdleCallback" in window) requestIdleCallback(loadWeather, { timeout: 3000 })
+  else setTimeout(loadWeather, 1500)
 </script>

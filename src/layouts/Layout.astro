@@ -1,6 +1,7 @@
 ---
 import Analytics from "@vercel/analytics/astro"
 import "../styles/global.css"
+import transitionCss from "../../public/versions/transition.css?raw"
 import { getI18N, LOCALIZED_PATHS as PAIRS } from "@/i18n"
 
 const currentLocale = Astro.url.pathname.startsWith("/en/") ? "en" : "es"
@@ -41,7 +42,8 @@ const person = {
     <!-- Page transition, shared with the old editions (the opt-in is inlined here because if it
          only comes in the stylesheet, the first visit to a page doesn't animate) -->
     <style is:inline>@view-transition{navigation:auto}</style>
-    <link rel="stylesheet" href="/versions/transition.css" />
+    <!-- Inlined so it doesn't block the first paint; the old editions still link the file -->
+    <style is:inline set:html={transitionCss} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />

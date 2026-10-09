@@ -43,6 +43,8 @@ export default defineConfig({
   // Everything is static except routes with prerender = false (diary, /api/remind, /v0)
   adapter: vercel(),
   integrations: [diaryCron],
+  // The CSS is small enough that inlining it beats a render-blocking request
+  build: { inlineStylesheets: "always" },
   // With the adapter, Vercel ignores vercel.json: redirects go here (the /v0 one lives in src/pages/v0)
   redirects: {
     "/v1": { status: 302, destination: "/v1/" },
