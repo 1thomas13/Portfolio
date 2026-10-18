@@ -22,11 +22,12 @@ const flap = "M0,100 L100,0 C70,2 30,3 3,3 C3,30 2,70 0,100 Z"
         <stop offset="0.22" stop-color="#000" stop-opacity="0.16" />
         <stop offset="0.55" stop-color="#000" stop-opacity="0" />
       </linearGradient>
+      <!-- Fixed colors: stops tied to the theme flash black while the theme changes -->
       <linearGradient id="page-corner-back" x1="0" y1="0" x2="0.5" y2="0.5">
-        <stop offset="0" class="page-corner-tip" />
-        <stop offset="0.55" class="page-corner-shine" />
-        <stop offset="0.86" class="page-corner-tip" />
-        <stop offset="1" class="page-corner-crease" />
+        <stop offset="0" stop-color="#000" stop-opacity="0.07" />
+        <stop offset="0.55" stop-color="#fff" stop-opacity="0.06" />
+        <stop offset="0.86" stop-color="#000" stop-opacity="0.07" />
+        <stop offset="1" stop-color="#000" stop-opacity="0.22" />
       </linearGradient>
       <filter id="page-corner-blur" x="-30%" y="-30%" width="160%" height="160%">
         <feGaussianBlur stdDeviation="2.5" />
@@ -38,6 +39,7 @@ const flap = "M0,100 L100,0 C70,2 30,3 3,3 C3,30 2,70 0,100 Z"
     <g clip-path="url(#page-corner-clip)">
       <path class="page-corner-shadow" d={flap} transform="translate(3 3)" filter="url(#page-corner-blur)" />
     </g>
+    <path class="page-corner-paper" d={flap} />
     <path d={flap} fill="url(#page-corner-back)" />
   </svg>
   <span class="page-corner-grain" aria-hidden="true"></span>
@@ -112,16 +114,10 @@ const flap = "M0,100 L100,0 C70,2 30,3 3,3 C3,30 2,70 0,100 Z"
     fill: rgb(0 0 0 / 0.3);
   }
 
-  .page-corner-tip {
-    stop-color: color-mix(in srgb, var(--bg) 92%, var(--fg));
-  }
-
-  .page-corner-shine {
-    stop-color: color-mix(in srgb, var(--bg) 94%, white);
-  }
-
-  .page-corner-crease {
-    stop-color: color-mix(in srgb, var(--bg) 76%, var(--fg));
+  /* Same fade as the page background, so the flap changes with it */
+  .page-corner-paper {
+    fill: var(--bg);
+    transition: fill var(--theme-fade);
   }
 
   /* The corner sits above the site's grain (body::after), so it carries its own */
@@ -136,7 +132,8 @@ const flap = "M0,100 L100,0 C70,2 30,3 3,3 C3,30 2,70 0,100 Z"
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .page-corner {
+    .page-corner,
+    .page-corner-paper {
       transition: none;
     }
   }
